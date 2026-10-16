@@ -17,3 +17,4 @@ Static HTML, CSS, SVG and JavaScript only. No external scripts, tracking, accoun
 On the owner-controlled VM: node --check app.js and Playwright local/browser regression checks. Don't upload credentials or recovery phrases to issues or pull requests.
 
 © 2026 PaperPilot Tools. All rights reserved.
+\nNew: public service information at https://livastic-vm1-primary.github.io/paperpilot-tools/services.html and transparent ScopeLens model evaluation notes at https://dev.to/livasticvm1primary/why-i-kept-8-transparent-rules-after-testing-small-local-llms-3lam .\n
