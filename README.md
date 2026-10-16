@@ -23,3 +23,9 @@ Separate live agent-marketplace reference (active listing; zero verified purchas
 ## Korean freelance estimate guide (free)
 
 Public educational article and on-device KRW sample calculator: https://livastic-vm1-primary.github.io/paperpilot-tools/freelance-estimate-ko.html . It does NOT create a certified e-tax invoice, replace tax advice, collect payment, or upload entered names/amounts. Headless Chrome e2e tests under private VM1 research/browserqa/ verify input arithmetic, TXT export, HTML escaping, layout and absence of external network calls.
+
+## Login-free project inquiry
+
+https://livastic-vm1-primary.github.io/paperpilot-tools/contact.html provides an activated, tested form for new customers who do not want GitHub sign-in or to open their own mail program. Submissions are sent through **FormSubmit.co**, a third-party form processor, to the existing contact mailbox. The form explicitly requests consent, is limited to a general project description and contact email, keeps vendor default anti-spam controls, and warns against secret keys or confidential client records. A test request from the owner was forwarded to the existing Gmail inbox after official email activation. It is not a real customer order, payment, or verified lead.
+
+Alternative private mailto and public GitHub inquiry remain available. Do not claim a payment processor or actual sales: seller payout KYC is still pending.
