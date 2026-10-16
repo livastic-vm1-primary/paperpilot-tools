@@ -29,3 +29,7 @@ Public educational article and on-device KRW sample calculator: https://livastic
 https://livastic-vm1-primary.github.io/paperpilot-tools/contact.html provides an activated, tested form for new customers who do not want GitHub sign-in or to open their own mail program. Submissions are sent through **FormSubmit.co**, a third-party form processor, to the existing contact mailbox. The form explicitly requests consent, is limited to a general project description and contact email, keeps vendor default anti-spam controls, and warns against secret keys or confidential client records. A test request from the owner was forwarded to the existing Gmail inbox after official email activation. It is not a real customer order, payment, or verified lead.
 
 Alternative private mailto and public GitHub inquiry remain available. Do not claim a payment processor or actual sales: seller payout KYC is still pending.
+
+### Reproducible proof
+
+The public sample at https://github.com/livastic-vm1-primary/livastic-vm1-primary/tree/main/examples/playwright-qa-proof contains real source, an executed Markdown QA report and screenshots on VM1-owned public websites. It does NOT represent paid customer work, escrow funding, or a security certification.
