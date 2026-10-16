@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://livastic-vm1-primary.github.io/paperpilot-tools/sitemap.xml

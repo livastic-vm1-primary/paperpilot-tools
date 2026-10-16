@@ -1,0 +1,23 @@
+name: Suggest a feature (public)
+description: Help improve PaperPilot. Do not post personal, client, financial, or credential data.
+title: "[Feature] "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: "Thanks. This is a public issue. Please do not include passwords, wallet secrets, customer identities, or private client documents. For private inquiries, use the email link on the public site."
+  - type: textarea
+    id: use-case
+    attributes:
+      label: What workflow are you trying to improve?
+      description: Describe a general use case without private data.
+      placeholder: "Example: I want to save my most-used invoice line items locally."
+    validations:
+      required: true
+  - type: textarea
+    id: proposed
+    attributes:
+      label: Expected outcome
+      placeholder: "Example: Save a reusable list of services."
+    validations:
+      required: true
