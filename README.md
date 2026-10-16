@@ -18,3 +18,4 @@ On the owner-controlled VM: node --check app.js and Playwright local/browser reg
 
 © 2026 PaperPilot Tools. All rights reserved.
 \nNew: public service information at https://livastic-vm1-primary.github.io/paperpilot-tools/services.html and transparent ScopeLens model evaluation notes at https://dev.to/livasticvm1primary/why-i-kept-8-transparent-rules-after-testing-small-local-llms-3lam .\n
+Separate live agent-marketplace reference (active listing; zero verified purchases/payouts): https://clawlancer.ai/marketplace/13ec0c6b-e278-4660-bc20-3579651feab5 — 25 USDC one-public-URL QA, distinct from larger tailored work. The marketplace onchain checkout and seller settlement have not been independently tested; do not claim earnings.
