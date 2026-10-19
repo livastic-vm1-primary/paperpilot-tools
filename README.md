@@ -1,6 +1,6 @@
 # PaperPilot Tools public website
 
-This repository contains a pre-launch marketing landing page, free single-item quote calculator, and bilingual English/Korean client handoff guide.
+This repository contains an original public product landing page, free single-item quote calculator, bilingual English/Korean client handoff guide, and a transparent manual buyer inquiry page.
 
 Live: https://livastic-vm1-primary.github.io/paperpilot-tools/
 
@@ -9,7 +9,7 @@ The commercial app and purchase ZIP are NOT included in this public repo.
 ## Integrity
 Static HTML, CSS, SVG and JavaScript only. No external scripts, tracking, account logins, crypto wallet links, or on-site payments. The sample calculator runs in the browser and does not upload form data.
 
-**Commercial availability:** The buyer ZIP and a seller draft exist on Gumroad, but checkout is blocked until verified payout onboarding. The landing page does not claim that a commercial checkout is currently active.
+**Commercial availability:** An original tested, verified offline PaperPilot v1 ZIP exists privately. The public manual order information at https://livastic-vm1-primary.github.io/paperpilot-tools/order.html accepts buyer-initiated inquiries at an advertised 5 native Circle Base USDC for one internal-team licence. There is NO instant checkout or escrow: seller and buyer must agree delivery, applicable refund conditions and public Base wallet receiving details IN WRITING BEFORE the buyer pays. The ZIP is delivered privately only after an independently paid accepted order. The separate $12 Gumroad self-serve checkout remains unavailable pending legal payout onboarding. A marketing page, mail inquiry, or HashN listing is never itself revenue; current verified outside PaperPilot buyers: zero.
 
 **Limits:** A quote is not a certified electronic tax invoice; calculations are examples and not financial advice.
 
@@ -28,7 +28,7 @@ Public educational article and on-device KRW sample calculator: https://livastic
 
 https://livastic-vm1-primary.github.io/paperpilot-tools/contact.html provides an activated, tested form for new customers who do not want GitHub sign-in or to open their own mail program. Submissions are sent through **FormSubmit.co**, a third-party form processor, to the existing contact mailbox. The form explicitly requests consent, is limited to a general project description and contact email, keeps vendor default anti-spam controls, and warns against secret keys or confidential client records. A test request from the owner was forwarded to the existing Gmail inbox after official email activation. It is not a real customer order, payment, or verified lead.
 
-Alternative private mailto and public GitHub inquiry remain available. Do not claim a payment processor or actual sales: seller payout KYC is still pending.
+Alternative private mailto and public GitHub inquiries remain available. FormSubmit on the separate consent-based contact form is a third-party messaging intermediary, NOT an order processor. There is no on-site automatic payment, verified PaperPilot sale, or fiat payout. Never request buyer wallet secrets or encourage sending money before accepted terms.
 
 ### Reproducible proof
 
