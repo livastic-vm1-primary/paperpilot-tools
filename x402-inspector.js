@@ -51,6 +51,16 @@
     }
     if (report.resource.url) field(results, "Quoted resource", report.resource.url);
     field(results, "Display cap", report.maxDisplayBudgetUSDC + " USDC");
+    const wire = report.transportHeaderBudget;
+    const wireBox = el("div", "quote-row");
+    wireBox.append(el("h3", "", "PAYMENT-REQUIRED transport budget (not a payment test)"));
+    field(wireBox, "Header size", wire.estimatedHttp1HeaderLineBytes.toLocaleString() + " bytes (HTTP/1 field line only)");
+    field(wireBox, "Measurement", wire.method === "observed-public-header" ? "Observed public Base64 field" : "Estimate from compact JSON, not actual server bytes");
+    field(wireBox, "Compatibility risk", wire.risk.replaceAll("_", " "));
+    wireBox.append(el("p", "fine", "Check your real client, reverse proxy and total response headers. 2/8/16 KiB are illustrative implementation checkpoints, not a universal x402 size limit. No signed retries or network requests were made."));
+    if (wire.exceeds8KiB) wireBox.classList.add("invoice-verdict-stop");
+    results.append(wireBox);
+
     const decision = report.invoiceComparison;
     const warnBlock = el("div", "invoice-price-verdict");
     warnBlock.append(el("h3", "", "Invoice expected-price check (untrusted quote; no payment)"),

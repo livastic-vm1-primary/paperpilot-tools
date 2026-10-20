@@ -103,8 +103,40 @@
     return obj;
   }
 
+  // A header-size *compatibility warning*, not a universal HTTP or x402 cap.
+  // When given an actual unsigned PAYMENT-REQUIRED header, count its Base64
+  // bytes. When given JSON, count a prospective compact JSON->Base64 encoding.
+  // Other HTTP headers and intermediary settings are unknown, so passing one
+  // threshold never certifies payment transport compatibility.
+  function inspectTransportHeader(raw, quote) {
+    const text = raw.trim();
+    const matches = text.matchAll(/^PAYMENT-REQUIRED\s*:\s*([A-Za-z0-9+/_-]+={0,2})\s*$/gim);
+    const lines = [...matches];
+    const bare = /^[A-Za-z0-9+/_-]+={0,2}$/.test(text) ? text : null;
+    const suppliedValue = lines.length === 1 ? lines[0][1] : bare;
+    const source = suppliedValue === null ? "compact-json-estimate" : "observed-public-header";
+    const encodedValueBytes = suppliedValue === null
+      ? Math.ceil(new TextEncoder().encode(JSON.stringify(quote)).length / 3) * 4
+      : new TextEncoder().encode(suppliedValue).length;
+    const headerLineBytes = encodedValueBytes + new TextEncoder().encode("PAYMENT-REQUIRED: \r\n").length;
+    const risk = headerLineBytes >= 16384 ? "SEVERE_16K_PLUS" :
+      headerLineBytes >= 8192 ? "HIGH_8K_PLUS" :
+      headerLineBytes >= 2048 ? "REVIEW_2K_PLUS" : "BELOW_2K_NOT_CERTIFIED";
+    return {
+      method: source, paymentRequiredValueBytes: encodedValueBytes,
+      estimatedHttp1HeaderLineBytes: headerLineBytes, risk,
+      exceeds2KiB: headerLineBytes >= 2048,
+      exceeds8KiB: headerLineBytes >= 8192,
+      exceeds16KiB: headerLineBytes >= 16384,
+      totalOtherResponseHeadersIncluded: false,
+      compatibilityGuaranteed: false,
+      note: "Only a local Base64 header-length inspection. HTTP/2 framing, other headers, per-field/per-line/total-header limits, proxy rules and server serialization are not verified. Do not truncate or rewrite an x402 signed offer."
+    };
+  }
+
   function analyze(raw, capInput = "0.02", expectedInvoiceUSDCInput = "") {
     const quote = parseInput(raw);
+    const transportHeaderBudget = inspectTransportHeader(raw, quote);
     const maxMicro = parseCap(capInput);
     const expectedInvoiceMicro = parseExpectedInvoiceAmount(expectedInvoiceUSDCInput);
     if (quote.x402Version !== 2) throw new Error("Only x402 version 2 public payment requirements are supported.");
@@ -115,6 +147,12 @@
       ? quote.resource : {};
     const resourceUrl = str(resource.url, 1200);
     const notices = [];
+    if (transportHeaderBudget.exceeds8KiB) {
+      notices.push("HTTP header transport risk: this PAYMENT-REQUIRED field alone is at least 8 KiB; some clients or proxies reject large individual fields before payment can start.");
+    } else if (transportHeaderBudget.exceeds2KiB) {
+      notices.push("HTTP header transport review: the field exceeds 2 KiB; deployment limits vary, and other response headers are not included.");
+    }
+
     // x402 v2 PaymentRequired.error is a vendor-supplied message, not
     // settlement proof or a facilitator-authenticated error. Display
     // bounded text only; never paste PAYMENT-SIGNATURE or auto-retry.
@@ -200,6 +238,7 @@
       kind: "public-x402-quote-offline-structural-display-v1",
       version: 2, networkExpected: NETWORK, canonicalNativeBaseUSDC: NATIVE_BASE_USDC,
       resource: {url: resourceUrl, description: str(resource.description, 300)},
+      transportHeaderBudget,
       merchantReportedError: serverError,
       merchantErrorUnverified: true,
       maxDisplayBudgetUSDC: formatMicro(maxMicro),
@@ -223,7 +262,7 @@
     };
   }
 
-  const exported = {analyze, parseInput, parseCap, parseExpectedInvoiceAmount, formatMicro, TEST_FIXTURE, INVOICE_MISMATCH_FIXTURE, NETWORK, NATIVE_BASE_USDC, MAX_BYTES};
+  const exported = {analyze, inspectTransportHeader, parseInput, parseCap, parseExpectedInvoiceAmount, formatMicro, TEST_FIXTURE, INVOICE_MISMATCH_FIXTURE, NETWORK, NATIVE_BASE_USDC, MAX_BYTES};
   if (typeof module !== "undefined" && module.exports) module.exports = exported;
   if (global) global.PaperPilotX402 = exported;
 })(typeof window !== "undefined" ? window : undefined);

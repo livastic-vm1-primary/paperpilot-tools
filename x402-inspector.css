@@ -11,3 +11,6 @@
 .invoice-price-verdict p{overflow-wrap:anywhere}
 .invoice-price-verdict .invoice-verdict-state{font-weight:850;letter-spacing:.025em}
 .invoice-price-verdict.invoice-verdict-stop{border:3px solid #ae3333;background:#ffedf0;color:#672226}
+
+/* Header-field transport compatibility heuristic: not a universal size cap. */
+.quote-row.invoice-verdict-stop{border:2px solid #b13b40;background:#fff0f1;color:#68282e}
