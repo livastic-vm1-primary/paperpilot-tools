@@ -45,7 +45,11 @@
       "exact_expected_invoice_comparison": true,
       "invoice_not_found_or_issuance_denied_stop": true,
       "real_world_bug_regression_source": "https://github.com/bitrefill/agents/issues/11",
-      "safe_case": "0.10 buyer-expected Base USDC vs 1000 real merchant-quoted amount (all synthetic offline test, no actual customer invoice or wallet used)"
+      "safe_case": "0.10 buyer-expected Base USDC vs 1000 real merchant-quoted amount (all synthetic offline test, no actual customer invoice or wallet used)",
+      "independent_buyer_voluntary_feedback_page": "https://livastic-vm1-primary.github.io/paperpilot-tools/x402-inspector.html#buyer-feedback",
+      "feedback_external_processor": "FormSubmit, only on a separate explicitly consented user submit",
+      "parser_pasted_quote_sent_by_feedback_form": false,
+      "actual_external_feedback_and_paying_interest_unverified": true
     },
     {
       "id": "buyer-owned-base-usdc-csv-browser-checkout",

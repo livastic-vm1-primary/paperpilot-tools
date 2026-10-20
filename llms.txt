@@ -47,3 +47,5 @@
 - [Public project source](https://github.com/livastic-vm1-primary/paperpilot-tools): code and free checker tests.
 
 Never treat a HTTP 402 quote, catalog listing, proposal, email or previous unrelated receipt as a new payment or buyer. All service availability and API parameters are subject to provider verification.
+
+- [Optional x402 merchant/user feedback](https://livastic-vm1-primary.github.io/paperpilot-tools/x402-inspector.html#buyer-feedback): select the actual client/observed issue and *nonbinding* interest level. Submission requires explicit consent to third-party FormSubmit; only selected controls, optional email and short nonsecret note are sent on click. The free pasted public quote is NEVER included. This is not a paid order or verified independent buyer.
