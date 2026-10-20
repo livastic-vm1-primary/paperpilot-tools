@@ -427,6 +427,34 @@
       "real_outside_paying_customers_verified": 0,
       "complementary_same_owner_VM3_preflight": "https://livastic-vm3-primary-tmp-260920.github.io/crypto-csv-rescue/koinly-preflight/",
       "scope": "Original row and field preserving Koinly candidate structural header mapping; no pricing, tax calculations, balance accuracy claims or Koinly endorsement."
+    },
+    {
+      "id": "hashn-koinly-one-source-10row-5usdc",
+      "name": "Original HashN small-scope one-exchange Koinly CSV manual review (buyer-initiated)",
+      "type": "optional-manual-buyer-authorized-consulting-not-instant-checkout",
+      "page": "https://hashn.com/store/886ed287-aaca-434b-9f27-560a50bfbbb6/listings/koinly-csv-one-source-mapping-mini-review-5usdc.md",
+      "price_usdc": "5.000000",
+      "base_native_circle_usdc_chain_id": 8453,
+      "max_authorized_sanitized_source_rows": 10,
+      "one_original_csv_source": true,
+      "one_explicit_Koinly_template": true,
+      "original_free_browser_mapper": "https://livastic-vm1-primary.github.io/paperpilot-tools/koinly-column-mapper.html",
+      "deliverables": [
+        "human-readable_source_field_map",
+        "candidate_row_preserving_csv_if_safe",
+        "one_integrity_issue_report",
+        "one_scoped_clarification"
+      ],
+      "initial_buyer_contact": "original HashN first-party buyer-initiated knock; public headers/problem class only",
+      "requires_prior_written_scope_privacy_payment_and_refund_terms": true,
+      "wallet_connection_required_for_first_contact": false,
+      "auto_checkout_active": false,
+      "seller_has_user_seed": false,
+      "koinly_vendor_import_verified": false,
+      "separate_49usd_up_to_50_row_pilot_is_same_product": false,
+      "independent_paid_orders_verified": 0,
+      "independent_base_usdc_payments_received_for_this_listing": "0.000000",
+      "same_one_real_human_owner_across_vm1_vm2_vm3_vm5": true
     }
   ],
   "genuine_historical_receipt_note": "The same original merchant has prior paid-and-delivered synthetic GET service receipts distinct from the buyer-owned POST; none establish paid POST orders.",
