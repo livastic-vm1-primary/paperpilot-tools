@@ -21,15 +21,15 @@ function linkFor(page, service) {
 }
 test('existing Base USDC invoice matching free page has working own-email-app merchant quote fallback',()=>{
   const {html}=linkFor('usdc-invoice-reconcile.html','USDC invoice');
-  assert.match(html,/If the third-party FormSubmit form does not finish/);
-  assert.match(html,/no message is sent until you choose Send/);
+  assert.match(html,/Optional FormSubmit inquiry \(spam check possible\)/);
+  assert.match(html,/nothing is sent until you choose Send/);
   assert.match(html,/contact\.html\?service=usdc-invoice-pilot/);
   assert.match(html,/not proven demand/);
 });
 test('existing crypto CSV rescue genuine $49 page has consent-neutral direct-email fallback',()=>{
   const {html}=linkFor('crypto-csv-rescue.html','Crypto CSV Rescue');
-  assert.match(html,/third-party form fails/);
-  assert.match(html,/not sent until you choose Send/);
+  assert.match(html,/Optional FormSubmit inquiry \(spam check possible\)/);
+  assert.match(html,/does not send anything until you choose Send/);
   assert.match(html,/contact\.html\?service=crypto-csv-rescue/);
   assert.match(html,/No independent customer order/);
 });
@@ -40,4 +40,22 @@ test('central owner contact form remains optional and activated recipient unchan
   assert.match(html,/mailto:onecursor1@gmail.com\?subject=PaperPilot/);
   assert.match(html,/실제 발송은 이용자가 직접 선택/);
   assert.match(html,/문의는 주문이나 유료 계약이 아닙니다/);
+});
+
+test('primary visible 49-USD button is first-party customer-authored email, with form secondary',()=>{
+ for(const [page,form] of [
+   ['usdc-invoice-reconcile.html','contact.html?service=usdc-invoice-pilot'],
+   ['crypto-csv-rescue.html','contact.html?service=crypto-csv-rescue'],
+ ]) {
+   const html=read(page);
+   const firstEmail=html.indexOf('href="mailto:onecursor1@gmail.com');
+   const formIndex=html.indexOf('href="'+form+'"');
+   assert.ok(firstEmail>0,page);
+   assert.ok(formIndex>firstEmail,'Primary direct mail must precede optional form for '+page);
+   const span=html.slice(firstEmail-70,firstEmail);
+   assert.match(span,/(class="cta"|class="primary block")/);
+   assert.equal((html.match(/href="mailto:onecursor1@gmail.com/g)||[]).length,1);
+   assert.ok((html.match(new RegExp('href="'+form.replace(/[?]/g,'\\?')+'"','g'))||[]).length>=1);
+   assert.match(html,/spam check possible/);
+ }
 });
