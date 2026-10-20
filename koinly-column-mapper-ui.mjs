@@ -1,5 +1,5 @@
 import {
-  parseExchangeCsv,buildKoinlyCsv,TEMPLATES,demoExchangeCsv,demoMapping,MAX_BYTES
+  parseExchangeCsv,buildKoinlyCsv,analyzeNarrativeCsv,TEMPLATES,demoExchangeCsv,demoNarrativeCsv,demoMapping,MAX_BYTES
 } from './koinly-column-mapper-core.mjs';
 const $ = id => document.getElementById(id);
 const make = (tag,txt,parent) => {
@@ -9,6 +9,25 @@ const make = (tag,txt,parent) => {
   return el;
 };
 let headers=[],last=null;
+let lastNarrative=null;
+function resetNarrative(){
+  lastNarrative=null;
+  $('narrative-download').disabled=true;
+  $('narrative-results').replaceChildren();
+  $('narrative-results').hidden=true;
+}
+function refreshNarrativeColumns(){
+  resetNarrative();
+  const select=$('narrative-description-column');
+  select.replaceChildren();
+  const blank=make('option','Select an existing source header',select);
+  blank.value='';
+  for(const h of headers){
+    const option=make('option',h,select);option.value=h;
+  }
+  const suggested=headers.find(h=>h.trim().toLowerCase()==='description');
+  if(suggested)select.value=suggested;
+}
 function resetPreview(){
   last=null;
   $('output-download').disabled=true;
@@ -23,6 +42,7 @@ function selectedMap(){
 }
 function rebuildFields(suggestions={}){
   resetPreview();
+  refreshNarrativeColumns();
   const parent=$('mapping-fields');
   parent.replaceChildren();
   if(headers.length===0){make('p','Inspect source CSV headers to display the mapping controls.',parent);return;}
@@ -67,6 +87,62 @@ function inspect(suggestions={}){
     message('No conversion allowed: '+(err?.message||'Invalid or unsupported CSV.'));
   }
 }
+$('narrative-description-column').addEventListener('change',resetNarrative);
+$('narrative-demo').addEventListener('click',()=>{
+  $('input-file').value='';
+  $('csv-original').value=demoNarrativeCsv;
+  $('utc-confirm').checked=false;
+  inspect();
+  $('narrative-status').textContent='Fictional narrative-only demo loaded locally: no external Wealthsimple exporter was tested. Select the Description field and click Analyze.';
+});
+$('narrative-analyze').addEventListener('click',()=>{
+  resetNarrative();
+  try{
+    const result=analyzeNarrativeCsv(sourceText(),{
+      descriptionColumn:$('narrative-description-column').value
+    });
+    const root=$('narrative-results');
+    root.hidden=false;
+    make('h3',result.ok?'Narrative evidence columns prepared locally':'NO ANNOTATION FILE — AMBIGUOUS SOURCE DESCRIPTIONS',root);
+    const report=result.report;
+    make('p','Source: '+report.sourceRows+' records. Strictly recognized: '+report.matchedRows+
+      '. Ambiguous/unsafe: '+report.unmatchedRows+'. Output: '+report.resultRows+' records.',root);
+    if(report.issues.length){
+      const ol=make('ol',undefined,root);
+      const safeReasons={
+        formula_like_source_cell:'A source cell resembles a spreadsheet formula; do not export.',
+        noncanonical_description:'The description includes leading/trailing whitespace or a line break.',
+        ambiguous_or_unsupported_phrase:'Cannot safely parse this exact phrase; no amount/asset guessed.'
+      };
+      for(const issue of report.issues){
+        make('li','CSV record '+issue.sourceRecord+': '+(safeReasons[issue.kind]||'Unsupported phrase.'),ol);
+      }
+      make('p','Fix or review ALL source evidence; one ambiguous record blocks the complete annotated output.',root);
+    }
+    const warnings=make('ul',undefined,root);
+    for(const warning of report.warnings)make('li',warning,warnings);
+    if(result.ok){
+      lastNarrative=result;$('narrative-download').disabled=false;
+      $('narrative-status').textContent='Local annotation ready. Original CSV was not changed. Click Download only if you want a separate evidence CSV; this is NOT a Koinly import file.';
+    }else{
+      $('narrative-status').textContent='No annotated CSV generated. The list shows row numbers only, never private values. This is not a paid service.';
+    }
+  }catch(err){
+    $('narrative-status').textContent='Fail-closed: '+(err?.message||'Unsupported input.');
+  }
+});
+$('narrative-download').addEventListener('click',()=>{
+  if(!lastNarrative?.ok||!lastNarrative.csv)return;
+  const blob=new Blob(['\\uFEFF'+lastNarrative.csv],{type:'text/csv;charset=utf-8'});
+  const url=URL.createObjectURL(blob);
+  try{
+    const a=document.createElement('a');a.href=url;
+    a.download='narrative-amount-asset-evidence-not-koinly.csv';
+    document.body.append(a);a.click();a.remove();
+    $('narrative-status').textContent='Downloaded LOCAL evidence columns only. This is NOT a Koinly import, cost basis or verified executed trade.';
+  }finally{setTimeout(()=>URL.revokeObjectURL(url),500);}
+});
+
 $('koinly-format').addEventListener('change',()=>rebuildFields());
 $('csv-original').addEventListener('input',()=>{
   headers=[];rebuildFields();message('Input changed. Inspect headers again before generating a new preview.');

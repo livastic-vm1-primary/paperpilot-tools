@@ -50,6 +50,23 @@
 <p id="mapper-message" class="mapper-note" role="status" aria-live="polite">No conversion yet. No data stored, uploaded or sent.</p>
 <section id="mapping-results" class="mapper-report" hidden role="region" aria-label="Row-count and validation evidence"></section>
 </div></section>
+<section class="wrap section" id="narrative-description-evidence">
+<h2>Optional: split a quantity and asset from a plain-language description</h2>
+<p>A <a href="https://www.reddit.com/r/koinly/comments/1qi2hw8/wealthsimple_csv_import_not_supported/" target="_blank" rel="noopener noreferrer">January 2026 public Koinly community question</a> described an unsupported export with wording like <code>Purchase of 1.4324467000 SOL...</code> rather than separate amount and asset fields. Our <strong>free, browser-local annotation</strong> recognizes only fully explicit invented examples such as <code>Purchase of 1.4324467000 SOL</code> or <code>Sale of 0.125 BTC</code>. It extracts the <em>claimed action, literal quantity and literal asset</em> into three extra columns while preserving every original source cell. It is <strong>not an official Wealthsimple parser</strong>; the real format and current import support have not been independently verified.</p>
+<p><strong>Not a transaction conversion.</strong> A purchase description alone cannot prove the counter-asset spent, price, fee, cost basis, timezone, transfer identity or even that a trade executed. A source narrative is merely unverified evidence. The optional output is <strong>not a Koinly CSV</strong>. It cannot replace official Koinly import instructions, independent vendor validation, transaction reconciliation or tax advice.</p>
+<div class="mapper-app">
+<label for="narrative-description-column">Existing source CSV column containing the full narrative</label>
+<select id="narrative-description-column"><option value="">Inspect source headers first</option></select>
+<div class="mapper-actions">
+<button id="narrative-demo" type="button" class="alt">Load fictional description-only demo</button>
+<button id="narrative-analyze" type="button">Analyze strict descriptions locally</button>
+<button id="narrative-download" type="button" disabled>Download annotated EVIDENCE (not Koinly)</button>
+</div>
+<p id="narrative-status" class="mapper-note" role="status" aria-live="polite">Select a source description column and analyze locally. No file upload, wallet, analytics or account access.</p>
+<section id="narrative-results" class="mapper-report" role="region" aria-label="Narrative row-only extraction report" hidden></section>
+</div>
+<p class="fine">Safety: only exact phrases matching Purchase/Sale + positive decimal + uppercase asset are recognized. Extra suffixes, multiple amounts, mixed notes, incomplete rows, spreadsheet formulas or ambiguous actions cause the whole annotated download to be withheld. Original values stay unchanged and warnings identify <strong>row numbers only</strong>. You can inspect the <a href="https://github.com/livastic-vm1-primary/paperpilot-tools/blob/main/koinly-column-mapper-core.mjs">public auditable source</a>. The separate original <a href="https://support.koinly.io/en/articles/9489978-how-to-import-a-csv-or-excel-file">Koinly CSV import guide</a> recommends preserving native supported exports. If you need a complete manually scoped mapping with lawful source evidence, see the optional <a href="https://hashn.com/store/886ed287-aaca-434b-9f27-560a50bfbbb6/listings/koinly-csv-one-source-mapping-mini-review-5usdc.md">5 native Base Circle USDC, 10-row HashN seller offer</a>; there are still zero verified paying buyers of that mini-service.</p>
+</section>
 <section class="wrap section">
 <h2>What this changes — and deliberately does not</h2>
 <div class="cards">

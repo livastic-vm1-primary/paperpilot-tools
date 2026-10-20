@@ -59,3 +59,28 @@ refund/cancellation, acceptance and native Circle Base USDC terms.
 No user customer source data should be transmitted in initial enquiries.
 VM5 alone owns direct external customer sales coordination; VM1 core
 mapping and VM3 structural preflight are complementary.
+
+### Separate fictional narrative descriptions (not a Wealthsimple integration)
+
+Source: fictional-narrative-export.csv. Locally derived independent
+evidence-only output: fictional-narrative-evidence-only.csv.
+
+The source is entirely INVENTED. It is not a real Wealthsimple
+statement, executed trade, payment, exchange, Koinly account or user.
+The three fully fictional phrases are "Purchase of 1.4324467000 SOL",
+"Sale of 0.125 BTC" and "Purchase of 2.000000 ETH".
+The local core copies every original row, order and source cell and adds
+only three UNVERIFIED annotation fields while keeping numeric trailing
+zeros. It never guesses another trade leg or outputs a valid Koinly
+trade automatically.
+
+On the public page choose "Load fictional description-only demo", select
+"Description", then "Analyze strict descriptions locally"; the report
+should show source records 3, recognized 3, unsupported 0. You must
+explicitly click "Download annotated EVIDENCE (not Koinly)" for a
+separate local CSV. Do not import that evidence directly into Koinly.
+
+Any incomplete phrase such as "Purchase of 1 SOL..." or a source with
+another amount and asset is rejected instead of guessed. Source money,
+fiat price, trade status and timestamps are not independently verified.
+The result report never includes input values, notes or chosen headers.

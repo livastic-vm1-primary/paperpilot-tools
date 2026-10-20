@@ -426,7 +426,20 @@
       "generated_Koinly_import_acceptance_verified": false,
       "real_outside_paying_customers_verified": 0,
       "complementary_same_owner_VM3_preflight": "https://livastic-vm3-primary-tmp-260920.github.io/crypto-csv-rescue/koinly-preflight/",
-      "scope": "Original row and field preserving Koinly candidate structural header mapping; no pricing, tax calculations, balance accuracy claims or Koinly endorsement."
+      "scope": "Original row and field preserving Koinly candidate structural header mapping; no pricing, tax calculations, balance accuracy claims or Koinly endorsement.",
+      "optional_local_narrative_evidence_inspector": true,
+      "narrative_public_anchor": "https://livastic-vm1-primary.github.io/paperpilot-tools/koinly-column-mapper.html#narrative-description-evidence",
+      "narrative_input_text_may_contain_quantity_asset_but_counter_asset_unknown": true,
+      "narrative_only_exact_purchase_sale_positive_decimal_asset_grammar": true,
+      "narrative_additional_columns": 3,
+      "narrative_real_Wealthsimple_schema_tested": false,
+      "narrative_automatic_Koinly_import_candidate": false,
+      "narrative_missing_cash_leg_fee_costbasis_guessed": false,
+      "narrative_local_no_upload": true,
+      "narrative_original_source_values_edited": false,
+      "narrative_any_ambiguous_row_denies_download": true,
+      "narrative_paying_outside_clients_confirmed": 0,
+      "narrative_price_usdc": "0.000000"
     },
     {
       "id": "hashn-koinly-one-source-10row-5usdc",

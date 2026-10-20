@@ -256,6 +256,96 @@ export function buildKoinlyCsv(input,{template='universal',mapping={},confirmedU
   if(issues.length)return {ok:false,csv:null,report:{...report,issueCount:issues.length}};
   return {ok:true,csv:out,report:{...report,issueCount:0}};
 }
+/**
+ * Independent human-review aid for unsupported narrative CSV exports.
+ *
+ * Example user-reported format (NOT a verified Wealthsimple export schema):
+ *   "Purchase of 1.4324467000 SOL"
+ *
+ * This does NOT invent a cash leg, fair-market value, fee, timezone, transfer
+ * direction or a real Koinly entry. It adds *evidence columns* to a separate
+ * CSV so the person can decide which other source data is still required.
+ * The original records remain exactly the same and never leave the browser.
+ *
+ * Only allow full, exact ASCII grammar to avoid hallucinated extractions from
+ * unrelated notes. Ambiguous records block the ENTIRE annotated download.
+ */
+const NARRATIVE_GRAMMAR=/^(Purchase|Sale) of ((?:0|[1-9]\d{0,22})(?:\.\d{1,24})?) ([A-Z0-9]{2,12})\.?$/;
+const NARRATIVE_FIELDS=Object.freeze([
+  'Narrative Action (unverified)',
+  'Narrative Quantity (unverified)',
+  'Narrative Asset (unverified)'
+]);
+export const demoNarrativeCsv=[
+  'date_utc,description,fictional_ref',
+  '2026-10-20 10:00:00,Purchase of 1.4324467000 SOL,FAKE-ALPHA',
+  '2026-10-20 11:01:00,Sale of 0.125 BTC,FAKE-BETA',
+  '2026-10-20 12:02:00,Purchase of 2.000000 ETH,FAKE-GAMMA'
+].join('\r\n');
+
+export function analyzeNarrativeCsv(input,{descriptionColumn}={}) {
+  // Never accept caller-provided parsed objects that could skip size controls.
+  if(typeof input!=='string')throw Error('Only original bounded CSV text is accepted.');
+  const original=parseExchangeCsv(input);
+  if(typeof descriptionColumn!=='string'||!original.headers.includes(descriptionColumn))
+    throw Error('Choose exactly one existing description source column.');
+  // Do not generate a CSV wider than the strict core's documented limit.
+  if(original.headers.length+NARRATIVE_FIELDS.length>MAX_COLUMNS)
+    throw Error('Narrative annotation needs space for three columns within the 40-column limit.');
+  if(original.headers.some(h=>NARRATIVE_FIELDS.some(n=>h.trim().toLowerCase()===n.toLowerCase())))
+    throw Error('Source already contains a generated narrative header; refuse duplicate annotation.');
+  const index=original.headers.indexOf(descriptionColumn);
+  const issues=[];const annotated=[];
+  for(let i=0;i<original.records.length;i++){
+    const row=original.records[i],num=i+2;
+    if(row.some(checkFormula)){
+      issues.push({sourceRecord:num,kind:'formula_like_source_cell'});
+      continue;
+    }
+    const description=row[index];
+    if(description!==description.trim()||/[\r\n]/.test(description)){
+      issues.push({sourceRecord:num,kind:'noncanonical_description'});
+      continue;
+    }
+    const m=NARRATIVE_GRAMMAR.exec(description);
+    if(!m || !validDecimal(m[2]) || !validAsset(m[3])){
+      issues.push({sourceRecord:num,kind:'ambiguous_or_unsupported_phrase'});
+      continue;
+    }
+    annotated.push([...row,m[1]==='Purchase'?'Purchase (claimed)':'Sale (claimed)',m[2],m[3]]);
+  }
+  const outputReport={
+    sourceRows:original.rowCount,sourceColumns:original.headers.length,
+    matchedRows:annotated.length,unmatchedRows:issues.length,
+    resultRows:issues.length?0:original.rowCount,
+    issueCount:issues.length,issues:issues.slice(0,50),
+    originalSourceRowsPreservedOnSuccess:true,
+    sourceCellValuesEdited:false,
+    originalNarrativeDescriptionReplaced:false,
+    actualVendorWealthsimpleCsvSchemaVerified:false,
+    KoinlyImportAcceptanceVerified:false,
+    taxCostBasisOrTradeCounterpartyInferred:false,
+    priceFeeCashLegOrFiatValueComputed:false,
+    localOnlyNoUpload:true,
+    warnings:[
+      'Only exact Purchase of <positive decimal> <UPPERCASE-ASSET> or Sale of ... grammar is recognized; other text is not interpreted.',
+      'This output is an annotation of source evidence, NOT a Koinly Simple, Trades or Universal import candidate.',
+      'Purchase/Sale strings are source claims, NOT proof of an executed trade, received amount, quote leg, price or tax treatment.',
+      'Source original input stays unchanged. Examine other records for the spent/received counter-asset, fee, timestamp and identity.',
+      'Review each source description against the authorized original and Koinly vendor guidance before constructing a separate import.',
+      'No exchange/Koinly account was connected and no actual independent paid buyer is known for this new feature.'
+    ]
+  };
+  if(issues.length)return {ok:false,csv:null,report:outputReport};
+  let out=rowCsv([...original.headers,...NARRATIVE_FIELDS]);
+  for(const row of annotated){
+    out+=rowCsv(row);
+    if(new TextEncoder().encode(out).length>MAX_BYTES*2)
+      throw Error('Annotated CSV exceeds the local safe output size cap.');
+  }
+  return {ok:true,csv:out,report:outputReport};
+}
+
 export const demoExchangeCsv=[
   'time_utc,amount_sent,asset_sent,amount_received,asset_received,venue_note,execution_ref',
   '2026-10-20 10:10:00,150,USDC,0.05,ETH,"fake swap, not live",EX-A101',
