@@ -305,6 +305,22 @@
       "purchases_reported_at_publication": 0,
       "payment_receipts_verified_for_offer": 0,
       "terms": "Written buyer-authorized scope, anonymized data, accepted platform checkout and cancellation terms before delivery. No financial, legal or tax advice; no wallet interactions or confidential records accepted."
+    },
+    {
+      "id": "free-evm-explorer-hash-discovery",
+      "name": "Offline EVM explorer CSV transaction hash lookup candidate counter",
+      "type": "free-python-stdlib",
+      "page": "https://github.com/livastic-vm1-primary/paperpilot-tools/tree/main/examples/evm-explorer-hash-preflight",
+      "price_usdc": "0.000000",
+      "max_csv_bytes": 4194304,
+      "max_rows": 5500,
+      "no_upload": true,
+      "no_rpc": true,
+      "no_wallet": true,
+      "no_tax_classification": true,
+      "external_rotki_maintainer_adoption_or_commission_proven": false,
+      "actual_customers_verified": 0,
+      "scope": "Conservative counts of transaction-hash candidates for RPC discovery ONLY; does not delete ERC20 Transfer events, trace identities, prove CSV complete or verify chain identity."
     }
   ],
   "genuine_historical_receipt_note": "The same original merchant has prior paid-and-delivered synthetic GET service receipts distinct from the buyer-owned POST; none establish paid POST orders.",

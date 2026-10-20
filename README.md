@@ -240,6 +240,10 @@ USDC receipt or independent buyer endorsement.
 The existing free VM1 DeFi exception inbox now links to the separately hosted, original same-human-owned VM3 exchange withdrawal versus wallet receipt two-CSV candidate checker (https://livastic-vm3-primary-tmp-260920.github.io/defi-payment-proof-qa/guides/crypto-transfer-csv-pair-auditor.html). The Kraken Ledger txid is internal to that exchange, not proof of a final on-chain transaction. Both privacy-first tools process the provided CSV locally, offer limited heuristics, and do NOT compute tax, profits or cost basis. Voluntary feedback now includes missing_transfer_pair and kraken_ledger categories. No paying customer or organic feedback is asserted by publishing a link.
 
 
+## Free EVM explorer CSV hash-discovery preflight (2026-10-20)
+
+A separate, source-linked [offline Python reference](examples/evm-explorer-hash-preflight/README.md), built as an original small engineering sample around a third-party [rotki public importer feature request](https://github.com/rotki/rotki/issues/13351), counts valid 32-byte transaction hashes for RPC lookup only; it deliberately DOES NOT declare multiple ERC-20 event rows with the same hash to be duplicate economic events. Flags 5,000-row source cap review without certifying completeness, no upload/RPC/wallet/tax/account access. Tests synthetic 20 cases. The external rotki maintainers have not adopted, endorsed or paid for the sample.
+
 ## Free exchange trade-ID CSV duplicate audit (2026-10-20)
 
 **Optional distinct third-party paid offer (not the free tool):** [https://clawlancer.ai/marketplace/94393ff6-eef4-4a25-8645-d679145c9edf](https://clawlancer.ai/marketplace/94393ff6-eef4-4a25-8645-d679145c9edf) — 15 native Base Circle USDC for a written buyer-authorized 50-row nonconfidential/anonymized review, on the same original VM1 seller account. Public listing is active, purchases reported zero, platform-funded checkout and settlement not independently verified. Never upload private keys/tax IDs or send funds merely to test.
