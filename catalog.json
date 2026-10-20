@@ -1,0 +1,64 @@
+{
+  "schema": "paperpilot-public-buyer-offers-v1",
+  "updated_date_utc": "2026-10-20",
+  "disclosure": "One human economic owner using openly AI-assisted research, software, documentation and testing. No artificial buyers or paid testimonials.",
+  "site_url": "https://livastic-vm1-primary.github.io/paperpilot-tools/",
+  "merchant_owner": "Same single beneficial owner; separately operated VM5 API",
+  "note": "This is a static public catalog, not a contract, invoice, payment confirmation, inventory reservation or checkout API.",
+  "offers": [
+    {
+      "id": "csv-local-preview",
+      "type": "free-browser-only",
+      "page": "https://livastic-vm1-primary.github.io/paperpilot-tools/csv-quality-api.html#local-preview",
+      "price_usdc": "0.000000",
+      "file_upload": false,
+      "login_required": false,
+      "max_input_utf8_bytes": 32768,
+      "result": "Structural warning preview, no certification"
+    },
+    {
+      "id": "vm5-x402-csv-preflight",
+      "type": "optional-agent-api",
+      "endpoint": "https://vm5-openapi-x402.onrender.com/v1/csv-preflight",
+      "method": "POST",
+      "free_sample_url": "https://vm5-openapi-x402.onrender.com/v1/csv-sample",
+      "merchant_docs": "https://vm5-openapi-x402.onrender.com/v1/docs",
+      "buyer_guide": "https://livastic-vm1-primary.github.io/paperpilot-tools/csv-quality-api.html",
+      "price_native_circle_usdc": "0.005000",
+      "network": "eip155:8453",
+      "settlement_token": "native Circle USDC",
+      "protocol": "x402 v2",
+      "current_unauthorized_valid_request_http_status": 402,
+      "invalid_request_http_status": 400,
+      "requires_explicit_buyer_wallet_authorization": true,
+      "verified_paid_post_customers": 0,
+      "caveat": "A quote is not a payment; independent buyer decides if and when to sign. No private personal CSV or wallet secrets in test requests."
+    },
+    {
+      "id": "manual-paperpilot-offline-kit",
+      "type": "manual-inquiry-only",
+      "page": "https://livastic-vm1-primary.github.io/paperpilot-tools/order.html",
+      "indicative_price_native_base_circle_usdc": "5.000000",
+      "instant_checkout": false,
+      "escrow_available": false,
+      "buyer_written_agreement_required": true,
+      "confirmed_paid_PaperPilot_orders": 0
+    },
+    {
+      "id": "custom-playwright-browser-qa",
+      "type": "bespoke-quote-only",
+      "page": "https://livastic-vm1-primary.github.io/paperpilot-tools/services.html",
+      "starting_quote_usd": "149",
+      "instant_checkout": false,
+      "buyer_authorized_scope_and_written_terms_required": true,
+      "confirmed_external_paid_customers": 0
+    }
+  ],
+  "genuine_historical_receipt_note": "The same original merchant has prior paid-and-delivered synthetic GET service receipts distinct from the buyer-owned POST; none establish paid POST orders.",
+  "contacts": {
+    "form": "https://livastic-vm1-primary.github.io/paperpilot-tools/contact.html",
+    "third_party_processor": "FormSubmit",
+    "direct_services_page": "https://livastic-vm1-primary.github.io/paperpilot-tools/services.html",
+    "accepts_payment": false
+  }
+}
