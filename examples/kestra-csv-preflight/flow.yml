@@ -1,0 +1,119 @@
+id: csv_preflight_no_ingest
+namespace: demos.csv_quality
+
+description: |
+  A reproducible synthetic CSV quality preflight. It emits redacted counts,
+  persists a report and deliberately does not upload or charge for data.
+
+tasks:
+  - id: preflight
+    type: io.kestra.plugin.scripts.python.Script
+    containerImage: python:3.13-slim
+    dependencies:
+      - kestra
+    inputFiles:
+      feed.csv: |
+        order_id,customer,amount
+        1,Ada,15
+        2,Lin,9
+    outputFiles:
+      - report.json
+    script: |
+      import csv
+      import io
+      import json
+      import re
+      from collections import Counter
+      from pathlib import Path
+      from kestra import Kestra
+
+      MAX_BYTES = 32768
+      MAX_ROWS = 500
+      MAX_COLUMNS = 40
+
+      def inspect(path):
+          path = Path(path)
+          issues = Counter()
+          rows_count = 0
+          columns = 0
+          raw = b""
+          try:
+              with path.open("rb") as source:
+                  raw = source.read(MAX_BYTES + 1)
+          except OSError:
+              issues["source_not_readable"] += 1
+          if not issues and len(raw) > MAX_BYTES:
+              issues["too_many_bytes"] += 1
+          if not issues:
+              try:
+                  text = raw.decode("utf-8-sig", errors="strict")
+              except UnicodeDecodeError:
+                  issues["invalid_utf8"] += 1
+                  text = ""
+          else:
+              text = ""
+          if not issues:
+              try:
+                  csv.field_size_limit(4096)
+                  reader = csv.reader(io.StringIO(text, newline=""), strict=True)
+                  header = next(reader, [])
+                  columns = len(header)
+                  if not header or columns > MAX_COLUMNS:
+                      issues["invalid_header_width"] += 1
+                  if len({h.strip().casefold() for h in header}) != columns:
+                      issues["duplicate_headers"] += 1
+                  if any(not h.strip() for h in header):
+                      issues["blank_headers"] += 1
+                  seen = set()
+                  for row in reader:
+                      rows_count += 1
+                      if rows_count > MAX_ROWS:
+                          issues["too_many_rows"] += 1
+                          break
+                      if len(row) != columns:
+                          issues["ragged_rows"] += 1
+                      if any(not value.strip() for value in row):
+                          issues["empty_values"] += 1
+                      fingerprint = tuple(row)
+                      if fingerprint in seen:
+                          issues["duplicate_rows"] += 1
+                      seen.add(fingerprint)
+                      for value in row:
+                          trimmed = value.lstrip(" \t\r\n")
+                          if (trimmed.startswith(("=", "+", "@"))
+                              or (trimmed.startswith("-") and not
+                                  re.fullmatch(r"-[0-9]+(?:\.[0-9]+)?", trimmed))):
+                              issues["formula_like_values"] += 1
+                  if rows_count == 0:
+                      issues["no_data_rows"] += 1
+              except csv.Error:
+                  issues["invalid_csv_quoting"] += 1
+          return {
+              "accepted": not bool(issues),
+              "rows": min(rows_count, MAX_ROWS),
+              "columns": columns,
+              "bytes": min(len(raw), MAX_BYTES + 1),
+              "issue_counts": dict(sorted(issues.items())),
+          }
+
+      report = inspect("feed.csv")
+      Path("report.json").write_text(
+          json.dumps(report, sort_keys=True, indent=2) + "\n", encoding="utf-8")
+      # Do not echo CSV values, upload raw data or call external paid endpoints.
+      Kestra.outputs({
+          "accepted": report["accepted"],
+          "rows": report["rows"],
+          "issue_count": sum(report["issue_counts"].values()),
+      })
+
+  - id: decision
+    type: io.kestra.plugin.core.flow.If
+    condition: "{{ outputs.preflight.vars.accepted }}"
+    then:
+      - id: accepted_no_publish
+        type: io.kestra.plugin.core.log.Log
+        message: "Preflight accepted synthetic data. No downstream upload is configured."
+    else:
+      - id: quarantine_no_publish
+        type: io.kestra.plugin.core.log.Log
+        message: "Preflight rejected input. Review the redacted report: {{ outputs.preflight.outputFiles['report.json'] }}"
