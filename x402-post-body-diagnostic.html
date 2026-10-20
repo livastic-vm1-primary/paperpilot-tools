@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src https://vm5-openapi-x402.onrender.com; script-src 'self'; style-src 'self'; img-src 'self'; form-action 'none'; object-src 'none'; base-uri 'none'; frame-src 'none'">
+<meta name="description" content="A free browser-triggered synthetic POST test demonstrates why a malformed x402 request returns HTTP 400 but a valid unsigned POST returns HTTP 402. Check Base USDC token, price and original payTo without connecting a wallet or spending crypto.">
+<meta property="og:title" content="x402 POST Request: 400 vs 402 — free signed-free demo">
+<meta property="og:description" content="A reproducible browser diagnostic of one publicly documented x402 seller endpoint using fixed fictional CSV requests. No private data, wallet, signatures or payment.">
+<link rel="canonical" href="https://livastic-vm1-primary.github.io/paperpilot-tools/x402-post-body-diagnostic.html">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="x402-post-body-diagnostic.css">
+<title>Free x402 POST Diagnostic: HTTP 400 vs 402 | PaperPilot</title>
+</head><body>
+<header class="nav"><div class="container"><strong>PaperPilot Tools · x402</strong><nav aria-label="Navigation"><a href="x402-inspector.html">Offline quote decoder</a> · <a href="csv-quality-api.html">CSV API</a> · <a href="services.html#x402-audit">Optional QA</a></nav></div></header>
+<main class="container">
+<section class="hero">
+<p class="chip">FREE · SYNTHETIC EXAMPLE · CLICK TO RUN</p>
+<h1>An HTTP 400 is not always a broken x402 paywall.</h1>
+<p class="lead">Some x402 endpoints validate a POST body <em>before</em> quoting payment. An empty JSON object correctly returns <strong>400 Bad Request</strong>, whereas the <strong>same endpoint</strong> can return <strong>402 Payment Required</strong> with a valid, unsigned fictional CSV. A HEAD/GET check can return 404 if only POST is supported.</p>
+<p lang="ko">유효하지 않은 POST 입력에서 400 응답이 나와도 결제 오류라고 단정할 수 없습니다. 가상 예시 데이터로 정상 미결제 요청의 402 응답을 별도로 확인하세요. 토큰 전송·지갑 서명은 하지 않습니다.</p>
+<p class="warning"><strong>Scope:</strong> the button below contacts only our original <a href="https://vm5-openapi-x402.onrender.com/v1/docs" rel="noopener noreferrer">VM5 merchant sample</a>. It is <strong>not</strong> an arbitrary third-party URL scanner or a certification of your own production endpoint. No browser network calls occur until the user clicks. Unlike our separate local-only <a href="x402-inspector.html">header inspector</a>, this example intentionally sends two PUBLIC fictional inputs to the original seller.</p>
+</section>
+<section class="panel" aria-labelledby="how-title">
+<h2 id="how-title">The same URL, two different questions</h2>
+<div class="columns">
+<figure><figcaption><strong>1. Invalid input (expected 400)</strong></figcaption><pre>POST /v1/csv-preflight
+Content-Type: application/json
+
+{}</pre><p>No CSV text supplied, so the API may reject it before presenting a payment requirement.</p></figure>
+<figure><figcaption><strong>2. Valid fictional CSV (expected 402)</strong></figcaption><pre>POST /v1/csv-preflight
+Content-Type: application/json
+
+{"csvText":"id,name\n1,Ada\n2,Lin\n","expectedColumns":["id","name"]}</pre><p>A complete, invented input is quoted at 0.005 Base Circle USDC. It is never paid or delivered.</p></figure>
+</div>
+<p>Both calls use a fixed URL and fixed test body embedded in open-source local JavaScript. No user CSV, login cookie, wallet, billing details, tokens, private key, authorization or PAYMENT-SIGNATURE is read or sent. Your browser can issue an automatic CORS OPTIONS preflight. The server may see your network IP address from visiting it.</p>
+</section>
+<section class="panel" id="run" aria-labelledby="run-title">
+<h2 id="run-title">Run a bounded live browser probe</h2>
+<p>This sends exactly two original seller POSTs without signatures after your click. It checks the unsigned 402's <code>PAYMENT-REQUIRED</code> header for x402 v2, Base mainnet, official Circle USDC token, 5,000 atomic units and the original registered recipient. It never issues a paid retry.</p>
+<button id="run-diagnostic" type="button">Run two fixed unsigned example checks</button>
+<p id="diagnostic-status" role="status">Not started. No example request sent yet.</p>
+<div id="diagnostic-result" role="region" aria-live="polite" aria-label="Observed live result"></div>
+<p id="attempts" class="fine">No request logs, local storage or analytics are created by this page.</p>
+<p class="fine">A matching 402 quote proves only the <em>unsigned challenge</em> for this fictional input. It does not prove a buyer paid, a settlement finalized, user-owned CSV delivery, refund handling, or merchant safety. A CORS failure is inconclusive, not evidence that funds were lost.</p>
+</section>
+<section class="panel">
+<h2>Run the same test without a wallet, or ask for a scoped QA review</h2>
+<p>For manual reproducibility, use the seller's <a href="https://vm5-openapi-x402.onrender.com/v1/docs" rel="noopener noreferrer">official public POST schema</a>, the open-source <a href="https://github.com/livastic-vm1-primary/paperpilot-tools/blob/main/examples/verify-csv-x402-unpaid.mjs" rel="noopener noreferrer">original offline + unsigned request script</a>, and our <a href="x402-inspector.html">strict local payment-header decoder</a>. These tools cannot validate a third-party merchant's full checkout or find a lost on-chain order.</p>
+<p>If you operate a different production x402 API and have a real POST-body/quote/CORS/delivery bug, our separate <a href="services.html#x402-audit">fixed-scope x402 browser QA service</a> can investigate a <strong>public authorized sandbox</strong> for an agreed proposal (indicative 49 native Base USDC for a bounded review). A legitimate written agreement must cover scope, seller identity, invoice, token/chain/payTo, acceptance, privacy, refund and delivery <strong>before payment</strong>. Our <a href="contact.html?service=x402-audit">consent-gated free enquiry form</a> starts that process. No private payment headers, wallet keys, customer CSV or tax data should be sent in an enquiry.</p>
+<p class="fine">Disclosure: PaperPilot is an AI-assisted independent developer; its VM1 and VM5 services belong to one human beneficiary. A public free tool, recorded 400/402, third-party feedback or a proposed 49 USDC price does not mean an external customer paid for this particular QA service. No vendor endorsement is implied.</p>
+</section>
+</main>
+<footer class="footer"><div class="container">© 2026 PaperPilot Tools · <a href="index.html">Home</a> · <a href="contact.html">Contact</a> · No automatic signing or token transfers.</div></footer>
+<script type="module" src="x402-post-body-diagnostic-ui.mjs"></script>
+</body></html>

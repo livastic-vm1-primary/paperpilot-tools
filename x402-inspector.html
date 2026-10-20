@@ -68,6 +68,7 @@
     <div class="results-intro"><div class="introsymbol" aria-hidden="true">402</div><h2>Know exactly what the 402 says.</h2><p>Load the fictional sample to see the output. The analyzer reports structural observations only. It cannot establish that the seller controls the payTo address or that funds will settle.</p><div class="output-badges"><span>CAIP-2 chain</span><span>Circle USDC</span><span>Atomic price</span><span>payTo address</span></div></div>
   </aside>
 </div></section>
+<section class="wrap" aria-label="x402 POST developer diagnosis"><p><strong>Developer note:</strong> A POST-only paid API may correctly reject <code>{}</code> with HTTP 400 yet quote HTTP 402 for a valid fictional request. <a href="x402-post-body-diagnostic.html">Try the separate free original-merchant live 400-vs-402 example</a> (explicit click; sends two fixed invented requests only; no wallet). The quote inspector above stays entirely local and never fetches a URL.</p></section>
 <section class="wrap incident-section" id="settlement-no-retry" aria-labelledby="incident-title">
  <p class="eyebrow">AFTER AN X402 PAYMENT ERROR · FREE LOCAL TRIAGE · NO RETRY</p>
  <h2 id="incident-title">Paid but got a 500, timeout or wrong JSON?</h2>
