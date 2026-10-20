@@ -1,0 +1,24 @@
+/* Local-only, no fonts/images/scripts fetched from other hosts. */
+.mapper-app{background:#fff;border:1px solid #cfdee1;border-radius:14px;padding:20px;margin:22px 0}
+.mapper-app h2{margin:8px 0;color:#123144}
+.mapper-app h3{font-size:17px;margin:18px 0 12px;color:#18384b}
+.mapper-app label{display:block;font-weight:700;margin:16px 0 6px}
+.mapper-app textarea,.mapper-app select{display:block;width:100%;margin:7px 0;padding:10px 12px;border-radius:8px;border:1px solid #a8b8c0;background:#fff;color:#152937;font:inherit}
+.mapper-app textarea{min-height:180px;font:13px/1.55 ui-monospace,SFMono-Regular,Consolas,monospace;resize:vertical}
+.mapper-app input[type=file]{max-width:100%}
+.mapper-app select{font-weight:400;min-width:0}
+.mapper-app button{font:inherit;cursor:pointer;border:1px solid #004754;border-radius:8px;padding:12px 17px;font-weight:730;background:#004754;color:#fff}
+.mapper-app button.alt{background:#fff;color:#004754}
+.mapper-app button:disabled{opacity:.45;cursor:not-allowed}
+.mapper-app .mapper-actions{display:flex;gap:12px;flex-wrap:wrap;margin:19px 0}
+.mapper-app .mapper-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:3px 20px}
+.mapper-app .mapper-grid label{min-width:0}
+.mapper-app .mapper-grid label span{display:block;overflow-wrap:anywhere}
+.mapper-app .mapper-note{background:#e8f3f1;padding:12px;border-radius:8px;margin:16px 0}
+.mapper-app .mapper-report{background:#f3f6f8;padding:16px;border:1px solid #b8d0d3;border-radius:10px;margin:20px 0;overflow-wrap:anywhere}
+.mapper-app .mapper-report[hidden]{display:none}
+.mapper-app .mapper-report ol{max-height:350px;overflow:auto}
+.mapper-app .checkbox-utc{display:flex;align-items:flex-start;gap:12px}
+.mapper-app .checkbox-utc input{margin-top:6px;flex:none}
+.mapper-app .checkbox-utc span{font-weight:500}
+@media(max-width:650px){.mapper-app .mapper-grid{grid-template-columns:1fr}.mapper-app{padding:14px}}

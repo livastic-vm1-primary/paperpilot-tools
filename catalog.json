@@ -393,6 +393,36 @@
       "existing_free_trade_id_tool": "https://livastic-vm1-primary.github.io/paperpilot-tools/tradeid-audit.html",
       "market_is_validated_to_buy_our_service": false,
       "one_single_human_beneficial_owner_across_vms": true
+    },
+    {
+      "id": "free-manual-koinly-header-mapper",
+      "name": "Free local exchange CSV to Koinly official template column mapper",
+      "type": "free-static-local-tool",
+      "page": "https://livastic-vm1-primary.github.io/paperpilot-tools/koinly-column-mapper.html",
+      "price_usdc": "0.000000",
+      "templates": [
+        "Universal",
+        "Simple",
+        "Trades"
+      ],
+      "limits": {
+        "csv_bytes": 524288,
+        "records": 200,
+        "columns": 40,
+        "cell_chars": 16000
+      },
+      "no_server_upload": true,
+      "no_account_login": true,
+      "no_wallet_connection": true,
+      "no_rpc": true,
+      "source_rows_automatically_deleted_or_merged": false,
+      "source_financial_values_automatically_edited": false,
+      "source_utc_confirmation_required": true,
+      "unused_source_columns_preserved_with_prefix": true,
+      "generated_Koinly_import_acceptance_verified": false,
+      "real_outside_paying_customers_verified": 0,
+      "complementary_same_owner_VM3_preflight": "https://livastic-vm3-primary-tmp-260920.github.io/crypto-csv-rescue/koinly-preflight/",
+      "scope": "Original row and field preserving Koinly candidate structural header mapping; no pricing, tax calculations, balance accuracy claims or Koinly endorsement."
     }
   ],
   "genuine_historical_receipt_note": "The same original merchant has prior paid-and-delivered synthetic GET service receipts distinct from the buyer-owned POST; none establish paid POST orders.",

@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#101b32">
+<meta name="description" content="Map unsupported exchange CSV columns to exact Koinly Simple, Trades or Universal template headers offline with no row deletion, trade guessing, wallet connection, upload or tax calculations. Manual mappings, synthetic demo, free local CSV candidate download.">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'none'; script-src 'self'; style-src 'self'; img-src 'self'; form-action 'none'; object-src 'none'; base-uri 'self'; upgrade-insecure-requests">
+<title>Exchange CSV → Koinly Header Mapper — Free Browser-Local Candidate CSV | PaperPilot</title>
+<link rel="canonical" href="https://livastic-vm1-primary.github.io/paperpilot-tools/koinly-column-mapper.html">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="crypto-csv-rescue.css">
+<link rel="stylesheet" href="koinly-column-mapper.css">
+</head><body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="head"><div class="wrap nav"><a class="brand" href="./">PaperPilot <span>Tools</span></a><nav aria-label="Services">
+<a href="crypto-csv-rescue.html">Crypto CSV Rescue</a>
+<a href="tradeid-audit.html">Free Trade-ID checker</a>
+<a href="services.html">Manual service enquiries</a></nav></div></header>
+<main id="main">
+<section class="hero"><div class="wrap hero-grid"><div>
+<p class="eyebrow">EXCHANGE CSV STRUCTURAL MAPPING · FREE / LOCAL / EXPLICIT</p>
+<h1>Your exchange CSV rejected by Koinly? <em>Map columns safely.</em></h1>
+<p class="lead">Choose which existing exchange column corresponds to each documented Koinly Simple, Trades or Universal field. The browser creates a candidate CSV with the exact Koinly header spelling, <strong>without deleting or merging source rows, calculating missing prices, changing existing cell values or uploading financial records</strong>.</p>
+<p>This solves a narrow format problem, not a crypto tax filing or a Koinly import guarantee. If your exchange is already supported by Koinly, the vendor recommends its native integration instead of modifying the supported export.</p>
+<div class="actions"><a class="secondary" href="https://support.koinly.io/en/articles/9489976-how-to-create-a-custom-csv-file-with-your-data" target="_blank" rel="noopener noreferrer">Koinly's original official template guide ↗</a>
+<a class="secondary" href="https://support.koinly.io/en/articles/9885319-how-to-modify-csv-files-to-import-them-to-koinly" target="_blank" rel="noopener noreferrer">Official modification guidelines ↗</a></div></div>
+<aside class="panel"><p class="eyebrow">NO TOKEN, LOGIN OR WALLET NEEDED</p>
+<h2>A small, honest tool</h2>
+<p>One CSV at a time, at most <strong>512 KiB, 200 records, 40 columns</strong>. A fabricated demo is available without uploading anything.</p>
+<ul><li>No backend, cookies or analytics</li><li>No amount-only duplicate deletion</li><li>No unknown trade, fee or timestamp inference</li><li>No blockchain lookups or tax computations</li><li>Zero known outside paid conversion customers</li></ul>
+</aside></div></section>
+<section class="wrap section">
+<h2>Browser-only CSV column mapping</h2>
+<p>Download and retain your exact original export separately. Confirm its clock is <strong>already UTC</strong>; do not check the UTC box if the file uses local exchange time. The program rejects values it cannot safely map, rather than silently guessing or modifying them.</p>
+<div class="mapper-app">
+<h2>1. Choose your authorized source file</h2>
+<label for="input-file">Read a local CSV file (never uploaded)</label>
+<input id="input-file" type="file" accept=".csv,text/csv">
+<label for="csv-original">Or paste CSV source locally (sensitive; not on shared computers)</label>
+<textarea id="csv-original" spellcheck="false" aria-label="Source exchange CSV text" placeholder="time_utc,amount_sent,asset_sent,amount_received,asset_received"></textarea>
+<div class="mapper-actions"><button id="input-demo" class="alt" type="button">Load entirely fictional demonstration</button><button id="input-inspect" type="button">Inspect headers locally</button><button id="input-clear" class="alt" type="button">Clear local input</button></div>
+<h2>2. Pick a documented Koinly template</h2>
+<label for="koinly-format">Destination template — never inferred automatically</label>
+<select id="koinly-format"><option value="universal">Universal — deposits, withdrawals, spot exchanges</option><option value="simple">Simple — one asset movement per source record</option><option value="trades">Trades — spot Buy/Sell with source Pair, Amount and Total</option></select>
+<p class="mapper-note"><strong>Exact official fields:</strong> Universal uses <code>Date</code>, <code>Sent Amount</code>/<code>Sent Currency</code> and <code>Received Amount</code>/<code>Received Currency</code>. Simple and Trades use <code>Koinly Date</code>. Mapping two original columns to the same destination data, or inventing missing trade fields, is prohibited.</p>
+<div id="mapping-fields"><p>Inspect source CSV headers to display mapping controls.</p></div>
+<h2>3. Confirm source timezone and preview</h2>
+<label class="checkbox-utc" for="utc-confirm"><input id="utc-confirm" type="checkbox"><span>I independently checked the original exchange export: dates selected above are already UTC in <code>YYYY-MM-DD HH:mm:ss</code>. This is not a request to guess or convert a timezone.</span></label>
+<div class="mapper-actions"><button id="input-preview" type="button">Validate → preview candidate CSV locally</button><button id="output-download" type="button" disabled>Download candidate Koinly-format CSV</button></div>
+<p id="mapper-message" class="mapper-note" role="status" aria-live="polite">No conversion yet. No data stored, uploaded or sent.</p>
+<section id="mapping-results" class="mapper-report" hidden role="region" aria-label="Row-count and validation evidence"></section>
+</div></section>
+<section class="wrap section">
+<h2>What this changes — and deliberately does not</h2>
+<div class="cards">
+<article><h3>Structure only</h3><p>It remaps chosen source columns to Koinly's published header spelling and copies every original source record in its original order. Unmapped input columns remain as clearly named <em>Source:</em> fields; Koinly may ignore extra columns. Text resembling spreadsheet formulas blocks export instead of being executed or quietly modified.</p></article>
+<article><h3>Never invent accounting facts</h3><p>No automatic UTC conversion, trade side, Total, acquisition price, token identity, cost basis, wallet link or tax treatment. Missing or malformed evidence blocks the entire generated candidate CSV; use vendor docs and a qualified adviser where needed.</p></article>
+<article><h3>Trades may still merge in Koinly</h3><p>Koinly's separate importer can combine fills sharing <em>Order ID</em>. This mapper itself never merges or deletes rows. Verify the real imported row/event count independently before considering any result accurate.</p></article>
+<article><h3>Check the output again</h3><p>When downloaded, this candidate CSV still contains your sensitive original data. Import it yourself and verify every source row and amount. The mapper does not connect to Koinly, obtain tax advice, confirm balances or guarantee an error-free import.</p></article>
+</div>
+<p>For a separate original one-owner **free structural checker**, you can independently run the <a href="https://livastic-vm3-primary-tmp-260920.github.io/crypto-csv-rescue/koinly-preflight/" target="_blank" rel="noopener noreferrer">VM3 Koinly CSV preflight</a>. It does not verify Koinly import or tax accounting either. This service is independent and not affiliated with or endorsed by Koinly.</p>
+</section>
+<section class="wrap section">
+<h2>Need a human to review an unsupported exporter?</h2>
+<p>Only after a real buyer requests assistance, a proposed <strong>49 USD</strong> manually scoped Crypto CSV Rescue review can examine up to 50 buyer-authorized redacted rows and document a safe mapping plan. That price is a hypothesis, <strong>not an accepted order or paid customer</strong>. Parties must separately agree on the lawful scope, privacy, ownership, acceptance, refund terms and exact native Circle Base USDC payment instructions before payment. Do not send tax files or wallet exports by initial email.</p>
+<div class="actions"><a class="primary" href="crypto-csv-rescue.html">Review separate free sample and optional human enquiry ↗</a><a class="secondary" href="contact.html?service=crypto-csv-rescue">Optional third-party-consent contact form ↗</a></div>
+<p class="fine">Original public source: <a href="https://github.com/livastic-vm1-primary/paperpilot-tools/blob/main/koinly-column-mapper-core.mjs" target="_blank" rel="noopener noreferrer">offline core</a> and <a href="https://github.com/livastic-vm1-primary/paperpilot-tools/blob/main/tests/koinly-column-mapper.test.mjs" target="_blank" rel="noopener noreferrer">fictional regression tests</a>. The external paying-customer count verified for this tool is zero.</p>
+</section>
+</main>
+<footer class="foot"><div class="wrap">PaperPilot Tools · Original AI-assisted local software · No independent paid buyer, no Koinly tax/accounting certification, no wallet access.</div></footer>
+<script type="module" src="koinly-column-mapper-ui.mjs"></script>
+</body></html>

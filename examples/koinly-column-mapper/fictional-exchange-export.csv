@@ -1,0 +1,4 @@
+time_utc,amount_sent,asset_sent,amount_received,asset_received,venue_note,execution_ref
+2026-10-20 10:10:00,150,USDC,0.05,ETH,"fake swap, not live",EX-A101
+2026-10-20 11:11:12,,,2.3,USDC,"fictional incoming, not paid",EX-A102
+2026-10-20 12:13:14,1,ETH,,,"fake outgoing, not onchain",EX-A103
