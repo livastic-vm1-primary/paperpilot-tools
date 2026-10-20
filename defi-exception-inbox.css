@@ -24,3 +24,15 @@ pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#061224;border:1px so
 ul li{padding-bottom:8px}
 footer{padding:23px 0 40px;color:var(--soft);font-size:14px;border-top:1px solid var(--line)}
 @media(max-width:750px){.hero{padding:34px 0}.grid,.two{grid-template-columns:1fr}.section{padding:28px 0}.card{padding:18px}}
+
+
+.feedback-card{margin:20px 0 25px}
+.feedback-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:14px 0}
+.feedback-card label{display:block;font-size:14px;font-weight:650;margin:8px 0}
+.feedback-card select,.feedback-card input[type=email]{display:block;width:100%;padding:12px;border-radius:8px;border:1px solid #a2b1cc;background:#0c1930;color:#fff;font:inherit}
+.feedback-card textarea{min-height:90px;max-height:120px}
+.feedback-card button{margin:10px 0}
+.feedback-honeypot{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.feedback-card .checkline{align-items:flex-start;margin:16px 0}
+.feedback-card .checkline input{flex:0 0 19px}
+@media(max-width:750px){.feedback-row{grid-template-columns:1fr}}

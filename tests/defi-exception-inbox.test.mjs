@@ -133,3 +133,28 @@ test('strict same-origin CSP loads styles/scripts as static files; no inline scr
  const css=readFileSync(root+'defi-exception-inbox.css','utf8');
  assert.match(css,/\.results/);
 });
+
+
+test('real user optional feedback form requires third-party consent, never includes local CSV or payment',()=>{
+ const page=readFileSync(root+'defi-exception-inbox.html','utf8');
+ assert.match(page,/id="defi-feedback-form" action="https:\/\/formsubmit\.co\/onecursor1@gmail\.com" method="POST"/);
+ assert.match(page,/form-action https:\/\/formsubmit\.co/);
+ assert.match(page,/connect-src 'none'/);
+ const start=page.indexOf('<form id="defi-feedback-form"');
+ const end=page.indexOf('</form>',start);
+ assert.ok(start>0 && end>start);
+ const form=page.slice(start,end);
+ for(const id of ['feedback-problem','feedback-export','feedback-paid','feedback-size','feedback-note','feedback-email','feedback-third-party-consent'])assert.match(form,new RegExp('id="'+id+'"'));
+ assert.match(form,/id="feedback-email" name="optional_reply_email" maxlength="120"/);
+ assert.match(form,/id="feedback-third-party-consent"[^>]*required/);
+ assert.doesNotMatch(form,/id="defi-csv"|id="defi-file"|name="csvText"|type="file"|name="(?:wallet_address|tx_hash|private_key)"/);
+ assert.doesNotMatch(form,/eth_sendTransaction|purchase now/i);
+ assert.match(form,/FormSubmit may present its standard anti-spam\/CAPTCHA step/);
+});
+test('third-party feedback never fires from free-check scripts',()=>{
+ const ui=readFileSync(root+'defi-review-ui.js','utf8');
+ const core=readFileSync(root+'defi-review-core.js','utf8');
+ for(const src of [ui,core]){
+   assert.doesNotMatch(src,/formsubmit|submit\s*\(|\.requestSubmit\s*\(|fetch\s*\(/i);
+ }
+});

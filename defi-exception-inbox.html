@@ -2,7 +2,7 @@
 <html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#111b30">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'none'; img-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'none'; img-src 'self'; object-src 'none'; base-uri 'self'; form-action https://formsubmit.co">
 <meta name="description" content="DeFi transaction CSV review checklist, free and local. Flag multiple event legs, ambiguous swaps, liquidity, staking, bridges and missing fields. No wallet connect, tax claims or upload. Optional 15 USDC review by written agreement.">
 <meta property="og:title" content="DeFi Exception Inbox — local review checklist, not an automatic tax calculator">
 <meta property="og:url" content="https://livastic-vm1-primary.github.io/paperpilot-tools/defi-exception-inbox.html">
@@ -50,7 +50,65 @@
 <div class="two"><div class="card"><h3>Deliverables after actual acceptance</h3><p>For up to 50 flagged, owner-authorized, non-sensitive EVM CSV records, we can prepare a <strong>traceable review checklist</strong> with transaction grouping suggestions, data gaps, ambiguous method explanations and original public-explorer links where available. One brief revision within the written scope. A specific delivery deadline must be agreed before any payment.</p><p class="fine">No audit, financial certification, professional tax opinion, asset recovery guarantee, wallet management or promise to repair hidden transaction history.</p></div>
 <div class="card"><h3>Before any USDC is sent</h3><p>Contact us with the network, approximate record count, anonymized header names, the largest discrepancy and whether you want a written quote. We will check whether the task is possible, agree a price and lawful file-sharing/payment/cancellation arrangement, and identify the receiving <strong>Base native Circle USDC</strong> address in the written contract. Do <strong>not</strong> send coins or original private financial exports without confirmed agreement.</p><a class="cta" href="mailto:onecursor1@gmail.com?subject=DeFi%20CSV%20exception%20review%20-%2015%20Base%20USDC&amp;body=Hello%20PaperPilot%2C%0A%0AChain%20(EVM)%3A%20%0ANumber%20of%20CSV%20rows%3A%20%0AWhat%20appears%20unreconciled%3A%20%0AExisting%20app%20or%20export%3A%20%0ADeadline%3A%20%0A%0AI%20will%20not%20send%20private%20records%20or%20USDC%20before%20written%20agreement.">Ask about one paid review ↗</a></div></div>
 <p class="notice"><strong>Evidence:</strong> the tool code and test cases are <a href="https://github.com/livastic-vm1-primary/paperpilot-tools/blob/main/defi-review-core.js">public for inspection</a>. Its heuristics cannot assign a legal tax category. A paid manual review is merely a proposed service—not a merchant x402 subscription, approved contract, new customer or received payment.</p></div></section>
-<section class="section" id="feedback"><div class="wrap"><h2>Your real feedback matters more than page views</h2><p>Which problem would you actually pay someone to resolve: <strong>missing source transactions, repeated event legs, LP/reward ambiguity, failed CSV import</strong> or something else? Tell us what explorer/app you tried and what the tool got wrong. Do not include addresses, full transaction hashes, personal identities, private keys or private balances. You can give anonymous product feedback using a public GitHub issue, or email us privately.</p>
+<section class="section" id="feedback"><div class="wrap"><h2>Your real feedback matters more than page views</h2><p>Which problem would you actually pay someone to resolve: <strong>missing source transactions, repeated event legs, LP/reward ambiguity, failed CSV import</strong> or something else? Tell us what explorer/app you tried and what the tool got wrong. Do not include addresses, full transaction hashes, personal identities, private keys or private balances. Use the optional consent-based feedback form below without providing a contact email. GitHub issues are public and require sign-in; email is a separate private option.</p>
+<div class="card feedback-card">
+<h3>One-minute feedback (optional; no email required)</h3>
+<p class="fine">Only provide a problem category, export software, and optional brief general feedback. Do <strong>not</strong> include your CSV, wallet addresses, full transaction hashes, balances, legal/tax identifiers, phone, seed phrases or private keys. This is feedback, not an order or a payment.</p>
+<form id="defi-feedback-form" action="https://formsubmit.co/onecursor1@gmail.com" method="POST" accept-charset="UTF-8">
+<input type="hidden" name="_subject" value="PaperPilot DeFi CSV — volunteered anonymous-field product feedback">
+<input type="hidden" name="_template" value="table">
+<input type="hidden" name="_next" value="https://livastic-vm1-primary.github.io/paperpilot-tools/contact-sent.html">
+<input type="hidden" name="_url" value="https://livastic-vm1-primary.github.io/paperpilot-tools/defi-exception-inbox.html">
+<div class="feedback-honeypot" aria-hidden="true"><label for="defi-hidden">Please leave this empty</label><input type="text" id="defi-hidden" name="_honey" tabindex="-1" autocomplete="off"></div>
+<div class="feedback-row">
+<div><label for="feedback-problem">What is the biggest pain point?</label>
+<select name="pain_point" id="feedback-problem" required>
+<option value="" selected disabled>Select one issue</option>
+<option value="multi_event_tx_hash">Multiple transfer logs from one transaction</option>
+<option value="bridge_lp_stake_ambiguity">Bridge, liquidity or staking classification is ambiguous</option>
+<option value="missing_export">Missing wallet / exchange CSV history</option>
+<option value="csv_format_parse">CSV imports fail or fields do not match</option>
+<option value="wrong_labels">False-positive labels or strange amount / date fields</option>
+<option value="other">Other (explain using non-sensitive terms)</option>
+</select></div>
+<div><label for="feedback-export">Which public exporter or software?</label>
+<select name="exporter" id="feedback-export" required>
+<option value="" selected disabled>Select a software/export family</option>
+<option value="etherscan_family">Etherscan, BaseScan or Arbiscan-style explorer CSV</option>
+<option value="bsc_polygon_explorer">BscScan or PolygonScan-style CSV</option>
+<option value="debank_zerion">DeBank or Zerion</option>
+<option value="koinly_cointracker">Koinly, CoinTracker or another tax tracker</option>
+<option value="rotki">Rotki</option>
+<option value="other">Other</option>
+<option value="not_tried">I have not tried an export yet</option>
+</select></div></div>
+<div class="feedback-row">
+<div><label for="feedback-paid">Would you voluntarily pay 15 Base USDC for a manual 50-row exception checklist?</label>
+<select name="willingness_to_pay_15_base_usdc" id="feedback-paid" required>
+<option value="" selected disabled>Select one answer</option>
+<option value="yes_only_if_accurate_scope">Yes, if scope and actual deliverables are agreed</option>
+<option value="maybe_5_usdc">Only around 5 USDC</option>
+<option value="maybe_10_usdc">Only around 10 USDC</option>
+<option value="no_only_free">No, I only need free tools</option>
+<option value="different_need">No, I would pay for a different feature</option>
+</select></div>
+<div><label for="feedback-size">How many rows cause trouble?</label>
+<select name="approx_rows_needing_review" id="feedback-size" required>
+<option value="" selected disabled>Select a range</option>
+<option value="1-10">1–10</option><option value="11-50">11–50</option>
+<option value="51-250">51–250</option><option value="251+">Over 250</option>
+<option value="unknown">Not sure</option>
+</select></div></div>
+<label for="feedback-note">One optional short, sanitized note (maximum 350 characters; no wallet or financial identifiers)</label>
+<textarea id="feedback-note" name="non_sensitive_general_feedback" maxlength="350" rows="3" placeholder="For example: two rows from an LP withdrawal seem to represent one user action. No wallet address or transaction details."></textarea>
+<label for="feedback-email">Optional reply email (leave blank if you do not want a reply)</label>
+<input type="email" id="feedback-email" name="optional_reply_email" maxlength="120" autocomplete="email" placeholder="Optional, not required">
+<div class="checkline"><input type="checkbox" id="feedback-third-party-consent" name="third_party_form_consent" value="I explicitly consent to sending ONLY the selected category fields and my optional note/email through FormSubmit" required>
+<label for="feedback-third-party-consent">I understand this <strong>separate voluntary form</strong> sends only the selected answer fields, optional note and optional reply email to third-party <a href="https://formsubmit.co/documentation" target="_blank" rel="noopener noreferrer">FormSubmit</a> for delivery to PaperPilot's existing inbox. FormSubmit may process request metadata and retain submission data for up to 30 days per its published policy. My original DeFi CSV, local audit and any wallet keys are <strong>not</strong> included. I consent to this separate transfer.</label></div>
+<button type="submit" class="cta">Send optional product feedback (no payment)</button>
+<p class="fine">FormSubmit may present its standard anti-spam/CAPTCHA step, which a visitor must complete normally. No automatic sending, no account or payment required for the local checker. No independent responses are presumed to exist.</p>
+</form>
+</div>
 <div class="actions"><a class="cta" href="mailto:onecursor1@gmail.com?subject=DeFi%20CSV%20tool%20feedback%20-%20no%20private%20wallet%20data&amp;body=Biggest%20pain%20(missing%20records%2Fduplicate%20logs%2FLP%2Fbridge%2Ftax%20tool%2Fother)%3A%20%0AExport%20type%20and%20chain%3A%20%0AWhat%20failed%20in%20this%20free%20tool%3A%20%0AWould%20you%20pay%2015%20USDC%20for%20a%2050-row%20human%20review%3F%20(Yes%2FNo%2Fother%20price)%3A%20%0A%0APlease%20do%20not%20include%20private%20wallet%20data.">Send voluntary feedback ↗</a>
 <a class="cta alt" href="https://github.com/livastic-vm1-primary/paperpilot-tools/issues/new?title=DeFi%20CSV%20review%3A%20feedback&amp;body=The%20CSV%20export%20I%20tried%20is%20from%3A%0AThe%20issue%20is%3A%0AMissing%20category%3A%0AWould%20I%20pay%20for%20this%3A%0A%0APlease%20redact%20personal%20or%20wallet%20data.">Report a missing case (public GitHub) ↗</a></div>
 <p class="fine">Independent user reviews received at launch: <strong>0 confirmed</strong>. Paid customers: 0. We will treat future comments as evidence only when they come from actual external users, not our own VM accounts.</p>
