@@ -26,6 +26,33 @@ const ASSET=/^[A-Z0-9][A-Za-z0-9:#._-]{0,110}$/;
 const TRADEPAIR=/^[A-Za-z0-9]{2,24}[-/][A-Za-z0-9]{2,24}$/;
 const HEADERFORBIDDEN=/[\0\r\n]/;
 const FORMULA=/^[\s]*[=+@-]/;
+// The independent SAME-OWNER VM3 structural checker presently applies
+// narrower limits than this conservative mapper for certain valid-looking
+// source records. This metadata is an ADVISORY, never a Koinly vendor rule.
+const VM3_COLUMNS=36, VM3_DECIMAL_FRACTION=18, VM3_SYMBOL_CHARS=44, VM3_PAIR_SIDE_CHARS=18;
+function siblingPreflightAdvisories(rows, headers, targets, sourceIdx) {
+  const warnings=new Set();
+  if(headers.length>VM3_COLUMNS)
+    warnings.add('The separate VM3 Koinly format preflight currently caps total CSV columns at 36; this candidate has more, so the separate checker will reject it. This is not evidence Koinly itself rejects the file.');
+  for(const cells of rows){
+    for(let i=0;i<targets.length;i++){
+      const field=targets[i],value=cells[sourceIdx[i]];
+      if(['Amount','Total','Sent Amount','Received Amount','Fee Amount'].includes(field)){
+        const frac=String(value??'').split('.')[1]??'';
+        if(frac.length>VM3_DECIMAL_FRACTION)
+          warnings.add('The separate VM3 Koinly format preflight currently limits fractional decimals to 18 places; this candidate includes higher source precision. We preserved the original amount exactly. Koinly vendor acceptance is unverified.');
+      }
+      if(['Currency','Sent Currency','Received Currency','Fee Currency'].includes(field) && value && value.length>VM3_SYMBOL_CHARS)
+        warnings.add('The separate VM3 preflight currently accepts asset-symbol strings shorter than 45 characters; original extended contract symbols may be longer. This checker limitation is not a Koinly verdict.');
+      if(field==='Pair' && value){
+        const halves=value.split(/[-/]/);
+        if(halves.length===2 && halves.some(h=>h.length>VM3_PAIR_SIDE_CHARS))
+          warnings.add('The separate VM3 preflight currently accepts pair symbols of at most 18 characters per asset; the mapper preserved an existing longer pair. Koinly import compatibility remains unverified.');
+      }
+    }
+  }
+  return [...warnings];
+}
 const int= x => Number.isInteger(x);
 
 export function parseExchangeCsv(src) {
@@ -156,9 +183,8 @@ export function buildKoinlyCsv(input,{template='universal',mapping={},confirmedU
   const config=TEMPLATES[template];
   if(!config)throw Error('Choose Universal, Simple, or Trades Koinly template.');
   if(confirmedUtc!==true)throw Error('Confirm source timestamps are already UTC; no timezone guessing.');
-  const original=typeof input==='string'?parseExchangeCsv(input):input;
-  if(!original||!Array.isArray(original.headers)||!Array.isArray(original.records)
-    ||original.headers.length<2||original.records.length>MAX_ROWS)throw Error('Provide a bounded parsed CSV.');
+  if(typeof input!=='string')throw Error('Only raw bounded CSV text is accepted, not unvalidated parsed objects.');
+  const original=parseExchangeCsv(input);
   const supported=[...config.required,...config.optional];
   if(!mapping||typeof mapping!=='object'||Array.isArray(mapping)||Object.keys(mapping).some(k=>!supported.includes(k)))
     throw Error('Only documented Koinly template fields may be mapped.');
@@ -190,13 +216,21 @@ export function buildKoinlyCsv(input,{template='universal',mapping={},confirmedU
       continue;
     }
     const projection=Object.fromEntries(targets.map((k,i)=>[k,cells[sourceIdx[i]]]));
+    const issueCountBeforeThisRow=issues.length;
     issues.push(...validate(template,projection,record));
-    if(issues.length>0)continue;
+    // Continue inspecting every subsequent source row. A prior bad row must
+    // NEVER suppress detection of a second independent error. The ENTIRE
+    // downloadable CSV remains null if even one source record has an issue.
+    if(issues.length>issueCountBeforeThisRow)continue;
     out+=rowCsv([...sourceIdx.map(i=>cells[i]),...extras.map(({i})=>cells[i])]);
     if(new TextEncoder().encode(out).length>MAX_BYTES*2)throw Error('Result exceeds a safe download limit.');
   }
+  const siblingWarnings=siblingPreflightAdvisories(original.records,headers,targets,sourceIdx);
   const report={
     template,
+    vm3PublicPreflightKnownInputLimitWarnings:siblingWarnings,
+    vm3PublicPreflightActuallyRunOnUserFile:false,
+    vm3PublicPreflightGuaranteesKoinlyImport:false,
     sourceRows:original.rowCount,
     outputRows:issues.length?0:original.rowCount,
     sourceColumns:original.headers.length,
@@ -210,6 +244,7 @@ export function buildKoinlyCsv(input,{template='universal',mapping={},confirmedU
     anyFinancialOrTaxAdviceGiven:false,
     issues:issues.slice(0,50),
     warnings:[
+      ...siblingWarnings,
       'Your source timestamps must REALLY be UTC; checking shape does not prove timezone.',
       'Unknown source columns have been preserved as Source: fields, which Koinly may ignore.',
       'No exchange software, Koinly account or actual user data was used to verify import acceptance.',

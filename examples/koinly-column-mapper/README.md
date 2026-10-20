@@ -25,6 +25,8 @@ examples/koinly-column-mapper/fictional-koinly-universal-candidate.csv
 4. Check actual source row/value preservation and actual Koinly import
    status independently. Repeat separately for another CSV file.
 
+Confirmed independent first-party SYNTHETIC interoperability: original VM3 public core.mjs at SHA256 93460f9d227e3934d22f547e9d44540a7f03ad62968d86d51678555df6930fcf accepted our Universal (3 rows), Simple (1 row), and Trades (1 row) candidates with zero errors/warnings. It rejects 21 fractional decimal places and 37 source columns because VM3 supports at most 18 fractional digits and 36 columns. These VM3-only limits are not proven Koinly importer limits and never justify modifying original financial values. The VM1 mapper now reports advisory warnings, preserving full source precision and rows. Our offline-only pinned interop verifier is scripts/qa-koinly-vm3-public-interop.mjs.
+
 VM3's different original free structural preflight complements this converter:
 https://livastic-vm3-primary-tmp-260920.github.io/crypto-csv-rescue/koinly-preflight/
 

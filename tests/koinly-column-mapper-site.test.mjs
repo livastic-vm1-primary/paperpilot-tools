@@ -22,6 +22,9 @@ test('local-only Koinly mapper content-security policy disables all network fetc
   assert.match(ui,/URL\.revokeObjectURL/);
   assert.match(ui,/new Blob/);
   assert.match(html,/NO TOKEN, LOGIN OR WALLET NEEDED/);
+  assert.match(html,/VM3 preflight currently accepts at most/);
+  assert.match(html,/36 columns and 18 fractional decimal places/);
+  assert.match(html,/does not verify Koinly import/);
 });
 test('one real economic owner commercial CTA and complementary preflight are disclosed',()=>{
   const html=read('koinly-column-mapper.html');

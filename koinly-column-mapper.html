@@ -59,6 +59,7 @@
 <article><h3>Check the output again</h3><p>When downloaded, this candidate CSV still contains your sensitive original data. Import it yourself and verify every source row and amount. The mapper does not connect to Koinly, obtain tax advice, confirm balances or guarantee an error-free import.</p></article>
 </div>
 <p>For a separate original one-owner **free structural checker**, you can independently run the <a href="https://livastic-vm3-primary-tmp-260920.github.io/crypto-csv-rescue/koinly-preflight/" target="_blank" rel="noopener noreferrer">VM3 Koinly CSV preflight</a>. It does not verify Koinly import or tax accounting either. This service is independent and not affiliated with or endorsed by Koinly.</p>
+<p><strong>Interoperability note:</strong> our separately developed VM3 preflight currently accepts at most <strong>36 columns and 18 fractional decimal places</strong>, stricter than this mapper's 40 columns and 24 decimal places. It also has narrower asset-symbol and pair limits. For records outside those limits, our local preview displays an advisory instead of rounding numbers, discarding source columns or claiming a Koinly vendor error. A VM3 structural pass still cannot prove Koinly import acceptance.</p>
 </section>
 <section class="wrap section">
 <h2>Need a human to review an unsupported exporter?</h2>

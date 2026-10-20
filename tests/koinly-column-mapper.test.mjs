@@ -143,3 +143,85 @@ test('output report never contains source financial values or original headers',
   assert.equal(r.report.KoinlyImportAcceptanceIndependentlyVerified,false);
   assert.equal(r.report.anyFinancialOrTaxAdviceGiven,false);
 });
+
+test('every malformed row is independently identified, instead of stopping after first bad record',()=>{
+  const source=[
+    'dateutc,quantity,coin,sourceMemo',
+    '2026-13-20 10:00:00,1,USDC,syntheticA',
+    '2026-10-20 10:00:00,not_a_number,ETH,syntheticB',
+    '2026-10-20 10:00:00,-0.5,BTC,syntheticC'
+  ].join('\r\n');
+  const out=fmt(source);
+  assert.equal(out.ok,false);
+  assert.equal(out.csv,null);
+  assert.equal(out.report.sourceRows,3);
+  assert.equal(out.report.outputRows,0);
+  assert.equal(out.report.issueCount,2);
+  assert.deepEqual(out.report.issues.map(x=>x.sourceRecord),[2,3]);
+  assert.equal(JSON.stringify(out.report).includes('syntheticA'),false);
+});
+
+test('spreadsheet formula failure does not hide subsequent unrelated date and amount issues',()=>{
+  const source=[
+    'dateutc,quantity,coin,sourceMemo',
+    '2026-10-20 10:00:00,-1,BTC,"=HYPERLINK(""http://fiction.invalid"")"',
+    '2026-02-30 10:00:00,1,USDC,note',
+    '2026-10-20 10:00:00,garbage,ETH,note'
+  ].join('\n');
+  const r=fmt(source);
+  assert.equal(r.ok,false);
+  assert.equal(r.csv,null);
+  assert.equal(r.report.issueCount,3);
+  assert.deepEqual(r.report.issues.map(x=>x.sourceRecord),[2,3,4]);
+  assert.match(r.report.issues[0].reason,/Spreadsheet formula/);
+});
+
+test('sibling checker narrower 18-place decimal limit is an explicit advisory, never a data rewrite',()=>{
+  const amount='0.123456789012345678901';
+  const r=fmt(csvSimple(undefined,amount));
+  assert.equal(r.ok,true);
+  assert.ok(r.csv.includes(amount));
+  assert.ok(r.report.vm3PublicPreflightKnownInputLimitWarnings.some(x=>x.includes('18 places')));
+  assert.equal(r.report.vm3PublicPreflightActuallyRunOnUserFile,false);
+  assert.equal(r.report.vm3PublicPreflightGuaranteesKoinlyImport,false);
+  assert.ok(!JSON.stringify(r.report).includes(amount));
+  const normal=fmt(csvSimple(undefined,'0.123456789012345678'));
+  assert.equal(normal.ok,true);
+  assert.equal(normal.report.vm3PublicPreflightKnownInputLimitWarnings.length,0);
+});
+
+test('sibling checker narrower 36-column limit is disclosed without dropping unused source cells',()=>{
+  const extras=Array.from({length:34},(_,i)=>'src'+(i+1));
+  const row=['2026-10-20 10:00:00','1.3','ETH',...extras.map((_,i)=>'fakeextra'+i)];
+  const source=['utc,amount,currency',...extras].join(',')+'\n'+row.join(',');
+  const r=fmt(source,{template:'simple',mapping:{'Koinly Date':'utc',Amount:'amount',Currency:'currency'},confirmedUtc:true});
+  assert.equal(r.ok,true);
+  assert.equal(r.report.sourceColumns,37);
+  assert.equal(r.report.outputRows,1);
+  assert.equal(r.report.preservedOriginalSourceColumns,34);
+  assert.ok(r.report.vm3PublicPreflightKnownInputLimitWarnings.some(x=>x.includes('36')));
+  const converted=parseExchangeCsv(r.csv);
+  assert.equal(converted.headers.length,37);
+  assert.equal(converted.records[0].at(-1),'fakeextra33');
+  assert.ok(!JSON.stringify(r.report).includes('fakeextra33'));
+});
+
+test('extended token contract identifiers and long base/quote pairs get sibling checker warnings only',()=>{
+  const asset='USDC:0x'+'a'.repeat(40)+':BASE';
+  const x=fmt(csvSimple(undefined,'10',asset));
+  assert.equal(x.ok,true);
+  assert.ok(x.csv.includes(asset));
+  assert.ok(x.report.vm3PublicPreflightKnownInputLimitWarnings.some(s=>s.includes('asset-symbol')));
+  const pair='A'.repeat(19)+'/'+'B'.repeat(19);
+  const trades='utc,pair,side,base,total\n2026-10-20 10:00:00,'+pair+',Buy,1,500';
+  const opts={template:'trades',mapping:{'Koinly Date':'utc',Pair:'pair',Side:'side',Amount:'base',Total:'total'},confirmedUtc:true};
+  const t=fmt(trades,opts);
+  assert.equal(t.ok,true);
+  assert.ok(t.report.vm3PublicPreflightKnownInputLimitWarnings.some(s=>s.includes('18 characters per asset')));
+});
+
+test('public core refuses unbounded parsed record objects rather than bypassing UTF8 CSV size and row checks',()=>{
+  const forged={headers:['dateutc','quantity','coin'],records:[['2026-10-20 10:00:00','1','ETH']]};
+  assert.throws(()=>buildKoinlyCsv(forged,simple),/Only raw bounded CSV text/);
+  assert.throws(()=>buildKoinlyCsv(null,simple),/Only raw bounded CSV text/);
+});
