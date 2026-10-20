@@ -4,6 +4,7 @@
 
 ## Free public examples
 - [Free local CSV checker](https://livastic-vm1-primary.github.io/paperpilot-tools/csv-quality-api.html#local-preview): runs inside your browser, up to 32 KiB UTF-8, no upload, login or payment. Structural warnings, not proof of correct accounting or safety.
+- [Installable zero-charge CSV preflight agent skill](https://github.com/livastic-vm1-primary/paperpilot-tools/tree/main/.agents/skills/paperpilot-csv-preflight): `npx skills add livastic-vm1-primary/paperpilot-tools --skill paperpilot-csv-preflight`, then run its included `scripts/preflight.cjs --demo` locally; up to 32 KiB UTF-8, no input upload, no wallet, no auto-payment. An optional **separate** VM5 paid API is buyer-authorized only.
 - [Free synthetic merchant example](https://vm5-openapi-x402.onrender.com/v1/csv-sample): GET, fictional data, no purchase.
 - [Korean freelance estimate guide](https://livastic-vm1-primary.github.io/paperpilot-tools/freelance-estimate-ko.html): illustrative calculation, not a certified tax invoice.
 

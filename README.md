@@ -61,3 +61,23 @@ not a paid service and cannot certify data correctness.
 
 QA: `node --test tests/*.test.mjs`. Current sales must still be verified
 from independent merchant payment/delivery receipts, not web requests or clicks.
+
+
+## Agent-installable CSV preflight skill (2026-10-20)
+
+Original [`paperpilot-csv-preflight`](.agents/skills/paperpilot-csv-preflight/SKILL.md)
+is self-contained and runs a bounded local CSV structural check via built-in
+Node.js only. It has no API calls, wallet, telemetry, input upload or third-party
+dependencies in the actual free-check script. Its copied parser is identical to
+the publicly tested browser checker; tests enforce source parity.
+
+```sh
+npx skills add livastic-vm1-primary/paperpilot-tools --skill paperpilot-csv-preflight
+# From inside the skill directory after install:
+node scripts/preflight.cjs --demo
+```
+
+The independent optional VM5 paid API remains priced at **0.005 native Circle
+Base USDC**, buyer-authorized only, and there are still no independently
+verified paid customers for its POST route. The skill does not provide or
+initiate x402 wallet signing; the buyer uses their own trusted client.

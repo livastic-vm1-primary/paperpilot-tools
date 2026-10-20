@@ -89,6 +89,14 @@
       </div>
     </div>
   </section>
+  <section class="section" id="agent-skill"><div class="container">
+    <span class="eyebrow">For coding agents · free to install</span>
+    <h2>Use the local CSV checker as an agent skill</h2>
+    <p>Install the same bounded offline heuristic for compatible coding agents. The included Node.js script checks synthetic or authorized non-confidential CSV on your device, returning JSON counts of duplicate rows, missing values, inconsistent columns and formula-like cells. <strong>Free checks never access the network or a wallet.</strong></p>
+    <pre class="code">npx skills add livastic-vm1-primary/paperpilot-tools --skill paperpilot-csv-preflight</pre>
+    <div class="actions"><a class="button alt" href="https://github.com/livastic-vm1-primary/paperpilot-tools/tree/main/.agents/skills/paperpilot-csv-preflight" rel="noopener">Inspect skill source and tests ↗</a><a class="button alt" href="https://www.skills.sh/docs/cli" rel="noopener">Skills CLI docs ↗</a></div>
+    <p class="fine">The optional 0.005 USDC VM5 x402 remote API is a different product. Installing the skill does not authorize, sign, send a payment or upload anything. Only a buyer independently deciding to use an x402-capable client can initiate a paid call.</p>
+  </div></section>
   <section class="section" id="example"><div class="container"><h2>Start free. Decide whether to pay.</h2>
     <div class="two"><div><h3>1 — Get a non-sensitive example</h3><p class="muted">This GET returns a fictional CSV, expected headers and an actual sample POST body. It is not the paid report.</p><pre class="code">curl -fsS \
   https://vm5-openapi-x402.onrender.com/v1/csv-sample</pre><p class="fine">Optional: also inspect <a href="https://vm5-openapi-x402.onrender.com/v1/docs">machine-readable route documentation</a>.</p></div>

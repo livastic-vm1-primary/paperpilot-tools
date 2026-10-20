@@ -17,6 +17,18 @@
       "result": "Structural warning preview, no certification"
     },
     {
+      "id": "agent-skill-free-csv-preflight",
+      "type": "free-installed-agent-skill",
+      "page": "https://github.com/livastic-vm1-primary/paperpilot-tools/tree/main/.agents/skills/paperpilot-csv-preflight",
+      "name": "paperpilot-csv-preflight",
+      "installation_command": "npx skills add livastic-vm1-primary/paperpilot-tools --skill paperpilot-csv-preflight",
+      "price_usdc": "0.000000",
+      "max_input_utf8_bytes": 32768,
+      "no_network_no_storage_no_wallet": true,
+      "optional_separate_paid_api_requires_explicit_buyer_authorization": true,
+      "caveat": "Installer obtains GitHub source; offline CLI does not transfer CSV. Strict structural heuristics, not a data correctness guarantee."
+    },
+    {
       "id": "vm5-x402-csv-preflight",
       "type": "optional-agent-api",
       "endpoint": "https://vm5-openapi-x402.onrender.com/v1/csv-preflight",
