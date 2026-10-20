@@ -130,3 +130,20 @@ Rebuild exactly with `npm ci --include=dev --ignore-scripts --no-audit --no-fund
 and `npm run build:checkout`. Audit the pure guards in
 `src/csv-x402-guard.mjs` before use. Do not pay from the seller's wallet
 as a purported independent customer.
+
+
+### Buyer path between both original free tools (2026-10-20)
+
+The original free x402 PAYMENT-REQUIRED preview now links to the separate
+optional browser-wallet CSV x402 checkout with a clear 0.005 native Base
+Circle USDC price and explicit no-customer-yet notice. The CSV checkout nav
+links back to the completely free, read-only x402 quote inspector. This is
+a customer education/consent path only; neither a visit nor unsigned quote
+creates sales. The only additional customer-paid action is a separately
+approved real-wallet signature by the **outside buyer**, whose settlement
+must be independently verified after a real delivered result.
+
+Proof before linking: VM1 original browser fetched the exact VM5 unsigned
+synthetic CSV request on this already-live checkout, and observed correctly
+pinned 0.005 native Circle BaseUSDC, recipient and no paid request; payment
+was never signed. Both free UI paths remain usable without signup/wallet.
