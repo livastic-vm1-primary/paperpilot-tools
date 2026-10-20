@@ -114,6 +114,7 @@ test('sitemap includes new page exactly once, contact query routes to existing x
  const html=read('x402-post-body-diagnostic.html');
  assert.equal((sitemap.match(/x402-post-body-diagnostic\.html/g)||[]).length,1);
  assert.match(html,/contact\.html\?service=x402-audit/);
+ assert.match(html,/x402-inspector\.html#buyer-feedback/);
  assert.match(html,/before payment/);
  assert.match(html,/No private payment headers/);
  assert.match(html,/one human beneficiary/);

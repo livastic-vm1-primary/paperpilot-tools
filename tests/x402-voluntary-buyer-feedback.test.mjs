@@ -59,3 +59,19 @@ test('responsive design supports visible user-feedback input and bot honeypot',(
  assert.ok(css.includes('.feedback-honey'));
  assert.ok(css.includes('@media(max-width:650px)'));
 });
+
+test('feedback form is actually permitted by CSP, but no other form recipient or quote payload is allowed',()=>{
+ assert.match(html,/connect-src 'none'/);
+ assert.match(html,/form-action https:\/\/formsubmit\.co;/);
+ assert.doesNotMatch(html,/form-action 'none'/);
+ const csp=html.match(/<meta http-equiv="Content-Security-Policy" content="([^"]+)"/)?.[1] ?? '';
+ assert.ok(csp.includes("script-src 'self'"));
+ assert.ok(!csp.includes('unsafe-inline'));
+ assert.ok(!form.includes('name="quote"'));
+ assert.ok(!form.includes('name="expected-invoice-usdc"'));
+ const quotedField=html.slice(html.indexOf('<textarea id="quote"'),html.indexOf('</textarea>',html.indexOf('<textarea id="quote"')));
+ assert.ok(quotedField);
+ assert.ok(!/\sname=/.test(quotedField));
+ assert.match(form,/id="fb-consent"[^>]*required/);
+ assert.match(form,/action="https:\/\/formsubmit.co\/onecursor1@gmail.com"/);
+});

@@ -133,7 +133,7 @@ test('object fields cannot override source code or trigger a network request',()
 test('website security and user-visible checkout separation are accurate',()=>{
   assert.match(html,/connect-src 'none'/);
   assert.match(html,/script-src 'self'/);
-  assert.match(html,/form-action 'none'/);
+  assert.match(html,/form-action https:\/\/formsubmit\.co/);
   assert.match(html,/x402-inspector-core\.js/);
   assert.match(html,/wallet signature/i);
   assert.match(html,/merchant identity/i);

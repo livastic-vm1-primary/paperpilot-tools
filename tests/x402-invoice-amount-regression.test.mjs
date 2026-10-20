@@ -87,7 +87,7 @@ test("public quote inspector UI has buyer expected-invoice amount and zero-netwo
  assert.match(html,/1,000 USDC placeholder/);
  assert.match(html,/github\.com\/bitrefill\/agents\/issues\/11/);
  assert.match(html,/connect-src 'none'/);
- assert.match(html,/form-action 'none'/);
+ assert.match(html,/form-action https:\/\/formsubmit\.co/);
  const source=readFileSync(root+"x402-inspector.js","utf8");
  assert.match(source,/invoiceComparison/);
  assert.match(source,/render\(analyze\(input\.value, cap\.value, expectedInvoice\.value\)\)/);
