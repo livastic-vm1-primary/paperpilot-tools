@@ -61,3 +61,42 @@ Official x402 HTTP v2 transport source: https://github.com/x402-foundation/x402/
 Original readable quote preview: https://livastic-vm1-primary.github.io/paperpilot-tools/x402-inspector.html
 
 Existing separately buyer-paid VM5 API terms: https://vm5-openapi-x402.onrender.com/v1/docs
+
+
+## Buyer-reported invoice amount mismatch: optional bounded QA check
+
+A genuine independent [Bitrefill developer issue](https://github.com/bitrefill/agents/issues/11)
+reported an x402 merchant invoice priced around **0.10 native Base USDC**
+returning a **1,000 USDC HTTP 402 placeholder**, while an alternate
+Lightning acceptance option declared `issuanceDenied: invoice_not_found`.
+This is evidence of a *problem to debug*, **not** evidence the reporter
+commissioned or endorsed our work. We will not submit a signed request,
+create a real invoice or spend someone's funds to reproduce it.
+
+The original free [x402 quote inspector](../x402-inspector.html) now has
+an **optional expected invoice USDC amount**. It uses integer micro-USDC
+comparison and shows **STOP** for a mismatched Base USDC amount *regardless*
+of an unrelated large display-cap, and if **any** option reports an issuance
+denial. The one-click fictional sample (expected 0.10, quote 1,000, Lightning
+invoice_not_found) is safe to test locally without contacting a merchant.
+
+For a **separately agreed 49-native-Base-USDC merchant QA pilot**, a client
+could ask us to include, in the existing ONE allowed route and ONE Origin:
+
+1. One **fictitious or explicitly authorized non-sensitive** expected
+   invoice amount and one **unsigned** public 402 challenge; highlight
+   inconsistent 6-decimal token amounts and any untrusted vendor denial.
+2. The existing two safe read-only browser OPTIONS/CORS preflight header
+   scenarios for the *same* agreed origin and route.
+3. Deliver a brief Markdown/JSON discrepancy & CORS matrix, exact synthetic
+   fixture and actionable merchant-side remediation suggestions; the client
+   independently verifies and deploys any fixes.
+
+This is **not** a promise to call an authenticated private invoice, debug
+billing servers, request real crypto purchases, sign transactions, install
+wallet software, rewrite merchant code, conduct security testing, or perform
+onchain settlement audits. Client must accept a distinct written scope,
+AI tooling/data/IP permissions, return/refund policy and lawful real-world
+payee before a paid contract or data transfer. No clients have purchased
+this particular audit yet; the published issue and demo do not represent
+a contracted deliverable or genuine payment.

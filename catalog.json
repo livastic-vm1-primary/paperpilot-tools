@@ -155,7 +155,7 @@
     {
       "id": "x402-merchant-browser-cors-qa-fixed-scope",
       "type": "manual-customer-qa-inquiry-only",
-      "name": "One public x402 merchant path and browser Origin compatibility report",
+      "name": "One x402 browser merchant path: quote invoice price vs expected and CORS QA",
       "page": "https://livastic-vm1-primary.github.io/paperpilot-tools/services.html#x402-audit",
       "inquiry": "https://livastic-vm1-primary.github.io/paperpilot-tools/contact.html?service=x402-cors",
       "indicative_price_native_base_circle_usdc": "49.000000",
@@ -165,7 +165,13 @@
       "escrow": false,
       "written_scope_and_legitimate_payee_required": true,
       "confirmed_external_paid_customers": 0,
-      "caveat": "Buyer-authorized read-only OPTIONS and unsigned 402 HTTP QA only. No client wallet signatures or actual transactions; not smart-contract/security certification or seller-deployed remediation."
+      "caveat": "No client wallet signatures, production data, payments or private invoice authorizations. Buyer-owned merchant route only: original public issue independently reports dangerous 0.10-versus-1000 USDC invoice quote, not a PaperPilot paid commission. 49 native Circle BaseUSDC remains an indicative ONE-route QA offer by prior written agreement with legal payee, refund and allowed test scope. Does not fix remote servers, validate private invoices, sign user wallet, prove any merchant order or transfer.",
+      "synthetic_invoice_expected_price_check": true,
+      "merchant_issuance_denied_negative_case": true,
+      "buyer_pain_public_source": "https://github.com/bitrefill/agents/issues/11",
+      "exact_bounded_price_scope": "One buyer-approved fake invoice-expected amount, one public x402 endpoint, one browser origin and two OPTIONS header patterns; local report only.",
+      "private_invoice_or_wallet_authorization_required": false,
+      "actual_paid_client_enquiries_confirmed": 0
     },
     {
       "id": "defi-transaction-csv-exception-inbox-free",
