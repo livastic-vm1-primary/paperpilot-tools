@@ -25,6 +25,8 @@
 - [Manual PaperPilot offline-kit order inquiry](https://livastic-vm1-primary.github.io/paperpilot-tools/order.html): proposed 5 native Base Circle USDC for one internal-team licence. No instant checkout, no escrow, no completed PaperPilot buyers; agree actual scope, lawful payment and refund terms in writing first.
 - [Opt-in customer inquiry](https://livastic-vm1-primary.github.io/paperpilot-tools/contact.html): consent-based third-party FormSubmit inquiry, not a payment order. Please do not send passwords, keys, customer files, private data, or wallet recovery phrases.
 
+- [x402 merchant CORS self-check and optional fixed-scope audit](https://github.com/livastic-vm1-primary/paperpilot-tools/blob/main/docs/X402_BROWSER_CORS_SELLER_AUDIT.md): original free Node script to evaluate owner-provided OPTIONS headers OFFLINE; no fetch/wallet/charge. Optional diagnostic of one authorized merchant URL + one browser Origin at indicative 49 native Circle Base USDC, only after buyer-accepted written contract and genuine payout eligibility. ZERO completed QA customers, no instant checkout.
+
 ## Machine-readable public details
 - [Product and offer catalog](https://livastic-vm1-primary.github.io/paperpilot-tools/catalog.json): static JSON with exact status and payment distinctions.
 - [Public project source](https://github.com/livastic-vm1-primary/paperpilot-tools): code and free checker tests.

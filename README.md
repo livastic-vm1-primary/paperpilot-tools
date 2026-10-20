@@ -180,3 +180,19 @@ rules, exception/QA summary, reusable Python source and one correction, with
 legal price/data/payout/return terms agreed in writing first. It is not
 an automated on-chain checkout, escrow or existing completed sale; confirmed
 new buyers and paid orders remain zero.
+
+## x402 merchant browser checkout compatibility (free source + optional paid QA)
+
+Original offline self-check tool: tools/x402-browser-cors-preflight.mjs
+Developer reproduction guide: docs/X402_BROWSER_CORS_SELLER_AUDIT.md
+
+This checks only pasted PUBLIC OPTIONS response headers and never fetches,
+signs, retries or spends. An HTTP204 with Content-Type and PAYMENT-SIGNATURE
+allowed is a prerequisite for a buyer browser request, not proof of a paid
+sale or successful settlement. The original buyer-owned checkout avoids the
+SDK automatic retry header bug, but no outside paid CSV POST has been proven.
+
+Separately, services.html#x402-audit accepts an opt-in manual pilot request
+for one x402 seller URL + buyer Origin with an INDICATIVE 49 native Circle
+Base USDC price subject to real signed written scope, lawful payee and buyer
+terms. No buyer, contract, automatic checkout or cash receipt is claimed.

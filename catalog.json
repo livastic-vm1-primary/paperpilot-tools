@@ -135,6 +135,33 @@
       "independently_paid_customers_confirmed": 0,
       "buyer_inquiry": "mailto:onecursor1@gmail.com?subject=PaperPilot%20CSV%20import%20pilot%20-%2025%20Base%20USDC",
       "caveat": "No original customer files or funds before owner-approved written scope, real legal recipient/payout, data rights, privacy and refund terms; no guaranteed fulfillment without acceptance."
+    },
+    {
+"id": "free-x402-browser-cors-selfcheck",
+      "type": "free-open-source-cli",
+      "name": "x402 browser CORS preflight audit, offline from public response headers",
+      "source": "https://github.com/livastic-vm1-primary/paperpilot-tools/blob/main/tools/x402-browser-cors-preflight.mjs",
+      "documentation": "https://github.com/livastic-vm1-primary/paperpilot-tools/blob/main/docs/X402_BROWSER_CORS_SELLER_AUDIT.md",
+      "price_usdc": "0.000000",
+      "remote_api_requests_by_script": 0,
+      "wallet_signing": false,
+      "customer_payment_claim": "No external paid customer inferred from this free utility",
+      "result": "Conditional public OPTIONS status/CORS compatibility hint; not actual paid delivery or merchant identity validation"
+    },
+    {
+      "id": "x402-merchant-browser-cors-qa-fixed-scope",
+      "type": "manual-customer-qa-inquiry-only",
+      "name": "One public x402 merchant path and browser Origin compatibility report",
+      "page": "https://livastic-vm1-primary.github.io/paperpilot-tools/services.html#x402-audit",
+      "inquiry": "https://livastic-vm1-primary.github.io/paperpilot-tools/contact.html?service=x402-cors",
+      "indicative_price_native_base_circle_usdc": "49.000000",
+      "payment_network": "eip155:8453",
+      "settlement_token": "native Circle USDC",
+      "instant_checkout": false,
+      "escrow": false,
+      "written_scope_and_legitimate_payee_required": true,
+      "confirmed_external_paid_customers": 0,
+      "caveat": "Buyer-authorized read-only OPTIONS and unsigned 402 HTTP QA only. No client wallet signatures or actual transactions; not smart-contract/security certification or seller-deployed remediation."
     }
   ],
   "genuine_historical_receipt_note": "The same original merchant has prior paid-and-delivered synthetic GET service receipts distinct from the buyer-owned POST; none establish paid POST orders.",
