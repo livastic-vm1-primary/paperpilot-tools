@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#111b30">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'none'; img-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'">
+<meta name="description" content="DeFi transaction CSV review checklist, free and local. Flag multiple event legs, ambiguous swaps, liquidity, staking, bridges and missing fields. No wallet connect, tax claims or upload. Optional 15 USDC review by written agreement.">
+<meta property="og:title" content="DeFi Exception Inbox — local review checklist, not an automatic tax calculator">
+<meta property="og:url" content="https://livastic-vm1-primary.github.io/paperpilot-tools/defi-exception-inbox.html">
+<link rel="canonical" href="https://livastic-vm1-primary.github.io/paperpilot-tools/defi-exception-inbox.html">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<title>DeFi CSV Exception Inbox · Free Local Review + Optional 15 USDC | PaperPilot</title>
+<link rel="stylesheet" href="defi-exception-inbox.css">
+
+</head><body>
+<header><div class="wrap"><nav aria-label="Site navigation"><a href="./" class="brand">PaperPilot <em>Tools</em></a><a href="./">Home</a><a href="csv-usdc-checkout.html">Small CSV x402 API</a><a href="services.html">Services</a><a href="contact.html">Contact</a></nav></div></header>
+<main>
+<section class="hero"><div class="wrap grid"><div><span class="kicker">Built around a real DeFi paper-trail headache</span>
+<h1>One DeFi transaction. <em>Several CSV rows. Which need review?</em></h1>
+<p class="lead">When swaps, liquidity pools, staking or bridges turn into ledger rows, the same onchain transaction may generate several transfer events. Before declaring a gain or income, identify <strong>what is still ambiguous</strong>.</p>
+<p>Use this <strong>free, local-only transaction CSV exception inbox</strong>. No wallet connection, no blockchain API, no keys, no account and no uploaded CSV. Review prompts—not tax classifications.</p><p class="fine">Accepts EVM/explorer-like CSV exports up to 256 KiB, 750 data rows and 35 columns, with common transaction hash / method / amount / address header aliases. Not all wallet exports include the necessary fields. This first release does not decode smart-contract logs, price assets or infer wallet ownership.</p>
+</div><aside class="card"><div class="kicker">Pay only for optional human-scoped help</div>
+<strong class="price">15 USDC</strong><p>Indicative one-time transaction exception review pilot, native Circle USDC on <strong>Base mainnet</strong>.</p><p>Up to <strong>50 flagged rows</strong>, limited to a factual reconciliation checklist—not tax filing, financial advice or a security guarantee. Written scope and legal payment terms first. <strong>No completed paid customer yet.</strong></p>
+<a class="cta alt" href="#pilot">Explore the optional scope ↓</a></aside></div></section>
+<section class="section" id="free"><div class="wrap"><span class="kicker">Free tool · no upload</span><h2>Inspect your DeFi export in this browser</h2>
+<p>Use a non-confidential CSV you are allowed to inspect. You can load a fictional file first to see how it works. Raw addresses, amounts and notes are not printed into the results. Only fixed review prompts and CSV row numbers appear.</p>
+<div class="card"><label for="defi-csv"><strong>Paste CSV text</strong> — Etherscan-like “Txn Hash, Method, Network, Value, From, To” headers supported; no secret recovery phrases or tax IDs.</label>
+<textarea id="defi-csv" rows="8" spellcheck="false" placeholder="Txn Hash,Network,Method,Value&#10;0x...,Base,swapExactTokens,10"></textarea>
+<label for="defi-file">Or open a local CSV file (read and analyzed locally, never uploaded)</label>
+<input id="defi-file" type="file" accept=".csv,text/csv,text/plain">
+<div class="actions"><button type="button" id="defi-demo" class="alt">Load fictional DeFi demo</button><button type="button" id="defi-run">Analyze locally (free)</button><button type="button" id="defi-clear" class="alt">Clear</button></div>
+<div id="defi-output" class="results" role="status" aria-live="polite">No analysis yet.</div>
+<div class="checkline"><input type="checkbox" id="defi-include-hash"><label for="defi-include-hash">Include complete <strong>public EVM transaction hashes</strong> in my local download (optional; OFF by default). The download stays on my device, but public hashes can reveal wallet activity if I share the file.</label></div>
+<button type="button" id="defi-download" disabled>Download unresolved review checklist (CSV)</button>
+<p class="fine">Download includes row numbers, suggested review prompts and, only if checked, validated EVM transaction hashes. Your original source CSV is not uploaded, sent to a merchant or logged by this page.</p>
+</div></div></section>
+<section class="section"><div class="wrap two"><div><h2>What this catches</h2><ul>
+<li><strong>Possible swaps and LP activity:</strong> hints from a declared method/action string, not a decoded token swap.</li>
+<li><strong>Possible rewards, lending and bridges:</strong> flag ambiguity for human inspection.</li>
+<li><strong>Multiple events sharing one transaction hash:</strong> note potential double-counting instead of silently removing rows.</li>
+<li><strong>Missing or malformed source fields:</strong> hash, date, amount, header mismatch.</li>
+<li><strong>Same sending/receiving address:</strong> a review clue, not proof of a self-transfer or no tax liability.</li>
+</ul></div><div><h2>What this does not do</h2><ul>
+<li>No live wallet syncing, blockchain verification or DeFi protocol ABI decoding.</li>
+<li>No token prices, realized gains, cost basis, yields, tax law or loss calculations.</li>
+<li>No automated labeling of swaps as disposals or bridging as nontaxable.</li>
+<li>No wallet connect, transaction signing, swaps, investment recommendations or token approval requests.</li>
+<li>No guarantee that a source CSV is complete or correct.</li>
+</ul></div></div></section>
+<section class="section" id="pilot"><div class="wrap"><span class="kicker">Separate optional paid help</span><h2>15 native Base USDC — 50-row exception review pilot</h2>
+<div class="two"><div class="card"><h3>Deliverables after actual acceptance</h3><p>For up to 50 flagged, owner-authorized, non-sensitive EVM CSV records, we can prepare a <strong>traceable review checklist</strong> with transaction grouping suggestions, data gaps, ambiguous method explanations and original public-explorer links where available. One brief revision within the written scope. A specific delivery deadline must be agreed before any payment.</p><p class="fine">No audit, financial certification, professional tax opinion, asset recovery guarantee, wallet management or promise to repair hidden transaction history.</p></div>
+<div class="card"><h3>Before any USDC is sent</h3><p>Contact us with the network, approximate record count, anonymized header names, the largest discrepancy and whether you want a written quote. We will check whether the task is possible, agree a price and lawful file-sharing/payment/cancellation arrangement, and identify the receiving <strong>Base native Circle USDC</strong> address in the written contract. Do <strong>not</strong> send coins or original private financial exports without confirmed agreement.</p><a class="cta" href="mailto:onecursor1@gmail.com?subject=DeFi%20CSV%20exception%20review%20-%2015%20Base%20USDC&amp;body=Hello%20PaperPilot%2C%0A%0AChain%20(EVM)%3A%20%0ANumber%20of%20CSV%20rows%3A%20%0AWhat%20appears%20unreconciled%3A%20%0AExisting%20app%20or%20export%3A%20%0ADeadline%3A%20%0A%0AI%20will%20not%20send%20private%20records%20or%20USDC%20before%20written%20agreement.">Ask about one paid review ↗</a></div></div>
+<p class="notice"><strong>Evidence:</strong> the tool code and test cases are <a href="https://github.com/livastic-vm1-primary/paperpilot-tools/blob/main/defi-review-core.js">public for inspection</a>. Its heuristics cannot assign a legal tax category. A paid manual review is merely a proposed service—not a merchant x402 subscription, approved contract, new customer or received payment.</p></div></section>
+<section class="section" id="feedback"><div class="wrap"><h2>Your real feedback matters more than page views</h2><p>Which problem would you actually pay someone to resolve: <strong>missing source transactions, repeated event legs, LP/reward ambiguity, failed CSV import</strong> or something else? Tell us what explorer/app you tried and what the tool got wrong. Do not include addresses, full transaction hashes, personal identities, private keys or private balances. You can give anonymous product feedback using a public GitHub issue, or email us privately.</p>
+<div class="actions"><a class="cta" href="mailto:onecursor1@gmail.com?subject=DeFi%20CSV%20tool%20feedback%20-%20no%20private%20wallet%20data&amp;body=Biggest%20pain%20(missing%20records%2Fduplicate%20logs%2FLP%2Fbridge%2Ftax%20tool%2Fother)%3A%20%0AExport%20type%20and%20chain%3A%20%0AWhat%20failed%20in%20this%20free%20tool%3A%20%0AWould%20you%20pay%2015%20USDC%20for%20a%2050-row%20human%20review%3F%20(Yes%2FNo%2Fother%20price)%3A%20%0A%0APlease%20do%20not%20include%20private%20wallet%20data.">Send voluntary feedback ↗</a>
+<a class="cta alt" href="https://github.com/livastic-vm1-primary/paperpilot-tools/issues/new?title=DeFi%20CSV%20review%3A%20feedback&amp;body=The%20CSV%20export%20I%20tried%20is%20from%3A%0AThe%20issue%20is%3A%0AMissing%20category%3A%0AWould%20I%20pay%20for%20this%3A%0A%0APlease%20redact%20personal%20or%20wallet%20data.">Report a missing case (public GitHub) ↗</a></div>
+<p class="fine">Independent user reviews received at launch: <strong>0 confirmed</strong>. Paid customers: 0. We will treat future comments as evidence only when they come from actual external users, not our own VM accounts.</p>
+<p class="fine">Research context: public user experiences on <a href="https://www.reddit.com/r/CryptoTax/comments/1rkazp1/how_to_collect_csv_files/">missing CSV/export rows</a> and <a href="https://www.reddit.com/r/defi/comments/1pmzwqi/whats_the_most_annoying_manual_thing_you_still_do/">manual DeFi reconciliation</a>. These are independent discussions, not testimonials or endorsements of this tool.</p>
+</div></section>
+</main>
+<footer><div class="wrap">© 2026 PaperPilot Tools · Original AI-assisted software · No confidential uploads · <a href="./">Home</a> · <a href="contact.html">Contact</a></div></footer>
+<script src="defi-review-core.js" defer></script><script src="defi-review-ui.js" defer></script>
+</body></html>

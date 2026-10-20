@@ -196,3 +196,29 @@ Separately, services.html#x402-audit accepts an opt-in manual pilot request
 for one x402 seller URL + buyer Origin with an INDICATIVE 49 native Circle
 Base USDC price subject to real signed written scope, lawful payee and buyer
 terms. No buyer, contract, automatic checkout or cash receipt is claimed.
+
+
+## DeFi CSV exception inbox — original privacy-first feedback MVP
+
+User-pain-guided free [DeFi transaction exception inbox](defi-exception-inbox.html),
+with fully transparent rules at [defi-review-core.js](defi-review-core.js).
+Onchain multi-log rows, bridge/LP/staking/borrowing method hints, unknown
+transaction labels, malformed amounts and missing source fields are surfaced
+for human review, not classified into financial/tax results.
+
+- Browser-only: source rows never uploaded, persisted, signed or used to
+  change any user wallet. Up to 256 KiB, 750 data records, 35 columns.
+- Optional local CSV report defaults to **row numbers and generated phrases**;
+  only an explicit checkbox permits including valid full public EVM tx hashes.
+- An opt-in qualitative feedback link asks for high-level problems and offers
+  a *manual written-scope only* 15 native Base USDC review of up to 50 flagged
+  rows, **not** a realized order, instant checkout, exchange, or tax service.
+- Existing VM3 Base USDC ledger and VM5 real paid x402 API remain independent
+  non-duplicated projects; original owner fleet receipts still tracked once.
+- Run tests with `node --test tests/defi-exception-inbox.test.mjs`.
+
+Known limitations: regex hints do not decode DeFi contract logs; matching
+transaction hashes are *not* automatically identified as duplicate economic
+events; multi-chain chain-specific receipt formats, missing transaction
+histories, prices, gains, losses, settlement finality and jurisdiction-specific
+tax interpretations remain the buyer's responsibility.

@@ -137,7 +137,7 @@
       "caveat": "No original customer files or funds before owner-approved written scope, real legal recipient/payout, data rights, privacy and refund terms; no guaranteed fulfillment without acceptance."
     },
     {
-"id": "free-x402-browser-cors-selfcheck",
+      "id": "free-x402-browser-cors-selfcheck",
       "type": "free-open-source-cli",
       "name": "x402 browser CORS preflight audit, offline from public response headers",
       "source": "https://github.com/livastic-vm1-primary/paperpilot-tools/blob/main/tools/x402-browser-cors-preflight.mjs",
@@ -162,6 +162,43 @@
       "written_scope_and_legitimate_payee_required": true,
       "confirmed_external_paid_customers": 0,
       "caveat": "Buyer-authorized read-only OPTIONS and unsigned 402 HTTP QA only. No client wallet signatures or actual transactions; not smart-contract/security certification or seller-deployed remediation."
+    },
+    {
+      "id": "defi-transaction-csv-exception-inbox-free",
+      "type": "free-local-browser-transaction-review-prompt-not-tax-advice",
+      "name": "DeFi Transaction CSV Exception Inbox",
+      "page": "https://livastic-vm1-primary.github.io/paperpilot-tools/defi-exception-inbox.html",
+      "price_native_circle_base_usdc": "0.000000",
+      "max_input_utf8_bytes": 262144,
+      "max_data_rows": 750,
+      "max_columns": 35,
+      "network_requests_for_csv": 0,
+      "wallet_signing": false,
+      "local_storage": false,
+      "public_address_optin_only_for_download": true,
+      "tax_legality_or_ownership_verified": false,
+      "confirmed_independent_external_users": 0,
+      "known_actual_paid_customers": 0,
+      "disclosure": "CSV import/export heuristics only, incomplete EVM network data cannot calculate gains or determine tax treatment."
+    },
+    {
+      "id": "manual-defi-transaction-exception-review-15usdc",
+      "type": "manual-fixed-scope-optional-service-not-an-instant-checkout",
+      "name": "DeFi EVM transaction exception report, maximum fifty flagged CSV rows",
+      "page": "https://livastic-vm1-primary.github.io/paperpilot-tools/defi-exception-inbox.html#pilot",
+      "price_native_circle_base_usdc": "15.000000",
+      "chain": "eip155:8453",
+      "checkout_status": "MANUAL_SCOPE_AGREEMENT_BEFORE_PAYMENT",
+      "max_review_rows": 50,
+      "deliverable": "Review checklist and original verified transaction hash links where available; no tax or investment advice.",
+      "professional_tax_advice": false,
+      "free_analysis_network_calls": 0,
+      "original_seller_identity": "one human beneficial owner PaperPilot tools",
+      "written_scope_data_privacy_and_payment_terms_required": true,
+      "confirmed_paid_customers": 0,
+      "revenue_recognized_usdc": "0.000000",
+      "buyer_feedback_received": 0,
+      "note": "Buyer asks voluntarily; not an approved contract, real checkout, onchain proof or existing award."
     }
   ],
   "genuine_historical_receipt_note": "The same original merchant has prior paid-and-delivered synthetic GET service receipts distinct from the buyer-owned POST; none establish paid POST orders.",
