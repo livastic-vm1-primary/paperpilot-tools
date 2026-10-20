@@ -19,6 +19,8 @@
 - A distinct paid-and-delivered synthetic GET /v1/csv-report has previously been verified for this same-owner merchant. This does not establish any paid POST /v1/csv-preflight order.
 
 ## Custom paid work — agreement first
+- [CSV import audit — free local script and optional 25 native Base Circle USDC fixed-scope manual pilot](https://livastic-vm1-primary.github.io/paperpilot-tools/csv-import-audit-service.html): 1 authorized non-confidential CSV <=2MiB, <=10,000 data rows, <=25 columns, up to 3 mutually agreed cleanup or mapping rules, exception list, reusable Python script, 1 correction; **NO checkout until exact terms in writing; actual sales 0**. Free Python 3 script checks structural issues offline without upload or wallet and is not a CSV correctness/financial certification. Distinct from automated existing 0.005USDC API.
+
 - [Services and technical proof](https://livastic-vm1-primary.github.io/paperpilot-tools/services.html): bilingual invoice templates (indicative from USD 99), scoped offline web utilities (from USD 249) and browser automation QA (from USD 149). These are starting quotes, not active checkouts or guaranteed delivery.
 - [Manual PaperPilot offline-kit order inquiry](https://livastic-vm1-primary.github.io/paperpilot-tools/order.html): proposed 5 native Base Circle USDC for one internal-team licence. No instant checkout, no escrow, no completed PaperPilot buyers; agree actual scope, lawful payment and refund terms in writing first.
 - [Opt-in customer inquiry](https://livastic-vm1-primary.github.io/paperpilot-tools/contact.html): consent-based third-party FormSubmit inquiry, not a payment order. Please do not send passwords, keys, customer files, private data, or wallet recovery phrases.

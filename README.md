@@ -159,3 +159,24 @@ unpaid requirement OR a payment rejection. Check an independent wallet receipt
 before attempting another signature.
 
 Source: https://github.com/x402-foundation/x402/blob/main/specs/transports-v2/http.md
+
+
+## Manual larger CSV import project (free audited script / optional fixed-scope service)
+
+Original [free local CSV import audit](free-tools/csv-import-audit/csv-import-audit.py)
+is one dependency-free Python 3 script with 19 independent offline unit tests.
+It supports non-confidential UTF-8 CSV <=2MiB, <=10,000 data records and <=25
+columns, reports aggregates only and never uploads input or requests wallet keys.
+
+```sh
+python3 free-tools/csv-import-audit/csv-import-audit.py --demo
+python3 -B -m unittest discover -s free-tools/csv-import-audit -p 'test_*.py'
+```
+
+The separate original [manual CSV import pilot
+page](csv-import-audit-service.html) offers a strictly optional **25 native
+Circle Base USDC one-file project**: up to three buyer-agreed mapping/cleanup
+rules, exception/QA summary, reusable Python source and one correction, with
+legal price/data/payout/return terms agreed in writing first. It is not
+an automated on-chain checkout, escrow or existing completed sale; confirmed
+new buyers and paid orders remain zero.

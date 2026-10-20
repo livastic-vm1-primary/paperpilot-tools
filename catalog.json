@@ -113,6 +113,28 @@
       "instant_checkout": false,
       "buyer_authorized_scope_and_written_terms_required": true,
       "confirmed_external_paid_customers": 0
+    },
+    {
+      "id": "manual-csv-import-audit-25usdc-pilot",
+      "type": "fixed-scope-manual-customer-project-proposal",
+      "name": "CSV Import Readiness Audit & 3-Rule Mapping Pilot",
+      "page": "https://livastic-vm1-primary.github.io/paperpilot-tools/csv-import-audit-service.html",
+      "free_local_audit_script": "https://livastic-vm1-primary.github.io/paperpilot-tools/free-tools/csv-import-audit/csv-import-audit.py",
+      "indicative_price_native_circle_base_usdc": "25.000000",
+      "network": "eip155:8453",
+      "delivery_scope": {
+        "files": 1,
+        "maxBytes": 2097152,
+        "maxDataRows": 10000,
+        "maxColumns": 25,
+        "maxAgreedRules": 3,
+        "revisions": 1
+      },
+      "checkout_status": "MANUAL_WRITTEN_BUYER_AGREEMENT_ONLY",
+      "automatic_wallet_checkout": false,
+      "independently_paid_customers_confirmed": 0,
+      "buyer_inquiry": "mailto:onecursor1@gmail.com?subject=PaperPilot%20CSV%20import%20pilot%20-%2025%20Base%20USDC",
+      "caveat": "No original customer files or funds before owner-approved written scope, real legal recipient/payout, data rights, privacy and refund terms; no guaranteed fulfillment without acceptance."
     }
   ],
   "genuine_historical_receipt_note": "The same original merchant has prior paid-and-delivered synthetic GET service receipts distinct from the buyer-owned POST; none establish paid POST orders.",

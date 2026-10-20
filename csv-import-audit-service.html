@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#121b2c">
+<meta name="description" content="CSV import readiness: free local audit script for up to 2 MiB; optional 25 Base USDC fixed-scope manual cleanup and 3-rule mapping pilot. No signup, no upload before agreement, source and tested fictional example provided.">
+<title>CSV Import Readiness: Free Local Audit + Optional 25 USDC Fixed Pilot | PaperPilot</title>
+<link rel="canonical" href="https://livastic-vm1-primary.github.io/paperpilot-tools/csv-import-audit-service.html">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<meta property="og:title" content="CSV Import Readiness — Free Local Audit and Optional 25 USDC Service">
+<meta property="og:description" content="A verified local CSV QA script plus a fixed-scope CSV import clean-up/mapping project for 25 native Base USDC, only by written agreement.">
+<meta property="og:url" content="https://livastic-vm1-primary.github.io/paperpilot-tools/csv-import-audit-service.html">
+<style>
+:root{color-scheme:dark;--bg:#121b2c;--panel:#1b2b43;--bright:#d8fa76;--fg:#f8fafe;--muted:#c6d0e3;--line:#40516e}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.65 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+a{color:var(--bright)}a:hover{text-decoration-thickness:3px}a:focus-visible{outline:3px solid var(--bright);outline-offset:4px}
+.wrap{max-width:1040px;margin:auto;padding:0 24px}.header{padding:18px 0;border-bottom:1px solid var(--line);background:#162239}
+.nav{display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap;align-items:center}
+.brand{font-weight:800;color:var(--fg);text-decoration:none;font-size:19px}.brand span{color:var(--bright)}nav{display:flex;gap:16px;flex-wrap:wrap}nav a{text-decoration:none;font-size:14px}
+.hero{padding:58px 0}.hero-grid{display:grid;grid-template-columns:1.2fr .85fr;align-items:center;gap:34px}
+.kicker{color:var(--bright);font-size:12px;letter-spacing:1.6px;text-transform:uppercase;font-weight:800}h1{font-size:clamp(34px,5.3vw,60px);line-height:1.12;letter-spacing:-.035em;margin:20px 0}h1 em{color:var(--bright);font-style:normal}h2{font-size:clamp(24px,3vw,34px);line-height:1.3;margin:0 0 16px}h3{font-size:20px}
+.lead{font-size:18px;color:#e3ecfa}.card{padding:24px;background:var(--panel);border:1px solid var(--line);border-radius:18px}
+.price{color:var(--bright);font-size:clamp(40px,5vw,55px);display:block;line-height:1.2;font-weight:850}.muted,.fine{color:var(--muted)}.fine{font-size:13px}
+.section{padding:50px 0;border-top:1px solid var(--line)}.grid{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.cta{display:inline-block;border-radius:10px;padding:13px 19px;background:var(--bright);color:#122238;font-weight:800;text-decoration:none;margin:10px 10px 4px 0}.cta.alt{background:transparent;border:1px solid #9cacc5;color:var(--fg)}
+pre{padding:20px;border-radius:12px;border:1px solid #394963;background:#061324;color:#e7edfa;white-space:pre-wrap;overflow-wrap:anywhere;font-size:13px;line-height:1.7}
+.checks{padding-left:22px}.checks li{margin:8px 0}.part{border-top:1px solid var(--line);padding-top:15px;margin-top:15px}.notice{border-left:4px solid var(--bright);padding:16px 20px;background:#1b3144}
+.report{max-height:470px;overflow:auto}
+footer{border-top:1px solid var(--line);color:var(--muted);padding:28px 0 45px;font-size:14px}
+@media(max-width:760px){.hero{padding:35px 0}.hero-grid,.grid{grid-template-columns:1fr}.section{padding:35px 0}}
+</style>
+</head><body>
+<header class="header"><div class="wrap nav"><a class="brand" href="./">PaperPilot <span>/tools</span></a><nav><a href="./">Home</a><a href="csv-usdc-checkout.html">Small CSV x402 checker</a><a href="services.html">Other work</a><a href="contact.html">Contact</a></nav></div></header>
+<main>
+<section class="hero"><div class="wrap hero-grid">
+<div><div class="kicker">CSV import readiness · Free-first</div><h1>Stop bad supplier CSV files <em>before importing.</em></h1>
+<p class="lead">Headers change. Records go missing. A spreadsheet export arrives with surprise columns. Get a concrete local audit at zero cost—or commission a reproducible, small **CSV-to-import-template cleanup** for your own authorized data.</p>
+<a class="cta" href="#free-script">Try the free local audit ↓</a><a class="cta alt" href="#fixed-scope">See the 25 USDC pilot ↓</a>
+<p class="fine">This is a separate, optional human-scoped project, NOT the existing 0.005-USDC x402 automated CSV API. No confidential data upload, wallet connection or payment is required to evaluate the free script. Actual paid project orders received: 0.</p></div>
+<aside class="card"><div class="kicker">Indicative fixed-scope pilot</div><strong class="price">25 USDC</strong><p>Native Circle USDC · Base mainnet (chain 8453)</p><p>One file, ≤2 MiB, ≤10,000 data rows, ≤25 columns, up to three agreed cleanup / mapping rules.</p><p class="fine">Manual quote and delivery agreement first. Do not send money until the exact scope, legal payment recipient, due date, permitted data handling and corrections are confirmed in writing.</p></aside>
+</div></section>
+<section class="section" id="free-script"><div class="wrap"><div class="kicker">Proof before payment</div><h2>Run a real, no-upload CSV structure audit</h2>
+<p>The free Python 3 script uses only the standard library and parses up to 2 MiB. It reports totals for uneven rows, missing cells, repeated header labels, exact duplicate records and possible formula prefixes without printing your rows or filenames. Quoted commas, escaped quotations, embedded line breaks and UTF-8 BOMs are supported.</p>
+<div class="grid"><div class="card"><h3>1. Inspect the source</h3>
+<a class="cta" href="free-tools/csv-import-audit/csv-import-audit.py" download="csv-import-audit.py">Download Python script</a>
+<p><a href="https://github.com/livastic-vm1-primary/paperpilot-tools/tree/main/free-tools/csv-import-audit" rel="noopener">Source, MIT license and 19 reproducible test cases ↗</a></p>
+<p class="fine">The standalone free script itself has no network calls, login, wallet, external packages or file mutations. Audit source before you run any code.</p></div>
+<div class="card"><h3>2. Run locally (no server)</h3><pre>python3 csv-import-audit.py --demo
+python3 csv-import-audit.py --file sample.csv</pre>
+<p class="fine">Only run on a CSV you are allowed to inspect. The script is deliberately bounded and does not repair or sanitize your data.</p></div></div>
+<div class="card part"><h3>Actual fictional demo output</h3>
+<pre class="report" id="static-demo">Data rows: 5
+Header columns: 3
+Uneven-length data rows: 1
+Missing cells: 3
+Duplicate data rows: 1
+Duplicate header names: 0
+Possible spreadsheet-formula prefixes: 1
+Upload requests: 0 · Wallet signatures: 0 · Paid amount: 0 USDC</pre>
+<p class="fine">Demonstration includes only fictional values (Ada, Lee and an example.invalid URL). Exact output is generated by the public script; no fabricated customer dataset or third-party purchase is claimed.</p></div></div></section>
+<section class="section" id="fixed-scope"><div class="wrap"><div class="kicker">Paid work only if it saves you time</div><h2>Optional 25 native Base USDC CSV import pilot</h2>
+<div class="grid">
+<div class="card"><h3>Defined one-file scope</h3><ul class="checks">
+<li>One owner-authorized, non-confidential CSV source, up to <strong>2 MiB / 10,000 data records / 25 columns</strong>.</li>
+<li>Up to <strong>three agreed cleanup or target-column mapping rules</strong> with examples. We do not invent missing information or make unsupported financial claims.</li>
+<li>Deliver the cleaned/restructured CSV where feasible, an exception list/count summary, and a <strong>reusable Python 3 script</strong> with reproducible tests.</li>
+<li>One correction within the original approved three-rule scope. Estimated three working days after all contract and lawful file conditions are met; the binding deadline is agreed first.</li>
+</ul></div><div class="card"><h3>How to request work safely</h3><ol class="checks">
+<li>Send only the intended column headers, row count, **synthetic or redacted examples**, three desired transformations and deadline. Do not email actual regulated or confidential records initially.</li>
+<li>Receive an honest suitability decision, exact scope, privacy controls and final price. Some large or nonstandard files will be declined or quoted separately.</li>
+<li>Agree delivery, permitted data handling, recipient and possible refund/cancellation terms in writing **before a Base USDC payment**. No surprise auto charges, deposit bonds or bank credentials.</li>
+<li>After consent and a lawful payment arrangement, receive source/results and a summary with remaining exceptions.</li>
+</ol></div></div>
+<p><a class="cta" href="mailto:onecursor1@gmail.com?subject=PaperPilot%20CSV%20import%20pilot%20-%2025%20Base%20USDC&amp;body=Hello%20PaperPilot%2C%0A%0AColumn%20count%3A%20%0ARow%20count%3A%20%0AFile%20size%20and%20format%3A%20%0ARule%201%3A%20%0ARule%202%3A%20%0ARule%203%3A%20%0ADeadline%3A%20%0A%0AI%20will%20not%20attach%20confidential%20files%20or%20credentials%20before%20written%20agreement.">Ask for the 25-USDC CSV pilot ↗</a><a class="cta alt" href="contact.html">Use the optional contact form ↗</a></p>
+<div class="notice"><strong>What this is not:</strong> a subscription, automatic x402 purchase, escrow agreement, marketplace verified seller badge, confidential-data processor, cryptocurrency investment, KYC bypass, data certification or guarantee of flawless imports. The 25-USDC amount is an offer for a proposed bounded scope, not a received invoice or existing contract.</div>
+</div></section>
+<section class="section"><div class="wrap"><h2>Want only a tiny automated API call?</h2>
+<p>For up to 32 KiB, the independent <a href="csv-usdc-checkout.html">free browser CSV checker + optional 0.005 USDC x402 API</a> remains available. That is a different product for automated structural QA of small samples. A paid API's HTTP 402 quote is <strong>not</strong> a completed sale; all payments require buyer approval.</p>
+<p lang="ko"><strong>한국어 안내:</strong> 무료 검사 프로그램은 자신의 컴퓨터에서 실행되며 파일을 업로드하지 않습니다. 별도 25 USDC 맞춤형 CSV 파일 정리 서비스는 1개 파일·2MiB·1만 행·25열·최대 3개 규칙에 한정됩니다. 실제 서면 합의 전에는 금전이나 원본 고객 데이터를 보내지 마세요. 실구매 고객은 아직 없습니다.</p>
+</div></section>
+</main>
+<footer><div class="wrap">© 2026 PaperPilot Tools · AI-assisted original code · One beneficial owner · <a href="contact.html">Contact</a> · <a href="csv-usdc-checkout.html">Small x402 CSV API</a></div></footer>
+</body></html>
