@@ -1,0 +1,80 @@
+{
+  "schema": "paperpilot-x402-post-only-merchant-probe-v1",
+  "as_of_utc": "2026-10-20",
+  "description": "Discover and quote a real POST-only merchant API that validates JSON input BEFORE returning an x402 v2 PAYMENT-REQUIRED response. Machine-readable instructions for externally operated, buyer-controlled agents. This is NOT an invoice, payment, settlement, seller-authentication proof, or auto-execution command.",
+  "economic_owner": "Same one beneficial human owner as PaperPilot Tools VM1 and original VM5 paid merchant; original software AI-assisted",
+  "source_openapi_url": "https://vm5-openapi-x402.onrender.com/openapi.json",
+  "source_free_public_sample_url": "https://vm5-openapi-x402.onrender.com/v1/csv-sample",
+  "source_docs_url": "https://vm5-openapi-x402.onrender.com/v1/docs",
+  "buyer_offer": {
+    "id": "vm5-x402-csv-preflight",
+    "display_name": "Customer-provided CSV structural QA report, paid HTTP POST",
+    "endpoint": "https://vm5-openapi-x402.onrender.com/v1/csv-preflight",
+    "method": "POST",
+    "content_type": "application/json",
+    "price_native_circle_usdc": "0.005000",
+    "payment_protocol": "x402 v2",
+    "chain_id": 8453,
+    "network": "eip155:8453",
+    "asset": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
+    "receiver_pay_to": "0x6b01efA0705E91a7aca54271510bf9e594717f34",
+    "max_csv_utf8_bytes": 32768,
+    "max_csv_rows": 500,
+    "max_columns": 40,
+    "result_if_paid": "Machine-readable issues: row and column counts, duplicates, empty cells, type anomalies and formula-like cells. No raw customer data echoed.",
+    "scope_limits": "No tax, GDPR, data correctness or merchant-account certification. Do not submit private identities, keys, regulated records, or sensitive production data.",
+    "actual_independent_paid_POST_buyers_confirmed": 0,
+    "paid_200_delivery_to_independent_buyer_verified": false
+  },
+  "discovery_problem": "An unsigned GET or HEAD to this POST-only route returns HTTP 404 and an unsigned POST with malformed or empty JSON returns HTTP 400. A search crawler using only HEAD/GET/OPTIONS or POST {} can mistakenly conclude that no x402 paywall exists. A valid, entirely fictional CSV POST reaches the unpaid 402 quote.",
+  "free_buyer_safe_quote_probe": {
+    "intent": "Public unpaid x402 quote inspection only; no payment authorized",
+    "request": {
+      "method": "POST",
+      "url": "https://vm5-openapi-x402.onrender.com/v1/csv-preflight",
+      "headers": {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
+      "json_body": {
+        "csvText": "id,name\n1,Ada\n2,Lin\n",
+        "expectedColumns": [
+          "id",
+          "name"
+        ]
+      }
+    },
+    "expected_http_status": 402,
+    "expected_payment_header": "PAYMENT-REQUIRED",
+    "expected_quote_fields": {
+      "x402Version": 2,
+      "accepts": [
+        {
+          "scheme": "exact",
+          "network": "eip155:8453",
+          "amount_atomic": "5000",
+          "usdc_decimals": 6,
+          "asset": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
+          "payTo": "0x6b01efA0705E91a7aca54271510bf9e594717f34"
+        }
+      ]
+    },
+    "signature_or_wallet_required_to_get_402_quote": false,
+    "free_quote_authorizes_spending": false,
+    "auto_retry_or_payment_signature_in_probe": false,
+    "note": "Only the current live 402 quote controls later buyer decisions; prices and receiver must be checked again before separate buyer-authorized payment. Do not interpret a 402, browser CORS success, or this public spec as delivered paid work."
+  },
+  "public_reproduction": "curl --max-time 12 --max-redirs 0 -i -X POST https://vm5-openapi-x402.onrender.com/v1/csv-preflight -H 'Content-Type: application/json' --data-binary '{\"csvText\":\"id,name\\n1,Ada\\n2,Lin\\n\",\"expectedColumns\":[\"id\",\"name\"]}'",
+  "independent_third_party_original_402_verification": {
+    "public_comment_url": "https://github.com/x402-foundation/x402/issues/3722#issuecomment-6289166310",
+    "verifier": "Independent x402 community contributor, no purchase or wallet signing",
+    "claim_verified": "Valid synthetic JSON POST reached correct native Circle Base USDC HTTP402 quote; browser CORS OPTIONS allowed required request headers",
+    "does_not_verify": "Real paid 200 response, repeat buyers, paid buyer-owned POST checkout, merchant business history or settlement",
+    "as_of_utc": "2026-10-20"
+  },
+  "what_not_to_do": [
+    "Do not issue wallet signature unless an independent buyer explicitly authorizes the exact current chain, token, amount and payTo.",
+    "Do not send a MetaMask seed/private key, bearer credential or funds as a required registration/deposit.",
+    "Do not confuse an original seller testing its own route, a crawler probe or a public listing with an independent paying customer."
+  ]
+}

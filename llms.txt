@@ -32,6 +32,8 @@
 
 - [x402 merchant CORS self-check and optional fixed-scope audit](https://github.com/livastic-vm1-primary/paperpilot-tools/blob/main/docs/X402_BROWSER_CORS_SELLER_AUDIT.md): original free Node script to evaluate owner-provided OPTIONS headers OFFLINE; no fetch/wallet/charge. Optional diagnostic of one authorized merchant URL + one browser Origin at indicative 49 native Circle Base USDC, only after buyer-accepted written contract and genuine payout eligibility. ZERO completed QA customers, no instant checkout.
 
+- [Machine-readable POST-only x402 CSV discovery and safe unpaid quote sample](https://livastic-vm1-primary.github.io/paperpilot-tools/x402-post-discovery.json): POST-only VM5 customer CSV quality service, exact synthetic application/json body required before HTTP 402, real native Circle Base8453 USDC 0.005 quote, receiver/token/CORS metadata and independent third-party unpaid 402 reproduction. GET/HEAD or invalid POST do not discover paid route. This public document never signs/pays, is not buyer agreement or paid POST proof; confirmed independent paid buyer-owned POST customers ZERO.
+
 ## Machine-readable public details
 - [Product and offer catalog](https://livastic-vm1-primary.github.io/paperpilot-tools/catalog.json): static JSON with exact status and payment distinctions.
 - [Public project source](https://github.com/livastic-vm1-primary/paperpilot-tools): code and free checker tests.

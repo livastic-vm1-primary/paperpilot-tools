@@ -246,3 +246,17 @@ seller, invoice, recipient identity and blockchain settlement are not
 verified. All logic is local JavaScript, no API requests or wallet calls.
 Neither this real-world public bug report nor our synthetic example is a
 paying user, an endorsement, or a current merchant incident claim.
+
+## POST-only x402 discovery for outside buyers (2026-10-20)
+
+A real outside x402 community contributor independently confirmed the original VM5
+merchant's valid fictional POST -> HTTP402, but observed that naive GET/HEAD
+or POST {} scanners miss the actual paid POST because input validation runs
+before the x402 challenge. The new static \`x402-post-discovery.json\` gives
+third-party coding agents and human developers an exact **synthetic no-signature**
+application/json body to get a true unpaid 402, six-decimal 0.005 native Circle
+Base USDC chain/asset/payTo, and the free original sample/docs. Existing
+HTML free CSV page and catalog.json now link to this machine-readable manifest.
+A 402, a crawler hit or a peer verification is NOT a confirmed independent
+paid/delivered POST; the actual buyer-owned paid POST count remains ZERO.
+There is no signing, merchant backend mutation, new service or runtime restart.

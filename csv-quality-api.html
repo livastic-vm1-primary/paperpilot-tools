@@ -13,7 +13,8 @@
   <link rel="alternate" type="text/plain" title="AI agent buyer guide" href="llms.txt">
   <link rel="alternate" type="application/json" title="Buyer offer catalog" href="catalog.json">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
-  <title>Free CSV Checker (Local, No Upload) + x402 API | PaperPilot Tools</title>
+  <link rel="alternate" type="application/json" href="x402-post-discovery.json" title="Safe x402 buyer POST quote discovery manifest">
+<title>Free CSV Checker (Local, No Upload) + x402 API | PaperPilot Tools</title>
   <style>
     :root{color-scheme:dark;--bg:#111b30;--mid:#192641;--lime:#d8fa76;--soft:#afbdd8;--line:#3a4765;--fg:#f4f7fb}
     *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font:16px/1.65 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--bg);color:var(--fg)}
@@ -105,6 +106,7 @@
   -H "Content-Type: application/json" \
   -d '{"csvText":"id,name\n1,Ada\n2,Lin\n","expectedColumns":["id","name"]}'</pre></div></div>
     <div class="panel"><strong>3 — To purchase a real report</strong><p>Follow the <a href="https://github.com/livastic-vm5-primary-20260911/x402-openapi-lint/blob/main/docs/CSV_REAL_DATA_BUYER_QUICKSTART_20261020.md">official owner-maintained buyer quickstart</a>. Your own x402-compatible client presents the exact Base Circle USDC price, address and asset for your approval and retries with its authorized payment signature. We do not ask you to send a private key, seed phrase, credentials, funds to a different address or unrequested deposit.</p></div>
+    <p class="fine"><strong>For API discovery crawlers and coding agents:</strong> this paid resource is <strong>POST-only and schema-first</strong>. A GET/HEAD route check returns 404; POSTing <code>{}</code> returns 400 instead of a 402 because invalid inputs are rejected before quoting. To discover the actual x402 v2 price, submit ONLY the public fictional JSON above without a signature. The <a href="x402-post-discovery.json">machine-readable POST quote-probe manifest</a> includes the exact safe request/expected header, Base native Circle USDC asset and chain. <a href="https://github.com/x402-foundation/x402/issues/3722#issuecomment-6289166310" rel="noopener noreferrer">An independent x402 contributor reproduced the genuine HTTP 402 + browser CORS response</a>, not any successful paid buyer-owned POST. Neither this link nor an unpaid HTTP 402 creates revenue.</p>
     <p class="fine">The merchant rejects malformed inputs before charging. A valid request receiving HTTP 402 is <strong>not itself a payment or a delivered report</strong>.</p>
   </div></section>
   <section class="section" id="privacy"><div class="container"><h2>Privacy and scope, stated precisely</h2>

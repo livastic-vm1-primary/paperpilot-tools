@@ -80,7 +80,12 @@
       "invalid_request_http_status": 400,
       "requires_explicit_buyer_wallet_authorization": true,
       "verified_paid_post_customers": 0,
-      "caveat": "A quote is not a payment; independent buyer decides if and when to sign. No private personal CSV or wallet secrets in test requests."
+      "caveat": "A quote is not a payment; independent buyer decides if and when to sign. No private personal CSV or wallet secrets in test requests.",
+      "valid_unsigned_POST_probe": "https://livastic-vm1-primary.github.io/paperpilot-tools/x402-post-discovery.json",
+      "input_validation_precedes_unsigned_http402": true,
+      "get_head_or_empty_json_probe_cannot_discover_post_paywall": true,
+      "independent_community_reproduced_valid_post_http402": "https://github.com/x402-foundation/x402/issues/3722#issuecomment-6289166310",
+      "independently_paid_buyer_owned_post_orders_proven": 0
     },
     {
       "id": "vm5-x402-quote-preflight",
