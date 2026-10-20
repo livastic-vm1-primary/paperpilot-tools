@@ -1,0 +1,62 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#101b32">
+<meta name="description" content="Public evidence for a genuine external Nano 5 XNO software engineering bounty: a fail-closed concurrency fix merged and paid by the Pursekeeper maintainer. Actual mainnet payment remains receivable, not in wallet balance.">
+<meta property="og:title" content="Independently accepted engineering bounty | PaperPilot"/>
+<meta property="og:description" content="Verified source, reviewer acceptance and public Nano payment block—not a fabricated testimonial or a customer conversion claim."/>
+<link rel="canonical" href="https://livastic-vm1-primary.github.io/paperpilot-tools/paid-engineering-proof.html">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="styles.css"><link rel="stylesheet" href="services.css">
+<title>Independently accepted software fix: paid 5 XNO bounty | PaperPilot</title>
+<style>
+.proof-bounty{padding:56px 0 60px;max-width:960px;margin:auto}
+.proof-bounty h1{font-size:clamp(28px,4vw,47px);line-height:1.16;letter-spacing:-.035em;margin:10px 0 24px}
+.proof-bounty h2{font-size:25px;margin:34px 0 13px}
+.proof-bounty .lead{font-size:19px;font-weight:560;line-height:1.7}
+.proof-bounty p,.proof-bounty li{line-height:1.75}
+.proof-bounty a{color:#166675;text-decoration:underline;text-underline-offset:3px}
+.proof-bounty .facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin:30px 0}
+.proof-bounty .fact{background:#f2f8f6;border:1px solid #d2e0db;border-radius:12px;padding:16px 18px}
+.proof-bounty .fact span{display:block;font-size:12px;letter-spacing:.06em;color:#52646d}
+.proof-bounty .fact strong{font-size:20px}
+.proof-bounty .caveat{padding:20px;border-left:4px solid #427c82;background:#ecf5f4}
+.proof-bounty .actions{display:flex;flex-wrap:wrap;gap:16px;margin:24px 0}
+.proof-bounty .actions a{padding:12px 15px;background:#f3fae4;border:1px solid #c3d89d;border-radius:8px;font-weight:700}
+.proof-bounty code{overflow-wrap:anywhere;font-size:13px}
+@media(max-width:700px){.proof-bounty{padding:32px 20px}.proof-bounty .facts{grid-template-columns:1fr}}
+</style>
+</head><body>
+<a class="skip" href="#main">Skip to evidence</a>
+<header class="header"><div class="container nav"><a class="brand" href="./">PaperPilot</a>
+<nav aria-label="Source and paid scopes"><a href="./">Free tools</a><a href="services.html#x402-audit">Optional paid review</a><a href="contact.html?service=x402-audit">Contact</a></nav></div></header>
+<main id="main"><article class="proof-bounty">
+<p class="eyebrow">ONE INDEPENDENT OUTSIDE SPONSOR · PUBLIC SOURCE + NANO MAINNET EVIDENCE</p>
+<h1>A real engineering fix. A real external <em>5 XNO reward.</em></h1>
+<p class="lead">We contributed a fail-closed concurrent wallet-lock repair to an independently maintained open-source x402 Nano payment client. The outside maintainer ran the tests, merged the pull request and announced payment. This is a completed, independently reviewed engineering delivery—not a claim that unrelated PaperPilot CSV APIs have paying customers.</p>
+<div class="facts">
+<div class="fact"><span>FIX ACCEPTED / MERGED</span><strong>October 20, 2026 · 19:20 UTC</strong></div>
+<div class="fact"><span>PAYMENT ANNOUNCED / ONCHAIN SEND CONFIRMED</span><strong>5 XNO · one unique reward</strong></div>
+<div class="fact"><span>RECIPIENT NANO WALLET STATE</span><strong>5 XNO receivable, 0 available</strong></div>
+<div class="fact"><span>REAL PAID WORK SCOPE</span><strong>Race-safe payment lock repair</strong></div>
+</div>
+<h2>The problem and the actual deliverable</h2>
+<p>Two independent payment-client processes could both try to reclaim a dead wallet lock by reading, comparing and removing the same stale record. Under a specific interleaving, a later waiter could delete the first waiter's newly acquired live lock. In a payment client, that can make duplicate attempts possible when recovery logic is unsafe.</p>
+<p>The fix adds an <strong>exclusive, nonexpiring stale-reaper gate</strong> created with the filesystem's <code>wx</code> mode around only the re-read / comparison / unlink critical section. A waiter that sees an existing gate does not remove or age it out; it waits to the original bound and exits without signing or buying. An abandoned gate must be inspected and removed manually only after confirming no process still owns it. The design chooses refusing a payment over guessing that it is safe to retry.</p>
+<p>The maintainer's accepted review documents a deterministic failure on the unmodified parent and passing regression tests after the patch. His Node.js 24 test run: <strong>187 tests total, 182 passed, 0 failed, 5 environment skips</strong>. Test results prove the local race properties, not universal network idempotency or settlement correctness.</p>
+<div class="actions"><a href="https://github.com/pursekeeper/api/pull/94" rel="noopener noreferrer">Examine the merged code and tests ↗</a>
+<a href="https://github.com/pursekeeper/api/pull/94#issuecomment-6299301932" rel="noopener noreferrer">Read independent reviewer + payment confirmation ↗</a></div>
+<h2>Independent payout and accounting evidence</h2>
+<p>The independent maintainer published the <a href="https://pursekeeper.dev/log" rel="noopener noreferrer">public reward ledger entry 441</a> and Nano mainnet send block:</p>
+<p><code>9D8609A7133DB7C03235ED072D2995465FE6296D48528F22680AC5B12AF147CE</code></p>
+<p>We independently checked the public chain state with a read-only Nano RPC at the time of the bounty: the block was <strong>confirmed</strong>, subtype <strong>send</strong>, its amount was <strong>5 × 10³⁰ raw</strong>, and its destination matched the public receiving address stated in the pull request. At that check, the wallet had <strong>5 XNO pending/receivable but 0 XNO available</strong>. A separate signed receive block is required before the wallet has a spendable balance. We did not sign a Nano receive, move funds, disclose keys or claim a fiat withdrawal.</p>
+<p class="caveat"><strong>No double counting:</strong> This is ONE unique outside sponsor reward, separate from four historical Base USDC transfers grossing 1.020000 USDC across the same human owner. When the wallet eventually receives the pending 5 XNO, that must not be booked as a second reward. Neither a quoted x402 price nor an unaccepted manual project is revenue.</p>
+<h2>Would you pay for a similar, bounded safety review?</h2>
+<p>The existing <a href="services.html#x402-audit">49 native Base USDC x402 quote / browser CORS pilot</a> offers unsigned challenge checks, exact token/recipient/amount verification, and one documented client/server checklist after separately agreed customer permission and scope. This sponsored Nano concurrency fix shows our open-source test discipline; it does <strong>not</strong> show that we already sold the Base USDC pilot, provide a formal security audit certification or promise a guaranteed fix to an unrelated protocol.</p>
+<p>For a specific wallet-lock race, retry/cancellation boundary or payment-header interoperability issue, first share just your <strong>public repository or fictional reproduction</strong>, expected and actual behavior, and an acceptance check. No buyer financial data, private keys, live signatures, credentials or production exploit instructions should be placed in an open inquiry. Pricing, lawful access, deadlines, deliverables and refund terms must be agreed separately.</p>
+<div class="actions"><a href="contact.html?service=x402-audit">Ask for a bounded x402 QA scope (free inquiry) ↗</a>
+<a href="x402-inspector.html">Try the free unsigned challenge inspector ↗</a></div>
+<p><small>Original project and sponsor are independent operators. All work described was AI-assisted under one human beneficial owner (VM1/VM2/VM3/VM5 are one owner's machines). This page does not assert a Pursekeeper endorsement, an independent outside paid CSV customer, a new USDC API purchase or recurring income.</small></p>
+</article></main>
+<footer class="footer"><div class="container footer-inner"><a href="./" class="brand">PaperPilot</a>
+<span>Genuine outside paid code fix · 5 XNO receivable · zero Nano wallet balance at the observed check</span><a href="services.html">Other technical scopes ↗</a></div></footer>
+</body></html>
