@@ -1,0 +1,25 @@
+{
+  "checkedUTC": "2026-10-20T17:14:17.384Z",
+  "exactOriginalMerchantUrl": "https://vm5-openapi-x402.onrender.com/v1/csv-preflight",
+  "buyerOrigin": "https://livastic-vm1-primary.github.io",
+  "network": "eip155:8453",
+  "nativeCircleBaseUSDC": "0x833589fCD6eDb6E08f4C7C32D4f71b54bdA02913",
+  "quoteRecipient": "0x6b01efA0705E91a7aca54271510bf9e594717f34",
+  "quotedNativeCircleBaseUSDC": "0.005",
+  "expectedAtomicUSDC": "5000",
+  "corsPreflightHttpStatus": 204,
+  "unsignedPostHttpStatus": 402,
+  "observedEncodedPaymentRequiredBytes": 2560,
+  "checks": [
+    "original_source_CORS_allows_POST",
+    "original_source_exposes_PAYMENT_REQUIRED",
+    "exact_x402_v2_price_token_chain_recipient",
+    "synthetic_body_only",
+    "no_wallet_or_payment_signature"
+  ],
+  "independentlyPaidCsvPostBuyerFound": false,
+  "independentOnchainSettlementVerified": false,
+  "userWalletFundsMoved": false,
+  "actualNewReceivedUSDC": "0",
+  "interpretation": "ONE free unsigned 402 quote passed; actual buyer wallet payment, paid CSV report and external token finality NOT tested."
+}
