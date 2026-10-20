@@ -240,6 +240,12 @@ USDC receipt or independent buyer endorsement.
 The existing free VM1 DeFi exception inbox now links to the separately hosted, original same-human-owned VM3 exchange withdrawal versus wallet receipt two-CSV candidate checker (https://livastic-vm3-primary-tmp-260920.github.io/defi-payment-proof-qa/guides/crypto-transfer-csv-pair-auditor.html). The Kraken Ledger txid is internal to that exchange, not proof of a final on-chain transaction. Both privacy-first tools process the provided CSV locally, offer limited heuristics, and do NOT compute tax, profits or cost basis. Voluntary feedback now includes missing_transfer_pair and kraken_ledger categories. No paying customer or organic feedback is asserted by publishing a link.
 
 
+## Free exchange trade-ID CSV duplicate audit (2026-10-20)
+
+The [browser-only audit](tradeid-audit.html) and [local parser](tradeid-audit-core.mjs) flag missing/repeated trade/fill/execution/transaction/order identifiers, exact repeated rows and equal amounts under **different** IDs. Strict 256 KiB/750-row bounds, no backend requests, wallet, payment, tax-law inference, raw CSV echo or automatic deletion; the redacted report contains only row numbers. One order/transaction ID may have legitimate multiple fills or event legs. Regression cases are in [tests/tradeid-audit.test.mjs](tests/tradeid-audit.test.mjs).
+
+Separate optional human DeFi exception review is currently an **indicative** 15 native Base Circle USDC for up to 50 masked flagged rows, only with genuine buyer-agreed lawful scope, seller identity/contract and payment terms; nothing on this tool triggers a payment, and no external buyer or sale has been independently verified.
+
 ## Buyer-side exact invoice mismatch check (free, no spending)
 
 A legitimate independent integrator [publicly reported an x402

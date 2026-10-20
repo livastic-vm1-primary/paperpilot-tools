@@ -250,6 +250,21 @@
       "existing_live_sage_or_bank_records_modified": false,
       "independent_paid_customers": 0,
       "caveat": "Only one authorized test Gmail label, Drive folder, and review staging Sheet; original software is AI-assisted and has 19 isolated mocks, NOT proven installed in a live customer Workspace, nor full invoice OCR/tax/SAGE integration. Buyer must agree in writing before payment."
+    },
+    {
+      "id": "free-trade-id-csv-duplicate-audit",
+      "type": "free-browser-only",
+      "name": "Trade-ID-first crypto CSV duplicate audit",
+      "page": "https://livastic-vm1-primary.github.io/paperpilot-tools/tradeid-audit.html",
+      "price_usdc": "0.000000",
+      "max_input_utf8_bytes": 262144,
+      "max_data_rows": 750,
+      "runs_offline_in_browser": true,
+      "no_upload": true,
+      "no_wallet": true,
+      "no_tax_classification": true,
+      "actual_customers": 0,
+      "scope": "Local-only row-number warnings for missing or reused trade/fill/execution/order IDs, exact duplicates, and identical quantities under distinct IDs; no automatic deletion, cost-basis inference, paid checkout or certification."
     }
   ],
   "genuine_historical_receipt_note": "The same original merchant has prior paid-and-delivered synthetic GET service receipts distinct from the buyer-owned POST; none establish paid POST orders.",

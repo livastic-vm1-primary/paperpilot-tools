@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'none'; img-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'; upgrade-insecure-requests">
+<meta name="theme-color" content="#111b30">
+<title>Crypto CSV trade-ID duplicate audit — free, entirely local | PaperPilot</title>
+<meta name="description" content="Free private crypto trading CSV audit. Compare repeated trade IDs, exact duplicate rows and equal amounts with distinct IDs. No upload, wallet, login, tax calculations or payment.">
+<meta property="og:title" content="CSV duplicate audits should not discard two different trade IDs">
+<link rel="canonical" href="https://livastic-vm1-primary.github.io/paperpilot-tools/tradeid-audit.html">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="defi-exception-inbox.css">
+</head><body>
+<header><div class="wrap"><nav aria-label="Main navigation"><a class="brand" href="./">PaperPilot <em>Tools</em></a><a href="defi-exception-inbox.html">DeFi exception inbox</a><a href="services.html">Optional services</a></nav></div></header>
+<main>
+<section class="hero"><div class="wrap grid"><div><span class="kicker">Real exchange-CSV friction • Local only</span>
+<h1>Same quantity. <em>Different trade IDs.</em> Don't silently erase a trade.</h1>
+<p class="lead">Some CSV importers use approximate duplicate detection. Equal quantities do <strong>not</strong> mean two fills are the same trade.</p>
+<p>Review your own small, authorized export for missing/repeated trade identifiers, exact repeated rows, and equal quantities with distinct IDs. Everything runs <strong>only in this browser</strong>—no account, upload, wallet, RPC, cookies or payment.</p></div>
+<aside class="card"><span class="kicker">What you keep</span><h2>Row-number-only report</h2><p>No raw identifiers, addresses, amounts or transaction details in the result or download. A repeated order ID can legitimately cover multiple fills; every finding requires manual review.</p><p class="fine">Free preview. No independent users, sales or correctness certification claimed.</p></aside></div></section>
+<section class="section" id="check"><div class="wrap"><h2>Check your CSV locally (free)</h2>
+<div class="card"><label for="trade-input"><strong>Paste a small CSV export</strong> (up to 256 KiB / 750 data rows / 60 columns). For privacy, use an anonymized copy on shared devices.</label>
+<textarea id="trade-input" rows="9" spellcheck="false" placeholder="Trade ID,Date,Asset,Amount&#10;A1,2026-10-01,USDC,100&#10;A2,2026-10-01,USDC,100"></textarea>
+<label for="trade-file">Or select an authorized local .csv file, never uploaded:</label>
+<input type="file" id="trade-file" accept=".csv,text/csv,text/plain">
+<div class="actions"><button type="button" id="trade-demo" class="alt">Load fictional demo</button><button type="button" id="trade-run">Audit locally</button><button type="button" id="trade-clear" class="alt">Clear</button></div>
+<pre id="trade-result" role="status" aria-live="polite">No report yet.</pre>
+<button type="button" id="trade-save" disabled>Download redacted row-number JSON</button>
+<p class="fine">This tool is a bounded, deterministic heuristic for the headers Trade ID, Fill ID, Execution ID, Transaction ID, TxID or Order ID (case/punctuation insensitive). It deliberately refuses amount-only data with no ID. Optional amount, asset and date columns improve the warnings. It does not deduplicate, modify or transmit your file.</p>
+</div></div></section>
+<section class="section"><div class="wrap two"><div><h2>Interpret carefully</h2><ul>
+<li><strong>Same amount, different IDs:</strong> both fills may be legitimate. Never discard one merely because quantity matches.</li>
+<li><strong>Same ID, different rows:</strong> might represent multiple legs, partial fills or an export issue. Inspect source semantics.</li>
+<li><strong>Exact repeated rows:</strong> candidate redundant exports; not proof that a transaction should be removed.</li>
+<li><strong>Missing IDs:</strong> re-export IDs or request them from the source; don't fabricate them.</li></ul></div><div><h2>Explicit limitations</h2><ul>
+<li>No cost basis, Form 8949 checkbox assignment, proceeds, gains, tax status or legal advice.</li>
+<li>No exchange API verification, historical completeness or semantic ledger proof.</li>
+<li>Order IDs are not always fill IDs. Blockchain transaction hashes can appear on several legitimate event rows.</li>
+<li>No backend upload, storage, analytics, wallet connection or signing.</li></ul>
+<p>See the <a href="https://github.com/livastic-vm1-primary/paperpilot-tools/blob/main/tradeid-audit-core.mjs" rel="noopener noreferrer" target="_blank">auditable MIT-licensed source</a> and <a href="https://github.com/livastic-vm1-primary/paperpilot-tools/tree/main/tests" rel="noopener noreferrer" target="_blank">offline regression tests</a>.</p></div></div></section>
+<section class="section" id="feedback"><div class="wrap"><h2>Does this solve your CSV import problem?</h2>
+<p>For actual product feedback, please share only the software name, <em>column header names</em>, which warning was missing, and whether you'd pay for a one-off human-authorized review. Do not send transaction histories, exchange credentials, addresses, API keys, seed phrases or tax IDs.</p>
+<div class="actions"><a class="cta" href="defi-exception-inbox.html#pilot">Optional, quoted 15 Base USDC / 50 flagged-row review ↗</a><a class="cta alt" href="https://github.com/livastic-vm1-primary/paperpilot-tools/issues/new" target="_blank" rel="noopener noreferrer">Public feedback (no sensitive data) ↗</a></div>
+<p class="fine">Paid work only after written scope, lawful buyer/payee approval, data-handling terms and independent receipt confirmation. No immediate checkout or purchased service exists on this page.</p></div></section>
+</main><footer><div class="wrap">PaperPilot Tools · AI-assisted original free software · One real economic owner · No endorsement from exchanges, accountants or other users.</div></footer>
+<script type="module" src="tradeid-audit-ui.mjs"></script>
+</body></html>
