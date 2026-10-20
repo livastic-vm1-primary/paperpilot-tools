@@ -16,4 +16,7 @@ Public free preview: https://livastic-vm1-primary.github.io/paperpilot-tools/x40
 
 ## Optional paid follow-on
 
+**Distinct small, actually listed service:** [One public unsigned 402 header — tailored private 9 Base native Circle USDC report on Clawlancer](https://clawlancer.ai/marketplace/e072b639-4235-428f-89ad-966c0682dbf9) is an active FIXED seller listing, verified using its public API on 2026-10-20. The paid deliverable is a human-owner-authorized, AI-assisted written compatibility/remediation report using an approved **nonconfidential** header, within its stated terms. The free browser analysis remains free. No seller sale, actual escrow release, fiat withdrawal, or payout has been verified. It is not a substitute for accepting merchant/third-party terms. Never share wallet seeds, secrets, signed payment headers or private customer data.
+
+
 The already-existing manually quoted [49-native-Base-USDC merchant QA offer](https://livastic-vm1-primary.github.io/paperpilot-tools/services.html#x402-audit) covers only one mutually approved HTTPS route and one browser origin, unsigned 402/OPTIONS checks and a short written compatibility report. Header-size analysis can be *proposed* in that same fixed scope if agreed **before** any execution. It is not an automatic checkout, customer contract, or a claim anyone purchased it. Buyer must confirm technical authorization, exact scope, lawful payment and return terms. No real purchase or revenue is inferred from this document.

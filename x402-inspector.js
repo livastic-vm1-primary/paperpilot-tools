@@ -74,6 +74,14 @@
     }
     metadataBox.append(el("p", "fine", "Each field is evaluated independently with compact JSON; savings cannot be added. No field is removed, no original quote changed and no code is patched. Buyers may rely on Bazaar metadata; discuss changes with the merchant."));
     results.append(metadataBox);
+    if (wire.exceeds8KiB && breakdown.hypotheticalNonAdditiveRankedCandidates.length) {
+      const paid = el("p", "fine", "Need an independent written report for your own public unsigned merchant header? ");
+      const link = el("a", "service-link", "Optional 9 Base USDC fixed-scope report ↗");
+      link.href = "https://clawlancer.ai/marketplace/e072b639-4235-428f-89ad-966c0682dbf9";
+      link.rel = "noopener noreferrer";
+      paid.append(link, document.createTextNode(" This is an external opt-in marketplace order, not a wallet action or automatic payment; no clients have bought this SKU yet."));
+      results.append(paid);
+    }
 
     const decision = report.invoiceComparison;
     const warnBlock = el("div", "invoice-price-verdict");
