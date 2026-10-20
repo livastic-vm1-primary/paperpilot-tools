@@ -1,6 +1,6 @@
 {
   "schema": "paperpilot-public-buyer-offers-v1",
-  "updated_date_utc": "2026-10-20",
+  "updated_date_utc": "2026-10-21",
   "disclosure": "One human economic owner using openly AI-assisted research, software, documentation and testing. No artificial buyers or paid testimonials.",
   "site_url": "https://livastic-vm1-primary.github.io/paperpilot-tools/",
   "merchant_owner": "Same single beneficial owner; separately operated VM5 API",
@@ -372,6 +372,27 @@
       "data_use_requires_written_buyer_authorization": true,
       "legal_payer_payee_and_refund_terms_required": true,
       "explicit_FormSubmit_consent_required": true
+    },
+    {
+      "id": "crypto-csv-rescue-49usd-50row-private-scope-proposal",
+      "name": "Crypto CSV Rescue 50-row privately authorized source discrepancy report",
+      "type": "nonbinding-human-scope-inquiry-not-an-automated-checkout",
+      "page": "https://livastic-vm1-primary.github.io/paperpilot-tools/crypto-csv-rescue.html",
+      "inquiry": "https://livastic-vm1-primary.github.io/paperpilot-tools/contact.html?service=crypto-csv-rescue",
+      "indicative_price_usd": "49.00",
+      "potential_payment_rail": "Native Base Circle USDC only after independently agreed written lawful terms and validated receiving address",
+      "price_is_confirmed_customer_purchase": false,
+      "confirmed_buyer_orders": 0,
+      "new_customer_funds_usdc": "0",
+      "maximum_source_rows": 50,
+      "browser_submission_of_private_customer_csv_allowed": false,
+      "uploads_or_wallet_interactions": false,
+      "tax_advice_or_cost_basis_reconstruction": false,
+      "fictional_demo_json": "https://livastic-vm1-primary.github.io/paperpilot-tools/docs/crypto-csv-rescue-fictional-50.json",
+      "fictional_demo_csv": "https://livastic-vm1-primary.github.io/paperpilot-tools/docs/crypto-csv-rescue-fictional-50-exceptions.csv",
+      "existing_free_trade_id_tool": "https://livastic-vm1-primary.github.io/paperpilot-tools/tradeid-audit.html",
+      "market_is_validated_to_buy_our_service": false,
+      "one_single_human_beneficial_owner_across_vms": true
     }
   ],
   "genuine_historical_receipt_note": "The same original merchant has prior paid-and-delivered synthetic GET service receipts distinct from the buyer-owned POST; none establish paid POST orders.",
