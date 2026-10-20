@@ -222,3 +222,8 @@ transaction hashes are *not* automatically identified as duplicate economic
 events; multi-chain chain-specific receipt formats, missing transaction
 histories, prices, gains, losses, settlement finality and jurisdiction-specific
 tax interpretations remain the buyer's responsibility.
+
+
+## Same-owner two-export crypto transfer bridge
+
+The existing free VM1 DeFi exception inbox now links to the separately hosted, original same-human-owned VM3 exchange withdrawal versus wallet receipt two-CSV candidate checker (https://livastic-vm3-primary-tmp-260920.github.io/defi-payment-proof-qa/guides/crypto-transfer-csv-pair-auditor.html). The Kraken Ledger txid is internal to that exchange, not proof of a final on-chain transaction. Both privacy-first tools process the provided CSV locally, offer limited heuristics, and do NOT compute tax, profits or cost basis. Voluntary feedback now includes missing_transfer_pair and kraken_ledger categories. No paying customer or organic feedback is asserted by publishing a link.

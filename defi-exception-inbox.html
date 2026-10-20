@@ -46,6 +46,20 @@
 <li>No wallet connect, transaction signing, swaps, investment recommendations or token approval requests.</li>
 <li>No guarantee that a source CSV is complete or correct.</li>
 </ul></div></div></section>
+<section class="section" id="two-csv-kraken-bridge"><div class="wrap">
+<span class="kicker">TWO EXPORTS / WALLET AND EXCHANGE / STILL FREE</span>
+<h2>Missing the other half of a wallet transfer?</h2>
+<div class="two"><div class="card">
+<h3>Kraken withdrawals versus wallet receipts</h3>
+<p>One EVM explorer CSV cannot establish whether a row was an exchange withdrawal, a different wallet's deposit, a bridge hop or a taxable sale. If you have a withdrawal export and a wallet receipt export, review candidate pairs before importing them into a tax tracker.</p>
+<p>Our <strong>same-owner VM3 two-CSV tool</strong> checks time windows, asset/amount, optional fee and duplicate candidates. It recognizes a documented Kraken Ledger CSV shape: its txid is an <strong>internal Kraken ledger ID</strong>, NOT an independently finalized blockchain transaction hash. Trade, earn and internal movements require separate review.</p>
+<div class="actions"><a class="cta" href="https://livastic-vm3-primary-tmp-260920.github.io/defi-payment-proof-qa/guides/crypto-transfer-csv-pair-auditor.html" target="_blank" rel="noopener noreferrer">Try the free two-CSV transfer-pair checker</a><a class="cta alt" href="#feedback">Tell us which export is missing</a></div>
+<p class="fine">This link opens the original separate VM3 GitHub Pages site, owned by the same single beneficial human. Following the link sends NO CSV, wallet address or tax record from this page; use the other local-only checker with non-confidential files. Neither checker connects a wallet or computes tax/cost basis or certifies ownership/onchain settlement. <a href="https://support.kraken.com/hc/articles/360001169383-how-to-interpret-ledger-history-fields" target="_blank" rel="noopener noreferrer">Kraken's official Ledger field definitions</a>.</p>
+</div><aside class="card"><h3>Which free checker fits?</h3><ul>
+<li><strong>VM1 single-export tool:</strong> EVM transaction rows, LP/bridge/reward ambiguity, repeat event hashes.</li>
+<li><strong>VM3 two-export tool:</strong> exchange withdrawal versus receipt candidate matches, orphan legs, duplicate candidates, time/fee differences.</li>
+<li><strong>Neither:</strong> reconstructs tax lots, authenticates a Kraken internal ledger ID onchain, independently certifies a transfer or substitutes for qualified tax advice.</li>
+</ul><p class="fine">Both are original AI-assisted tools of ONE economic owner, not separate people buying from each other. Organic external users and paid customers have NOT been independently verified for this free Kraken use case.</p></aside></div></div></section>
 <section class="section" id="pilot"><div class="wrap"><span class="kicker">Separate optional paid help</span><h2>15 native Base USDC — 50-row exception review pilot</h2>
 <div class="two"><div class="card"><h3>Deliverables after actual acceptance</h3><p>For up to 50 flagged, owner-authorized, non-sensitive EVM CSV records, we can prepare a <strong>traceable review checklist</strong> with transaction grouping suggestions, data gaps, ambiguous method explanations and original public-explorer links where available. One brief revision within the written scope. A specific delivery deadline must be agreed before any payment.</p><p class="fine">No audit, financial certification, professional tax opinion, asset recovery guarantee, wallet management or promise to repair hidden transaction history.</p></div>
 <div class="card"><h3>Before any USDC is sent</h3><p>Contact us with the network, approximate record count, anonymized header names, the largest discrepancy and whether you want a written quote. We will check whether the task is possible, agree a price and lawful file-sharing/payment/cancellation arrangement, and identify the receiving <strong>Base native Circle USDC</strong> address in the written contract. Do <strong>not</strong> send coins or original private financial exports without confirmed agreement.</p><a class="cta" href="mailto:onecursor1@gmail.com?subject=DeFi%20CSV%20exception%20review%20-%2015%20Base%20USDC&amp;body=Hello%20PaperPilot%2C%0A%0AChain%20(EVM)%3A%20%0ANumber%20of%20CSV%20rows%3A%20%0AWhat%20appears%20unreconciled%3A%20%0AExisting%20app%20or%20export%3A%20%0ADeadline%3A%20%0A%0AI%20will%20not%20send%20private%20records%20or%20USDC%20before%20written%20agreement.">Ask about one paid review ↗</a></div></div>
@@ -67,6 +81,7 @@
 <option value="multi_event_tx_hash">Multiple transfer logs from one transaction</option>
 <option value="bridge_lp_stake_ambiguity">Bridge, liquidity or staking classification is ambiguous</option>
 <option value="missing_export">Missing wallet / exchange CSV history</option>
+<option value="missing_transfer_pair">Exchange withdrawal and wallet receipt do not match</option>
 <option value="csv_format_parse">CSV imports fail or fields do not match</option>
 <option value="wrong_labels">False-positive labels or strange amount / date fields</option>
 <option value="other">Other (explain using non-sensitive terms)</option>
@@ -78,6 +93,7 @@
 <option value="bsc_polygon_explorer">BscScan or PolygonScan-style CSV</option>
 <option value="debank_zerion">DeBank or Zerion</option>
 <option value="koinly_cointracker">Koinly, CoinTracker or another tax tracker</option>
+<option value="kraken_ledger">Kraken Ledger CSV (internal IDs, not blockchain hashes)</option>
 <option value="rotki">Rotki</option>
 <option value="other">Other</option>
 <option value="not_tried">I have not tried an export yet</option>

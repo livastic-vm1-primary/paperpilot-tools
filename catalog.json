@@ -182,6 +182,23 @@
       "disclosure": "CSV import/export heuristics only, incomplete EVM network data cannot calculate gains or determine tax treatment."
     },
     {
+      "id": "free-crypto-two-csv-transfer-review-one-owner-vm3",
+      "type": "free-browser-local-complementary-one-owner-product",
+      "name": "Crypto exchange-to-wallet two-CSV transfer candidate auditor",
+      "page": "https://livastic-vm3-primary-tmp-260920.github.io/defi-payment-proof-qa/guides/crypto-transfer-csv-pair-auditor.html",
+      "linked_from": "https://livastic-vm1-primary.github.io/paperpilot-tools/defi-exception-inbox.html#two-csv-kraken-bridge",
+      "operator": "Original VM3, SAME one human economic owner as VM1",
+      "price_native_circle_base_usdc": "0.000000",
+      "no_customer_data_uploaded": true,
+      "wallet_connection": false,
+      "transfers_certified_onchain": false,
+      "kraken_internal_ledger_id_is_onchain_hash": false,
+      "tax_or_cost_basis_computation": false,
+      "confirmed_external_paid_customers": 0,
+      "independent_user_feedback_confirmed": 0,
+      "caveat": "Candidate CSV record pairing only, not legal/tax judgment, chain verification or evidence of an independently paid buyer."
+    },
+    {
       "id": "manual-defi-transaction-exception-review-15usdc",
       "type": "manual-fixed-scope-optional-service-not-an-instant-checkout",
       "name": "DeFi EVM transaction exception report, maximum fifty flagged CSV rows",
