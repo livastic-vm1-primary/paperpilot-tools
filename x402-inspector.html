@@ -31,6 +31,7 @@
   <div class="hero-grid"><div>
     <h1>Before your agent pays,<br><em>read the quote.</em></h1>
     <p class="lead">Paste a <code>PAYMENT-REQUIRED</code> header. Instantly see the network, token contract, micro-USDC price and recipient. Understand what was <strong>requested</strong> before you approve any wallet action.</p>
+    <p class="sub-ko"><strong>Already signed, then received HTTP 500 or a timeout?</strong> Use our <a href="#settlement-no-retry">FREE post-payment no-retry checklist ↘</a> before you risk sending a second charge. It is a self-reported browser-only guide, never a refund or verified on-chain receipt.</p>
     <p class="sub-ko" lang="ko">결제 전에 체인·USDC 자산·요청 금액·수령 주소를 무료로 확인하세요. 입력값은 서버에 전송하지 않습니다.</p>
     <p class="sub-ko">A real x402 invoice lookup problem can return a <strong>1,000 USDC placeholder</strong> for a <strong>0.10 USDC invoice</strong>. Enter the expected invoice amount below; this page flags an exact mismatch and any merchant-reported issuance denial. No payment is initiated. <a href="https://github.com/bitrefill/agents/issues/11" rel="noopener noreferrer">Original independent user report ↗</a>. This public report is not an endorsement of this tool or evidence of our paid customers.</p>
     <p class="sub-ko">Merchant debugging: public x402 headers can be too large for some HTTP clients and proxies to accept. This tool now measures an observed Base64 <code>PAYMENT-REQUIRED</code> field or estimates one from JSON, with conservative 2/8/16 KiB transport warnings and a ranked hypothetical byte-saving breakdown for optional Bazaar metadata (values are not displayed). It does not establish compatibility with any particular stack, and it never makes a payment. <a href="https://github.com/x402-foundation/x402/issues/3803" rel="noopener noreferrer">Independent upstream field-size report ↗</a>.</p>
@@ -67,6 +68,37 @@
     <div class="results-intro"><div class="introsymbol" aria-hidden="true">402</div><h2>Know exactly what the 402 says.</h2><p>Load the fictional sample to see the output. The analyzer reports structural observations only. It cannot establish that the seller controls the payTo address or that funds will settle.</p><div class="output-badges"><span>CAIP-2 chain</span><span>Circle USDC</span><span>Atomic price</span><span>payTo address</span></div></div>
   </aside>
 </div></section>
+<section class="wrap incident-section" id="settlement-no-retry" aria-labelledby="incident-title">
+ <p class="eyebrow">AFTER AN X402 PAYMENT ERROR · FREE LOCAL TRIAGE · NO RETRY</p>
+ <h2 id="incident-title">Paid but got a 500, timeout or wrong JSON?</h2>
+ <p>Before you re-sign the same x402 request, distinguish a wallet signature, a <strong>user-confirmed</strong> on-chain transfer, and the actual merchant delivery. A server failure after a token transfer <strong>does not automatically refund</strong> it. This checklist runs in this browser only and makes <strong>zero network calls</strong>; its results are self-reported, not independently verified. Never paste an EIP-3009 signature, seed phrase, private URL or bearer token.</p>
+ <div class="incident-grid">
+  <form id="receipt-triage-form" class="incident-form">
+   <label for="incident-signed">Did you authorize a payment signature for this particular request?
+    <select id="incident-signed" required><option value="unknown">Not sure</option><option value="yes">Yes — signed or submitted</option><option value="no">No, I did not sign</option></select>
+   </label>
+   <label for="incident-chain">What did YOU find for this payment in a trusted chain explorer?
+    <select id="incident-chain" required><option value="unknown">Not checked / unknown</option><option value="confirmed">A matching Base USDC transfer appears confirmed</option><option value="not_confirmed">Not confirmed at the time I checked</option></select>
+   </label>
+   <label for="incident-delivery">What happened to the expected paid result?
+    <select id="incident-delivery" required><option value="unknown">Unknown / not checked</option><option value="failed_or_invalid">Error, timeout, missing or unusable response</option><option value="valid_delivered">Usable result received</option></select>
+   </label>
+   <label for="incident-hash">Optional PUBLIC Base transaction hash — 0x + 64 hex characters
+    <input id="incident-hash" type="text" autocomplete="off" spellcheck="false" maxlength="66" placeholder="Leave blank; never paste PAYMENT-SIGNATURE">
+   </label>
+   <div class="incident-buttons">
+    <button type="submit">Classify without paying</button>
+    <button type="button" id="incident-demo">Show invented 500-after-payment scenario</button>
+    <button type="button" id="incident-clear">Clear</button>
+   </div>
+   <p id="receipt-triage-status" class="incident-compact" role="status">No report generated. This tool cannot check Base, issue refunds or trigger another payment.</p>
+  </form>
+  <aside id="receipt-triage-result" class="incident-output" aria-live="polite">
+   <h3>No payment retry by default</h3><p>If you signed and received an error, a 500 or timeout is not proof the payment failed. Use only evidence from your own transaction and the merchant's order record.</p>
+  </aside>
+ </div>
+ <p class="incident-foot">Independent technical context: <a href="https://github.com/x402-foundation/x402/issues/3810" target="_blank" rel="noopener noreferrer">real x402 HEAD settlement/delivery issue</a>. This link is a third-party problem report, not a testimonial or proof anyone bought our work. To discuss a separately authorized one-public-URL incident diagnosis, <a href="contact.html?service=x402-postpayment-qa">request a scoped quote</a> without payment headers or private data. No paid order is implied.</p>
+</section>
 <section class="wrap x402-feedback" id="buyer-feedback" aria-labelledby="feedback-heading">
  <div class="feedback-intro">
   <p class="eyebrow">REAL MERCHANT FEEDBACK · OPTIONAL / 무료 사용자 의견</p>
@@ -117,4 +149,5 @@
 </section>
 </main>
 <footer class="footer"><div class="wrap footer-row"><span>© 2026 PaperPilot Tools · transparently AI-assisted · one economic owner</span><span><a href="index.html">Home</a> · <a href="contact.html">Contact</a> · <a href="https://github.com/livastic-vm1-primary/paperpilot-tools" rel="noopener noreferrer">Public source</a></span></div></footer>
+<script type="module" src="x402-receipt-triage-ui.mjs"></script>
 </body></html>

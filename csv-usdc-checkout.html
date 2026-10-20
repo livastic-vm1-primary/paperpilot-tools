@@ -79,6 +79,7 @@
      <button type="button" id="remote-pay-btn" class="btn pay" disabled>Pay 0.005 USDC once &amp; get report</button>
      <p id="remote-checkout-status" role="status" aria-live="polite" data-state="info" class="status">No payment has been requested. Start with the free local preview.</p>
      <p class="fine"><strong>Important:</strong> if your wallet says a payment is pending or the server times out after a signature, <strong>do not click again</strong>. Check the original wallet history and the merchant receipt first. This client does not auto-retry signed payments. A 402 price quote is not a successful payment.</p>
+     <p class="fine">Getting a 500, timeout, or missing report after authorizing a payment? <a href="x402-inspector.html#settlement-no-retry">Open the FREE local no-retry incident checklist ↗</a>. It NEVER re-signs, probes a wallet, charges your account, confirms settlement, or files a refund.</p>
      <h3>Hosted report (shown only after a real paid response)</h3>
      <pre id="paid-result" class="report" aria-live="polite">No paid report requested.</pre>
      <p><a id="settlement-transaction-link" hidden target="_blank" rel="noopener noreferrer">View your transaction on BaseScan ↗</a></p>

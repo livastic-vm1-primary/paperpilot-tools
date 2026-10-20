@@ -31,3 +31,24 @@
 .feedback-actions .primary{font:inherit}
 .feedback-honey{position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden}
 @media(max-width:650px){.feedback-fields{grid-template-columns:1fr}.x402-feedback{border-radius:0}.feedback-actions{align-items:flex-start}}
+
+
+/* No-signature x402 incident triage: browser-only; never interpret as a chargeback. */
+.incident-section{padding:46px 0 56px}
+.incident-section h2{font-size:clamp(23px,3vw,37px);line-height:1.18;margin:10px 0 17px}
+.incident-section>p{max-width:84ch}
+.incident-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:23px;margin-top:23px}
+.incident-form,.incident-output{background:#fff;border:1px solid #c4d8dd;border-radius:13px;padding:25px;min-width:0}
+.incident-form label{display:block;font-size:14px;font-weight:720;line-height:1.5;margin:0 0 17px}
+.incident-form select,.incident-form input{display:block;margin-top:7px;width:100%;max-width:100%;padding:11px;border-radius:8px;border:1px solid #718c9a;background:#fff;color:var(--navy);font:inherit}
+.incident-buttons{display:flex;flex-wrap:wrap;gap:9px}
+.incident-buttons button{cursor:pointer;border:1px solid #8c9d9d;border-radius:7px;padding:11px;background:#f3f7fa;color:var(--navy);font:700 13px/1.25 system-ui,sans-serif}
+.incident-buttons button[type=submit]{background:#16354d;color:#fff}
+.incident-buttons button:focus-visible{outline:3px solid #18b28f;outline-offset:2px}
+.incident-output h3{margin:0 0 12px;font-size:18px}
+.incident-output ol{padding-left:23px}
+.incident-output li{margin:9px 0}
+.incident-output a{font-weight:750;overflow-wrap:anywhere}
+.incident-verdict{font-weight:850;color:#6f272a;overflow-wrap:anywhere}
+.incident-compact,.incident-foot{font-size:13px;line-height:1.65;color:#465968;overflow-wrap:anywhere}
+@media(max-width:780px){.incident-grid{grid-template-columns:1fr}.incident-form,.incident-output{padding:18px}}
