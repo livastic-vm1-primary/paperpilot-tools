@@ -115,6 +115,8 @@ test('public discovery offers functional audit and optional separately-agreed sc
   const llm = read('../llms.txt');
   const catalog = JSON.parse(read('../catalog.json'));
   assert.match(html, /No immediate checkout or purchased service exists/);
+  assert.match(html, /defi-exception-inbox\.html#feedback/);
+  assert.match(html, /explicit third-party consent/);
   assert.match(def, /tradeid-audit\.html/);
   assert.match(siteMap, /tradeid-audit\.html/);
   assert.match(llm, /tradeid-audit\.html/);
