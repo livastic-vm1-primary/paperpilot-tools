@@ -35,6 +35,7 @@ test('free Python sample and inline displayed facts match the real executable',(
 test('sales CTA only asks for nonconfidential scope by regular mailto, not wallet secrets',()=>{
  assert.match(page,/href="mailto:onecursor1@gmail.com\?subject=/);
  assert.match(page,/No confidential data upload, wallet connection or payment is required/);
+ assert.doesNotMatch(page,/\*\*[^*]{4,150}\*\*/);
  assert.match(page,/do not send money until/i);
  assert.doesNotMatch(page,/script src=|eth_sendTransaction|window\.ethereum|localStorage|setInterval|form action="https:/);
 });
