@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'none'; script-src 'self'; style-src 'self'; img-src 'self'; form-action 'none'; object-src 'none'; base-uri 'self'; upgrade-insecure-requests">
+<meta name="description" content="Why did Koinly skip rows, report missing purchase history, reject a CSV, or show API + CSV duplicates? Free private diagnosis by symptom, official references and an optional 5 Base USDC human mapping review. No wallet or uploads.">
+<meta property="og:title" content="Koinly CSV skipped rows, duplicates & missing purchase history | Free Triage">
+<meta property="og:description" content="Free no-upload Koinly import error checklist. Independent, source-backed help; small optional scoped review, no tax advice.">
+<link rel="canonical" href="https://livastic-vm1-primary.github.io/paperpilot-tools/koinly-import-triage.html">
+<title>Koinly CSV Import Errors: Skipped Rows, Duplicates & Missing History | PaperPilot</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="crypto-csv-rescue.css">
+<link rel="stylesheet" href="koinly-import-triage.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+<header class="head"><div class="wrap nav">
+<a class="brand" href="./">PaperPilot <span>Tools</span></a>
+<nav aria-label="Site navigation"><a href="koinly-column-mapper.html">Free CSV Mapper</a><a href="crypto-csv-rescue.html">Crypto CSV Rescue</a><a href="contact.html?service=koinly-mini-5">Ask a question</a></nav>
+</div></header>
+<main id="main">
+<section class="hero"><div class="wrap hero-grid"><div>
+<p class="eyebrow">FREE, SOURCE-BACKED DIAGNOSTIC / 무료 구조적 점검</p>
+<h1>Koinly imported fewer rows than you expected? <em>Check the reason first.</em></h1>
+<p class="lead">A rejected file, skipped duplicates, and missing acquisition history are <strong>three different problems</strong>. Choose your symptom to see a safe first-pass checklist before you alter any import.</p>
+<p lang="ko">Koinly CSV가 거부되거나, 일부 행을 건너뛰거나, 매수 이력이 없다고 나올 때 각각 원인과 확인 순서가 다릅니다. 원본 파일을 지우거나 취득가를 임의로 적기 전에 점검하세요.</p>
+<div class="actions"><a class="primary" href="#triage">Choose your import problem ↓</a><a class="secondary" href="koinly-column-mapper.html">Free local header mapper ↗</a></div>
+</div><aside class="panel">
+<p class="eyebrow">ZERO CUSTOMER DATA / 데이터 입력 불필요</p><h2>No CSV upload. No login.</h2>
+<p>This decision guide asks only for an <strong>error category</strong>. It never accesses your Koinly account, wallet, original CSV or private keys.</p>
+<ul><li>No analytics, cookies or external API calls</li><li>No guessed tax basis or trading history</li><li>No row deletion, exchange logins or signing</li><li>Independent tool — not Koinly support</li></ul>
+<p class="small-note">A vendor import summary, not the number of CSV lines, determines why rows were skipped.</p>
+</aside></div></section>
+<section class="wrap section" id="triage">
+<h2>Pick what Koinly actually reported</h2>
+<div class="triage">
+<label for="issue">Select your observed symptom · 화면에 나온 문제 선택</label>
+<select id="issue">
+<option value="skipped">Skipped rows / 일부 행 건너뜀</option>
+<option value="duplicates">Possible API + CSV duplicates / 중복 거래</option>
+<option value="missing">Missing purchase history / 취득 이력 누락</option>
+<option value="rejected">Rejected or unrecognized CSV / 파일 인식 실패</option>
+</select>
+<section id="plan" role="region" aria-live="polite" aria-labelledby="plan-title">
+<h3 id="plan-title">Rows were skipped</h3>
+<p id="plan-description">Review the vendor import summary before making changes.</p>
+<ol id="plan-steps"></ol>
+<p><strong>Primary documentation:</strong> <a id="plan-source" href="https://support.koinly.io/en/articles/9490012-errors-when-importing-transactions" target="_blank" rel="noopener noreferrer">Official Koinly import errors ↗</a></p>
+<p id="plan-offer" class="small-note"></p>
+</section>
+</div>
+<p class="small-note">Each choice is a general diagnostic plan, not an inspection of your transactions. Refer to your official provider's latest documentation before making edits. This page is not legal, accounting or tax advice.</p>
+</section>
+<section class="wrap section"><h2>Free fix first. Optional paid help only when scoped.</h2>
+<div class="method">
+<article><h3>1. Identify the failure</h3><p>Read your import summary, save the original export, and use the official help article matched to your symptom. This costs nothing.</p></article>
+<article><h3>2. Map unsupported CSV columns</h3><p>Our <a href="koinly-column-mapper.html">free local-only mapper</a> works on one authorized CSV with explicit mapping. No upload or invented transactions. Supported files should use Koinly's own integration.</p></article>
+<article><h3>3. Ask about a 5 USDC mini-review</h3><p>Only if one unsupported source header remains: up to ten buyer-authorized, redacted structural rows. Written acceptance of scope, delivery, payee, refund and data handling <strong>before payment</strong>. Not automated checkout.</p></article>
+</div>
+<div class="actions"><a class="primary" href="contact.html?service=koinly-mini-5">Ask about the optional 5 Base USDC scope (free enquiry) ↗</a><a class="secondary" href="https://hashn.com/store/886ed287-aaca-434b-9f27-560a50bfbbb6/listings/koinly-csv-one-source-mapping-mini-review-5usdc.md" target="_blank" rel="noopener noreferrer">View original third-party listing (5 USDC, not a paid order) ↗</a></div>
+<p class="small-note">No third-party customer purchase for this mini-review is confirmed. An enquiry is not a payment. We do not compute gains, modify a Koinly account, request credentials, or infer missing acquisition prices. For larger cross-export discrepancies, <a href="crypto-csv-rescue.html">see the separate $49 indicative pilot</a>.</p>
+</section>
+<section class="wrap section">
+<h2>Official Koinly sources, not guesses</h2>
+<p>These references independently document that skipped records may be intentional, duplicate matching requires near-exact equality, and missing purchase history has multiple causes.</p>
+<ul>
+<li><a href="https://support.koinly.io/en/articles/9490012-errors-when-importing-transactions" target="_blank" rel="noopener noreferrer">Import errors: skipped, rejected, failed rows</a></li>
+<li><a href="https://support.koinly.io/en/articles/9789363-how-duplicate-detection-works-in-koinly" target="_blank" rel="noopener noreferrer">Duplicate detection and API/CSV overlap</a></li>
+<li><a href="https://support.koinly.io/en/articles/9490037-missing-purchase-history-for-xyz" target="_blank" rel="noopener noreferrer">Missing purchase history</a></li>
+<li><a href="https://support.koinly.io/en/articles/9489985-how-to-import-a-csv-file-using-a-different-timezone" target="_blank" rel="noopener noreferrer">Non-UTC CSV import handling</a></li>
+</ul>
+<p>Do not delete transactions solely to make warnings disappear. Keep an original, reversible evidence trail. If your importer and original source disagree on economic treatment, seek your tax professional.</p>
+</section>
+</main>
+<footer class="foot"><div class="wrap">© 2026 PaperPilot Tools · AI-assisted independent diagnostics · not affiliated with Koinly · no paid mini-review customer verified · <a href="contact.html">Consent-based contact</a></div></footer>
+<script type="module" src="koinly-import-triage-ui.mjs"></script>
+</body>
+</html>

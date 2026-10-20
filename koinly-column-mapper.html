@@ -29,6 +29,7 @@
 <p>One CSV at a time, at most <strong>512 KiB, 200 records, 40 columns</strong>. A fabricated demo is available without uploading anything.</p>
 <ul><li>No backend, cookies or analytics</li><li>No amount-only duplicate deletion</li><li>No unknown trade, fee or timestamp inference</li><li>No blockchain lookups or tax computations</li><li>Zero known outside paid conversion customers</li></ul>
 </aside></div></section>
+<section class="wrap section"><h2>First: did Koinly skip, reject or double-import the file?</h2><p>These symptoms are not equivalent. Before remapping columns, use the <a href="koinly-import-triage.html">free no-upload Koinly import-error decision guide</a> to distinguish intentional skipped rows, exact duplicates, API/CSV overlaps and missing purchase history. No exchange login or CSV contents are requested.</p></section>
 <section class="wrap section">
 <h2>Browser-only CSV column mapping</h2>
 <p>Download and retain your exact original export separately. Confirm its clock is <strong>already UTC</strong>; do not check the UTC box if the file uses local exchange time. The program rejects values it cannot safely map, rather than silently guessing or modifying them.</p>

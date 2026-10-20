@@ -1,0 +1,10 @@
+.triage{background:#ffffff;border:1px solid #ccdad9;border-radius:20px;padding:clamp(18px,3vw,32px);margin:20px 0;box-shadow:0 8px 22px #0b293009}
+.triage label{display:block;font-weight:700;margin-bottom:10px}
+.triage select{font:inherit;background:#f5faf8;color:#12363a;border:2px solid #8eaaa2;border-radius:8px;padding:13px;width:100%;max-width:730px}
+.triage select:focus-visible,.triage a:focus-visible{outline:3px solid #3773ad;outline-offset:3px}
+.triage ol{padding-left:23px;line-height:1.9}.triage li{padding:5px 0}
+.triage p{max-width:78ch;line-height:1.75}
+.method{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}
+.method article{border:1px solid #d6e2de;background:#f6fbfa;padding:20px;border-radius:12px}
+.method h3{margin:0 0 8px}.method p{line-height:1.65;margin:0}
+.small-note{color:#364e52;font-size:.91rem}
