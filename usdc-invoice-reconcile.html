@@ -8,6 +8,7 @@
 <link rel="canonical" href="https://livastic-vm1-primary.github.io/paperpilot-tools/usdc-invoice-reconcile.html">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="defi-exception-inbox.css">
+<link rel="stylesheet" href="usdc-invoice-reconcile.css">
 </head><body>
 <header><div class="wrap"><nav aria-label="Main"><a class="brand" href="./">PaperPilot <em>Tools</em></a><a href="tradeid-audit.html">Trade-ID check</a><a href="services.html">Custom services</a></nav></div></header>
 <main>
@@ -31,6 +32,7 @@
 <label for="recon-transfers-file">Or read transfers from your own local CSV (not uploaded):</label><input id="recon-transfers-file" type="file" accept=".csv,text/csv">
 <p class="fine">An invoice_id beside a transfer must come from a separate buyer-authorized association or merchant memo; it is NOT inherent to the blockchain. No amount-only guesses or automatic allocations across invoices. Partial transfers with the same invoice reference can sum, but all amounts remain unverified.</p>
 <div class="actions"><button id="recon-demo" type="button" class="alt">Load fictional example</button><button id="recon-run" type="button">Preview locally</button><button id="recon-clear" type="button" class="alt">Clear both inputs</button></div>
+<section id="recon-summary" class="recon-results" role="region" aria-label="Unverified invoice and transfer candidate summary" hidden></section>
 <pre id="recon-output" role="status" aria-live="polite">No report yet. No data stored.</pre>
 <button type="button" disabled id="recon-download">Download local candidate report JSON</button>
 </div></div></section>

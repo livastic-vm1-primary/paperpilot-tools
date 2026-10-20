@@ -12,6 +12,7 @@ const idPattern = /^[a-z0-9][a-z0-9_.:-]{0,79}$/i;
 const addressPattern = /^0x[0-9a-fA-F]{40}$/;
 const ZERO_ADDRESS = '0x'+'0'.repeat(40);
 const hashPattern = /^0x[0-9a-fA-F]{64}$/;
+const ZERO_TX_HASH = '0x' + '0'.repeat(64);
 const unitsCap = 10n ** 24n;
 
 function readCsv(source, title) {
@@ -67,6 +68,7 @@ const invoiceId = s => idPattern.test(s) ? s : null;
 function amount(s) {
   if (!/^\d+(?:\.\d{1,6})?$/.test(s)) return null;
   const [whole, fraction = ''] = s.split('.');
+  if (whole.length > 19) return null; // never parse arbitrarily huge numbers
   const out = BigInt(whole) * 1000000n + BigInt(fraction.padEnd(6, '0'));
   return out > 0n && out <= unitsCap ? out : null;
 }
@@ -109,7 +111,7 @@ export function reconcileUsdcCsv(invoiceSource, transferSource) {
     const logText = value(transfers, row, 'log_index');
     const validLog = /^(?:0|[1-9]\d{0,8})$/.test(logText);
     const network = chain(value(transfers, row, 'chain_id'));
-    const event = row.validShape && hashPattern.test(hash) && validLog
+    const event = row.validShape && hashPattern.test(hash) && hash.toLowerCase() !== ZERO_TX_HASH && validLog
       ? JSON.stringify([network,hash.toLowerCase(),String(BigInt(logText))])
       : null;
     return {

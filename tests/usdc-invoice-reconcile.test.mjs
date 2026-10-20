@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {reconcileUsdcCsv,fictionalInvoices,fictionalTransfers,CIRCLE_BASE_USDC,INPUT_LIMIT} from '../usdc-invoice-reconcile-core.mjs';
+import {summarizeUnverifiedReport} from '../usdc-invoice-reconcile-summary.mjs';
 
 const payee='0x'+'1'.repeat(40);
 const wrongPayee='0x'+'3'.repeat(40);
@@ -221,4 +222,76 @@ test('home page discovery link and public no-wallet scope are present',()=>{
   assert.match(html,/zero-address burn\/mint and self-to-self transfers/);
   assert.match(html,/No actual merchant adoption, paid buyer/);
   assert.match(html,/FormSubmit|outside email-form provider/);
+});
+
+test('the zero transaction-hash placeholder never becomes an attributed customer payment',()=>{
+  const r=inspect(inv(),tr('I1','1','0x'+'0'.repeat(64)));
+  assert.equal(tstatus(r),'invalid_transfer_fields');
+  assert.equal(status(r),'review_required_exception');
+  assert.equal(r.invoice_records[0].attributed_usdc,'0.000000');
+  assert.equal(r.actual_rpc_receipt_log_and_finality_verified,false);
+});
+test('amount limit rejects pathological digit count without huge BigInt computation',()=>{
+  for(const n of ['1'.repeat(200000),'00000000000000000001','10000000000000000000000000']) {
+    const r=inspect(inv('I1',n));
+    assert.equal(status(r),'invalid_invoice_fields');
+  }
+});
+test('plain-language public summary quantifies exceptions and never claims actual settlement',()=>{
+  const r=inspect(fictionalInvoices,fictionalTransfers);
+  const s=summarizeUnverifiedReport(r);
+  assert.equal(s.invoiceTotal,5);
+  assert.equal(s.transferTotal,7);
+  assert.equal(s.flaggedInvoices,4);
+  assert.equal(s.flaggedTransfers,4);
+  assert.equal(s.invoices.length,5);
+  assert.equal(s.transfers.length,7);
+  assert.ok(s.invoices.some(x=>x.status==='candidate_exact_amount_only'
+    && /Independently verify the canonical chain receipt/i.test(x.nextStep)));
+  assert.ok(s.invoices.some(x=>x.status==='candidate_partial_underpaid'
+    && /missing or additional installments/i.test(x.nextStep)));
+  assert.match(s.headline,/zero actual chain receipts/);
+  assert.match(s.actions,/Do not deliver goods, book revenue/);
+  assert.ok(!JSON.stringify(s).includes('FAKE-100'));
+  assert.ok(!JSON.stringify(s).includes('0x'+'a'.repeat(64)));
+});
+test('plain-language recommendations are specific to zero-address and self-transfer problems',()=>{
+  const burns=summarizeUnverifiedReport(inspect(inv('I1','1',ZERO),tr('I1','1',H('a'),'0','8453',CIRCLE_BASE_USDC,ZERO)));
+  assert.match(burns.transfers[0].nextStep,/burn candidate/);
+  const mints=summarizeUnverifiedReport(inspect(inv(),tr('I1','1',H('a'),'0','8453',CIRCLE_BASE_USDC,payee,ZERO)));
+  assert.match(mints.transfers[0].nextStep,/mint candidate/);
+  const selfs=summarizeUnverifiedReport(inspect(inv(),tr('I1','1',H('a'),'0','8453',CIRCLE_BASE_USDC,payee,payee)));
+  assert.match(selfs.transfers[0].nextStep,/not an independent incoming buyer payment/);
+});
+test('display summary rejects invalid limits and bounds tables to first 50 rows',()=>{
+  const base=inspect(fictionalInvoices,fictionalTransfers);
+  const many={
+    ...base,
+    invoice_records:Array.from({length:750},(_,i)=>({...base.invoice_records[0],record:i+2})),
+    transfer_records:Array.from({length:750},(_,i)=>({...base.transfer_records[0],record:i+2}))
+  };
+  const s=summarizeUnverifiedReport(many);
+  assert.equal(s.invoiceTotal,750);
+  assert.equal(s.transferTotal,750);
+  assert.equal(s.invoices.length,50);
+  assert.equal(s.transfers.length,50);
+  for (const bad of [0,-1,101,1.1,NaN,'50']) {
+    assert.throws(()=>summarizeUnverifiedReport(base,bad),/Visible row cap/);
+  }
+});
+test('display is a true first-party local DOM table with no dynamic raw HTML insertion',()=>{
+  const h=file('usdc-invoice-reconcile.html');
+  const css=file('usdc-invoice-reconcile.css');
+  const js=file('usdc-invoice-reconcile-ui.mjs');
+  const summary=file('usdc-invoice-reconcile-summary.mjs');
+  assert.match(h,/id="recon-summary"[^>]*hidden/);
+  assert.match(h,/href="usdc-invoice-reconcile\.css"/);
+  assert.match(css,/recon-tables/);
+  assert.match(js,/summarizeUnverifiedReport/);
+  assert.match(js,/document\.createElement/);
+  assert.match(js,/\.textContent/);
+  assert.match(js,/\.replaceChildren/);
+  assert.doesNotMatch(js,/\bfetch\s*\(|XMLHttpRequest|navigator\.sendBeacon|innerHTML|outerHTML|insertAdjacentHTML|window\.ethereum|web3/);
+  assert.doesNotMatch(summary,/\bfetch\s*\(|innerHTML|wallet connect|window\.ethereum/);
+  assert.equal(h.includes('connect-src \'none\''),true);
 });

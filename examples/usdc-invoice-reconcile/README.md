@@ -26,6 +26,10 @@ case-insensitive for token/address/hash; invoice_id is case-sensitive. Zero-addr
 self-transfers fail closed for customer-payment attribution. Token
 amounts use 6-decimal integer arithmetic using BigInt. Duplicate IDs in
 invoice CSV quarantine the candidate and are **never silently overwritten**.
+Zero-filled 32-byte transaction hashes are rejected as placeholders. Large
+amount strings are rejected before BigInt parsing. The public page summarizes
+exceptions and proposed manual follow-up in an accessible row-number table,
+with the full local JSON available below it; no paid status is inferred.
 A duplicate (claimed chain, tx_hash, log_index) quarantines BOTH rows; identical
 hashes with DIFFERENT log_index represent different potential events.
 

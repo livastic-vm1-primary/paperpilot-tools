@@ -1,0 +1,16 @@
+/* First-party, locally rendered unverified exception summary, no remote fonts. */
+.recon-results {margin:20px 0;background:#0c1930;border:1px solid #52678b;border-radius:12px;padding:20px}
+.recon-results[hidden]{display:none}
+.recon-results h3{margin:8px 0 12px;color:#d8fa76}
+.recon-results .recon-headline{border-left:4px solid #e5b46b;padding:10px 14px;background:#27314a;font-weight:700}
+.recon-results .recon-metrics{display:flex;gap:12px;flex-wrap:wrap;margin:14px 0}
+.recon-results .recon-metrics p{flex:1 1 140px;margin:0;padding:13px;border:1px solid #52678b;border-radius:9px;background:#14223b}
+.recon-results .recon-metrics strong{display:block;font-size:22px;color:#fff}
+.recon-tables{max-width:100%;overflow-x:auto;margin:18px 0}
+.recon-tables table{border-collapse:collapse;width:100%;min-width:650px;font-size:13px;line-height:1.5}
+.recon-tables th,.recon-tables td{padding:10px;text-align:left;vertical-align:top;border-bottom:1px solid #435376}
+.recon-tables th{color:#d8fa76}
+.recon-tables tbody tr:nth-child(odd){background:#162641}
+.recon-tables td:first-child{white-space:nowrap}
+.recon-results .recon-bound{font-size:13px;color:#d1dbec}
+#recon-output{max-height:480px;overflow:auto}
