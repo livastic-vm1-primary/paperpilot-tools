@@ -34,6 +34,8 @@
 
 - [Machine-readable POST-only x402 CSV discovery and safe unpaid quote sample](https://livastic-vm1-primary.github.io/paperpilot-tools/x402-post-discovery.json): POST-only VM5 customer CSV quality service, exact synthetic application/json body required before HTTP 402, real native Circle Base8453 USDC 0.005 quote, receiver/token/CORS metadata and independent third-party unpaid 402 reproduction. GET/HEAD or invalid POST do not discover paid route. This public document never signs/pays, is not buyer agreement or paid POST proof; confirmed independent paid buyer-owned POST customers ZERO.
 
+- [Google Workspace invoice intake, free sample source and optional 95-USDC fixed-scope QA](https://livastic-vm1-primary.github.io/paperpilot-tools/services.html#workspace-invoice-intake): free local source at https://github.com/livastic-vm1-primary/paperpilot-tools/tree/main/examples/google-workspace-invoice-staging with 19 offline mock tests. Gmail-to-private Drive/InvoiceStaging Sheet; preview only by default, human opt-in before archive and no real owner Gmail customer account access claimed. Optional one TEST label/folder/sheet with up to ten fictional PDFs for indicative 95 native Circle Base USDC, written purchaser contract, legal payee, cancellation and receipt verification first. Confirmed paying customers ZERO.
+
 ## Machine-readable public details
 - [Product and offer catalog](https://livastic-vm1-primary.github.io/paperpilot-tools/catalog.json): static JSON with exact status and payment distinctions.
 - [Public project source](https://github.com/livastic-vm1-primary/paperpilot-tools): code and free checker tests.

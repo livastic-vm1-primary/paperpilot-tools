@@ -231,6 +231,25 @@
       "revenue_recognized_usdc": "0.000000",
       "buyer_feedback_received": 0,
       "note": "Buyer asks voluntarily; not an approved contract, real checkout, onchain proof or existing award."
+    },
+    {
+      "id": "google-workspace-invoice-intake-test-pilot-95-usdc",
+      "type": "manual-buyer-request-only",
+      "name": "Owner-approved Gmail PDF -> Drive private archive -> isolated review Sheet setup",
+      "page": "https://livastic-vm1-primary.github.io/paperpilot-tools/services.html#workspace-invoice-intake",
+      "inquiry": "https://livastic-vm1-primary.github.io/paperpilot-tools/contact.html?service=workspace-invoice",
+      "free_source": "https://github.com/livastic-vm1-primary/paperpilot-tools/tree/main/examples/google-workspace-invoice-staging",
+      "indicative_price_native_base_circle_usdc": "95.000000",
+      "network": "eip155:8453",
+      "checkout_or_payment_enabled": false,
+      "requires_written_scope_and_verified_lawful_payee": true,
+      "max_test_invoice_count": 10,
+      "requires_owner_explicit_gmail_drive_sheet_approval": true,
+      "default_preview_only": true,
+      "real_google_workspace_customer_account_live_testing_confirmed": false,
+      "existing_live_sage_or_bank_records_modified": false,
+      "independent_paid_customers": 0,
+      "caveat": "Only one authorized test Gmail label, Drive folder, and review staging Sheet; original software is AI-assisted and has 19 isolated mocks, NOT proven installed in a live customer Workspace, nor full invoice OCR/tax/SAGE integration. Buyer must agree in writing before payment."
     }
   ],
   "genuine_historical_receipt_note": "The same original merchant has prior paid-and-delivered synthetic GET service receipts distinct from the buyer-owned POST; none establish paid POST orders.",

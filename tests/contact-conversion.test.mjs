@@ -15,7 +15,8 @@ const serviceCategories=[
   ["invoice","Bilingual invoice or quote template"],
   ["utility","Offline browser utility"],
   ["qa","Playwright browser QA"],
-  ["x402-cors","x402 merchant CORS and quote QA"]
+  ["x402-cors","x402 merchant CORS and quote QA"],
+  ["workspace-invoice","Google Workspace Gmail Drive invoice intake QA"]
 ];
 
 function renderSelection(param){
@@ -33,7 +34,7 @@ function renderSelection(param){
   return {...state,domLookups:count};
 }
 
-test("exact four distinct in-site paid-service inquiry routes",()=>{
+test("exact five distinct in-site paid-service inquiry routes",()=>{
   const links=[...services.matchAll(/<a class="service-contact" href="([^"]+)"/g)].map(m=>m[1]);
   assert.deepEqual(links,serviceCategories.map(([key])=>"contact.html?service="+key));
   assert.ok(!links.some(x=>x.startsWith("mailto:")));
