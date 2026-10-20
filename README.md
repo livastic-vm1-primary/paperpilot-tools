@@ -81,3 +81,28 @@ The independent optional VM5 paid API remains priced at **0.005 native Circle
 Base USDC**, buyer-authorized only, and there are still no independently
 verified paid customers for its POST route. The skill does not provide or
 initiate x402 wallet signing; the buyer uses their own trusted client.
+
+
+## Local x402 v2 payment-required inspector (free, original, 2026-10-20)
+
+Live public page: https://livastic-vm1-primary.github.io/paperpilot-tools/x402-inspector.html
+
+This is a small standalone browser-only public unsigned PAYMENT-REQUIRED
+Base64/JSON decoder. It shows exact chain, asset contract, 6-decimal Base
+USDC amount, 20-byte payTo address format and warnings relative to an optional
+local display budget. It makes **no external quote-fetch requests, payment
+signatures, wallet connections, analytics or remote writes**. It is not
+a service authenticator, safety oracle, transaction checker or payment client.
+All resource text and addresses are treated as untrusted and rendered as text.
+
+A real separate buyer-authorized x402 v2 GET API on original VM5 is linked
+as an optional structured convenience service (0.010000 native Base USDC).
+Current firstparty original unpaid GET returns HTTP402 PAYMENT-REQUIRED,
+fictional /v1/x402-sample returns HTTP200, paid customer receipts on this
+specific route remain ZERO. This VM1 free software does not authorize any
+customer to spend. Check current VM5 terms and buyer-supplied quote before
+using an actual trusted wallet or client.
+
+Regression tests: node --test tests/*.test.mjs. Browser functional testing
+is a separate requirement; those unit tests cannot by themselves prove a
+real browser deployment or paid response.

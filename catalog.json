@@ -29,6 +29,20 @@
       "caveat": "Installer obtains GitHub source; offline CLI does not transfer CSV. Strict structural heuristics, not a data correctness guarantee."
     },
     {
+      "id": "free-x402-quote-inspector",
+      "type": "free-browser-only",
+      "name": "x402 v2 PAYMENT-REQUIRED header inspector",
+      "page": "https://livastic-vm1-primary.github.io/paperpilot-tools/x402-inspector.html",
+      "price_usdc": "0.000000",
+      "runs_offline_in_browser": true,
+      "automatic_quote_network_requests": 0,
+      "requires_login": false,
+      "wallet_connection": false,
+      "local_storage": false,
+      "scope": "Pure syntax/field inspection of unsigned public x402 v2 quote up to 32 KiB; Base native CircleUSDC token, exact micro-amount, wallet-address format and optional visible budget. Not merchant authentication, settlement proof or approval to pay.",
+      "independent_external_user_adoption_confirmed": false
+    },
+    {
       "id": "vm5-x402-csv-preflight",
       "type": "optional-agent-api",
       "endpoint": "https://vm5-openapi-x402.onrender.com/v1/csv-preflight",
@@ -45,6 +59,23 @@
       "requires_explicit_buyer_wallet_authorization": true,
       "verified_paid_post_customers": 0,
       "caveat": "A quote is not a payment; independent buyer decides if and when to sign. No private personal CSV or wallet secrets in test requests."
+    },
+    {
+      "id": "vm5-x402-quote-preflight",
+      "type": "optional-separately-hosted-paid-api",
+      "endpoint": "https://vm5-openapi-x402.onrender.com/v1/x402-preflight",
+      "method": "GET",
+      "free_sample_url": "https://vm5-openapi-x402.onrender.com/v1/x402-sample",
+      "merchant_docs": "https://vm5-openapi-x402.onrender.com/v1/docs",
+      "buyer_guide": "https://livastic-vm1-primary.github.io/paperpilot-tools/x402-inspector.html",
+      "price_native_circle_usdc": "0.010000",
+      "network": "eip155:8453",
+      "settlement_token": "native Circle USDC",
+      "protocol": "x402 v2",
+      "unauthorized_quote_status_http": 402,
+      "requires_independent_buyer_wallet_authorization": true,
+      "independently_verified_paid_orders": 0,
+      "caveat": "Separate original VM5 vendor. Public unsigned x402 quote structural review, does not fetch merchant or verify identity/settlement. An HTTP402 quote, our own QA, or free sample is not a customer purchase."
     },
     {
       "id": "manual-paperpilot-offline-kit",

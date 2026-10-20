@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'none'; form-action 'none'; object-src 'none'; base-uri 'none'; frame-src 'none'">
+<meta name="theme-color" content="#0e1d32">
+<meta name="description" content="Inspect a public x402 v2 PAYMENT-REQUIRED header locally before authorizing an API payment. Show chain, actual native Base USDC token, atomic price, recipient and warnings. No wallet, login, upload or fee.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Free x402 Payment Preview — Verify the quote fields before you pay">
+<meta property="og:description" content="Local-only x402 V2 402 quote decoder with explicit Base native USDC, price and payTo checks. No signatures, API fetch or wallet connection.">
+<meta property="og:url" content="https://livastic-vm1-primary.github.io/paperpilot-tools/x402-inspector.html">
+<link rel="canonical" href="https://livastic-vm1-primary.github.io/paperpilot-tools/x402-inspector.html">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="x402-inspector.css">
+<script defer src="x402-inspector-core.js"></script>
+<script defer src="x402-inspector.js"></script>
+<title>Free x402 Payment Preview | Base USDC Quote Decoder | PaperPilot Tools</title>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"PaperPilot x402 Payment Preview","applicationCategory":"DeveloperApplication","operatingSystem":"Web Browser","description":"Offline-only x402 v2 payment required header fields preview; no merchant verification or wallet actions.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"url":"https://livastic-vm1-primary.github.io/paperpilot-tools/x402-inspector.html"}</script>
+</head>
+<body>
+<a class="skip" href="#tool">Skip to quote inspector</a>
+<header class="topbar"><div class="wrap topbar-inner">
+  <a class="identity" href="index.html" aria-label="PaperPilot Tools home"><span class="logo">P·</span><span>PaperPilot <small>/ agent tools</small></span></a>
+  <nav aria-label="Site navigation"><a href="csv-quality-api.html">CSV QA</a><a href="services.html">Custom QA</a><a href="llms.txt">Agent guide</a></nav>
+  <span class="mini-pill"><span class="pulse"></span> FREE · LOCAL ONLY</span>
+</div></header>
+<main>
+<section class="hero wrap">
+  <div class="top-eyebrow"><span class="rule"></span> x402 v2 · BASE USDC · PAYMENT READINESS</div>
+  <div class="hero-grid"><div>
+    <h1>Before your agent pays,<br><em>read the quote.</em></h1>
+    <p class="lead">Paste a <code>PAYMENT-REQUIRED</code> header. Instantly see the network, token contract, micro-USDC price and recipient. Understand what was <strong>requested</strong> before you approve any wallet action.</p>
+    <p class="sub-ko" lang="ko">결제 전에 체인·USDC 자산·요청 금액·수령 주소를 무료로 확인하세요. 입력값은 서버에 전송하지 않습니다.</p>
+    <div class="hero-metrics" aria-label="Product capabilities">
+      <div><strong>0</strong><span>Uploads / 업로드</span></div>
+      <div><strong>0</strong><span>Wallet signatures</span></div>
+      <div><strong>6</strong><span>USDC decimal places</span></div>
+    </div>
+  </div><aside class="hero-side">
+    <p class="eyebrow">WHY IT EXISTS</p>
+    <div class="path-line"><span class="num">01</span><div><strong>HTTP 402</strong><p>Your API says a payment is needed.</p></div></div>
+    <div class="path-line"><span class="num">02</span><div><strong>Readable quote</strong><p>Check the actual chain, asset and recipient.</p></div></div>
+    <div class="path-line"><span class="num">03</span><div><strong>You decide</strong><p>Use your trusted payment client only if satisfied.</p></div></div>
+    <div class="note-blue">This is a <strong>format and field review</strong>, never a merchant identity check, payment authorization, fraud verdict or proof of settlement.</div>
+  </aside></div>
+</section>
+<section class="tool-section" id="tool"><div class="wrap tool-grid">
+  <div class="form-panel">
+    <div class="panel-head"><div><p class="eyebrow">LOCAL WORKBENCH / 무료 도구</p><h2>Inspect a public quote</h2></div><span class="step-badge">NO CONNECT</span></div>
+    <label for="quote"><strong>PAYMENT-REQUIRED header or decoded JSON</strong><span>Only a public unsigned merchant quote. Never paste PAYMENT-SIGNATURE, wallet seed, bearer token, customer data or private credentials.</span></label>
+    <textarea id="quote" placeholder="PAYMENT-REQUIRED: eyJ4NDAyVmVyc2lvbiI6Miw..." spellcheck="false" autocomplete="off" autocapitalize="off" rows="9" maxlength="32768"></textarea>
+    <div class="action-row"><div class="budget"><label for="cap"><strong>Display budget (native Base USDC)</strong><span>Warning threshold; not a wallet limit.</span></label><input id="cap" type="text" inputmode="decimal" value="0.02" maxlength="15" aria-describedby="cap-help"><small id="cap-help">Default 0.020000 · No payment is authorized</small></div></div>
+    <div class="buttons">
+      <button class="primary" type="button" id="inspect">Inspect without paying <span aria-hidden="true">→</span></button>
+      <button class="secondary" type="button" id="demo">Load fictional sample</button>
+      <button class="ghost" type="button" id="clear">Clear</button>
+    </div>
+    <p class="privacy">⦿ Your input is processed only by JavaScript in this browser. This page makes <strong>no network requests</strong> to inspect a quote, has no analytics and stores no input. It never fetches an arbitrary API or connects a wallet.</p>
+  </div>
+  <aside class="results-panel" id="results" aria-live="polite" aria-atomic="false">
+    <div class="results-intro"><div class="introsymbol" aria-hidden="true">402</div><h2>Know exactly what the 402 says.</h2><p>Load the fictional sample to see the output. The analyzer reports structural observations only. It cannot establish that the seller controls the payTo address or that funds will settle.</p><div class="output-badges"><span>CAIP-2 chain</span><span>Circle USDC</span><span>Atomic price</span><span>payTo address</span></div></div>
+  </aside>
+</div></section>
+<section class="service-section wrap" id="premium">
+ <p class="eyebrow">FROM A FREE CHECK TO A PAID SERVICE · OPTIONAL</p>
+ <div class="product-grid"><div class="text-col">
+   <h2>Need a machine-readable report?</h2>
+   <p>This browser preview is free forever. For a structured hosted x402 v2 quote consistency report, a <strong>separate existing VM5 service</strong> can process a buyer-supplied <em>public unsigned</em> quote and return a JSON analysis after the buyer independently authorizes a payment.</p>
+   <div class="bill"><span>Optional original hosted API</span><strong>0.010000 <small>native Base USDC / authorized GET</small></strong><span>chain eip155:8453 · Circle native USDC · x402 v2</span></div>
+   <div class="buyers"><a class="service-link" href="https://vm5-openapi-x402.onrender.com/v1/x402-sample" rel="noopener noreferrer">View free fictional hosted JSON example ↗</a><a class="service-link" href="https://vm5-openapi-x402.onrender.com/v1/docs" rel="noopener noreferrer">Current API parameters and price ↗</a><a class="service-link" href="services.html">Request custom integration QA ↗</a></div>
+   <p class="fine">No instant checkout on this page. The paid <code>GET /v1/x402-preflight</code> endpoint uses HTTP 402; a quote is not a payment. No paid customer of this particular endpoint is independently confirmed. Only use it with your own wallet and trusted x402 client, after checking live terms. No refunds, settlement or purchaser identity are inferred from a preview.</p>
+ </div><aside class="flow-box">
+   <h3>What you receive</h3>
+   <div class="feature"><span>✓</span><div><strong>Offline free preview</strong><p>Immediate local field analysis with zero external input transfer.</p></div></div>
+   <div class="feature"><span>✓</span><div><strong>Explicit paid API choice</strong><p>Public, bounded, unsigned quote interpretation as hosted JSON. No signed authorization accepted here.</p></div></div>
+   <div class="feature"><span>✓</span><div><strong>Honest settlement status</strong><p>Only an independently paid transaction and delivered response count as commercial revenue.</p></div></div>
+   <p class="important">Never treat a valid-looking header as a green light to send USDC. Compare the service URL and receiving wallet against a source you independently trust.</p>
+ </aside></div>
+</section>
+<section class="explanation wrap">
+<h2>What a quote inspection can—and cannot—tell you</h2>
+<div class="cards"><article><h3>Can inspect</h3><p>Base CAIP-2 network, literal native Circle USDC contract, exact positive six-decimal USDC amount, HTTP resource field, 20-byte payTo format, and a voluntary budget threshold.</p></article><article><h3>Cannot guarantee</h3><p>Authenticity, merchant identity, who controls the payTo key, on-chain balances, invoice matching, whether payment settles, client wallet support, or contract safety. No remote verification is performed.</p></article><article><h3>Nothing is signed</h3><p>No seed phrases, API keys, payment signatures, wallet connections, token approvals, gas payments, or x402 facilitator are used by the free checker.</p></article></div>
+</section>
+</main>
+<footer class="footer"><div class="wrap footer-row"><span>© 2026 PaperPilot Tools · transparently AI-assisted · one economic owner</span><span><a href="index.html">Home</a> · <a href="contact.html">Contact</a> · <a href="https://github.com/livastic-vm1-primary/paperpilot-tools" rel="noopener noreferrer">Public source</a></span></div></footer>
+</body></html>

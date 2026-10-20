@@ -8,8 +8,11 @@
 - [Free synthetic merchant example](https://vm5-openapi-x402.onrender.com/v1/csv-sample): GET, fictional data, no purchase.
 - [Korean freelance estimate guide](https://livastic-vm1-primary.github.io/paperpilot-tools/freelance-estimate-ko.html): illustrative calculation, not a certified tax invoice.
 
+- [Free x402 v2 quote decoder](https://livastic-vm1-primary.github.io/paperpilot-tools/x402-inspector.html): read the PAYMENT-REQUIRED header/unsigned JSON locally. Shows Base USDC asset address, 6-decimal amount, recipient payTo and warnings. No network fetch, wallet, account, signing, charge or fraud/merchant-identity certification. No user adoption or payments assumed.
+
 ## Optional paid APIs
 - [VM5 CSV preflight buyer instructions](https://livastic-vm1-primary.github.io/paperpilot-tools/csv-quality-api.html): POST https://vm5-openapi-x402.onrender.com/v1/csv-preflight, currently 0.005 native Circle USDC on Base mainnet (eip155:8453) per valid buyer-authorized x402 v2 request. The current unsigned valid request returns HTTP 402; malformed input returns HTTP 400 before payment. Quotes are NOT purchases. No independently verified paid POST customers at this time.
+- [Optional VM5 x402 quote structure API](https://vm5-openapi-x402.onrender.com/v1/docs): distinct existing GET /v1/x402-preflight, 0.010000 native Base Circle USDC per separate buyer-authorized x402 v2 request. Free fictional hosted demonstration: https://vm5-openapi-x402.onrender.com/v1/x402-sample . No independent customer-paid orders verified for this route; GET 402 challenge alone is not a sale.
 - [Original merchant public API specification](https://vm5-openapi-x402.onrender.com/v1/docs): read current price and parameters BEFORE considering a paid request.
 - [Original buyer quickstart](https://github.com/livastic-vm5-primary-20260911/x402-openapi-lint/blob/main/docs/CSV_REAL_DATA_BUYER_QUICKSTART_20261020.md): independent buyer controls signature and payment. Never send secrets or private CSV just to test a route.
 - A distinct paid-and-delivered synthetic GET /v1/csv-report has previously been verified for this same-owner merchant. This does not establish any paid POST /v1/csv-preflight order.
