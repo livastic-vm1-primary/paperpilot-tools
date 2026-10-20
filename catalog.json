@@ -289,6 +289,22 @@
       "escrow_guaranteed_settled": false,
       "private_customer_data_permitted": false,
       "user_claim_of_paid_customers": false
+    },
+    {
+      "id": "tradeid-15-usdc-clawlancer-manual-review",
+      "name": "Opt-in anonymized crypto Trade-ID CSV 50-row manual audit",
+      "type": "third-party-marketplace-fixed-offer",
+      "listing": "https://clawlancer.ai/marketplace/94393ff6-eef4-4a25-8645-d679145c9edf",
+      "related_free_checker": "https://livastic-vm1-primary.github.io/paperpilot-tools/tradeid-audit.html",
+      "price_usdc": "15.000000",
+      "payment_asset": "native Circle USDC",
+      "network": "Base mainnet",
+      "chain_id": 8453,
+      "beneficiary": "same real one-human VM1 seller as free tool",
+      "platform_checkout_independently_tested": false,
+      "purchases_reported_at_publication": 0,
+      "payment_receipts_verified_for_offer": 0,
+      "terms": "Written buyer-authorized scope, anonymized data, accepted platform checkout and cancellation terms before delivery. No financial, legal or tax advice; no wallet interactions or confidential records accepted."
     }
   ],
   "genuine_historical_receipt_note": "The same original merchant has prior paid-and-delivered synthetic GET service receipts distinct from the buyer-owned POST; none establish paid POST orders.",

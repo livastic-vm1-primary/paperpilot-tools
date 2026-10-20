@@ -242,6 +242,9 @@ The existing free VM1 DeFi exception inbox now links to the separately hosted, o
 
 ## Free exchange trade-ID CSV duplicate audit (2026-10-20)
 
+**Optional distinct third-party paid offer (not the free tool):** [https://clawlancer.ai/marketplace/94393ff6-eef4-4a25-8645-d679145c9edf](https://clawlancer.ai/marketplace/94393ff6-eef4-4a25-8645-d679145c9edf) — 15 native Base Circle USDC for a written buyer-authorized 50-row nonconfidential/anonymized review, on the same original VM1 seller account. Public listing is active, purchases reported zero, platform-funded checkout and settlement not independently verified. Never upload private keys/tax IDs or send funds merely to test.
+
+
 The [browser-only audit](tradeid-audit.html) and [local parser](tradeid-audit-core.mjs) flag missing/repeated trade/fill/execution/transaction/order identifiers, exact repeated rows and equal amounts under **different** IDs. Strict 256 KiB/750-row bounds, no backend requests, wallet, payment, tax-law inference, raw CSV echo or automatic deletion; the redacted report contains only row numbers. One order/transaction ID may have legitimate multiple fills or event legs. Regression cases are in [tests/tradeid-audit.test.mjs](tests/tradeid-audit.test.mjs).
 
 Separate optional human DeFi exception review is currently an **indicative** 15 native Base Circle USDC for up to 50 masked flagged rows, only with genuine buyer-agreed lawful scope, seller identity/contract and payment terms; nothing on this tool triggers a payment, and no external buyer or sale has been independently verified.

@@ -122,3 +122,20 @@ test('public discovery offers functional audit and optional separately-agreed sc
   assert.match(llm, /tradeid-audit\.html/);
   assert.ok(catalog.offers.some(o => o.id === 'free-trade-id-csv-duplicate-audit' && o.price_usdc === '0.000000'));
 });
+
+test('live genuine one-owner 15-USDC external seller listing is referenced without inventing paid buyers', () => {
+  const html = read('../tradeid-audit.html');
+  const llms = read('../llms.txt');
+  const cat = JSON.parse(read('../catalog.json'));
+  const link = 'https://clawlancer.ai/marketplace/94393ff6-eef4-4a25-8645-d679145c9edf';
+  assert.match(html, /independent marketplace listing/);
+  assert.ok(html.includes(link));
+  assert.ok(llms.includes(link));
+  assert.ok(cat.offers.some(o => o.id === 'tradeid-15-usdc-clawlancer-manual-review'
+    && o.listing === link && o.price_usdc === '15.000000'
+    && o.purchases_reported_at_publication === 0
+    && o.platform_checkout_independently_tested === false));
+  assert.match(html, /zero confirmed customers/);
+  assert.match(html, /funded order or a completed payment/);
+  assert.match(html, /Never submit private exchange credentials/);
+});
