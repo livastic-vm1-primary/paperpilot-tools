@@ -60,6 +60,20 @@
     wireBox.append(el("p", "fine", "Check your real client, reverse proxy and total response headers. 2/8/16 KiB are illustrative implementation checkpoints, not a universal x402 size limit. No signed retries or network requests were made."));
     if (wire.exceeds8KiB) wireBox.classList.add("invoice-verdict-stop");
     results.append(wireBox);
+    const breakdown = report.optionalMetadataBudget;
+    const metadataBox = el("div", "quote-row");
+    metadataBox.append(el("h3", "", "Where public optional Bazaar metadata uses bytes"));
+    if (!breakdown.hypotheticalNonAdditiveRankedCandidates.length) {
+      metadataBox.append(el("p", "fine", "No supported optional Bazaar metadata fields found for savings analysis. This does not mean the route is HTTP-client compatible."));
+    } else {
+      const items = el("ol", "warnings");
+      for (const candidate of breakdown.hypotheticalNonAdditiveRankedCandidates) {
+        items.append(el("li", "", candidate.path + ": hypothetically ~" + candidate.hypotheticalHeaderBytesSaved.toLocaleString() + " encoded bytes saved if removed by the merchant after review."));
+      }
+      metadataBox.append(items);
+    }
+    metadataBox.append(el("p", "fine", "Each field is evaluated independently with compact JSON; savings cannot be added. No field is removed, no original quote changed and no code is patched. Buyers may rely on Bazaar metadata; discuss changes with the merchant."));
+    results.append(metadataBox);
 
     const decision = report.invoiceComparison;
     const warnBlock = el("div", "invoice-price-verdict");

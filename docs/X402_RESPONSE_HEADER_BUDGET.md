@@ -11,7 +11,8 @@ Public free preview: https://livastic-vm1-primary.github.io/paperpilot-tools/x40
 - Display an HTTP/1 field-line byte estimate including the literal name, separator and CRLF. Checkpoints: 2,048 bytes (review), 8,192 bytes (elevated compatibility risk), 16,384 bytes (severe compatibility risk); these are **diagnostic heuristics**, not definitive limits. Total HTTP headers, proxies, HTTP/2 framing, different serialization and server policies are unmeasured.
 - No remote fetch, payment, wallet, token signature, approval, settlement or on-chain verification. A green reading does not guarantee that the application works. The original existing amount mismatch and merchant-declared denial detection remain independent.
 - A safe engineering response when a header becomes too large is to *review and minimize optional metadata and avoid embedding huge Bazaar examples or schemas in the challenge*. Do not truncate a live signed offer or silently change what a paying client authorized.
-- Tests compare observed-vs-estimated lengths, 2/8/16 KiB checkpoints, 32 KiB input cap and privacy assurances on deterministic fictional fixtures.
+- The page now simulates the effect of **removing one optional Bazaar metadata field at a time**, then ranks the six greatest potential encoded-byte reductions. It never modifies the original quote, prints raw examples, removes payment-critical fields, or recommends deleting a field without manual semantics review. Simulated byte savings are independent and **cannot be added**; a real response/proxy may serialize differently.
+- Tests compare observed-vs-estimated lengths, 2/8/16 KiB checkpoints, synthetic large Bazaar samples, price integrity, field omission simulations, 32 KiB input cap and privacy assurances. [Fictional public sample report](./X402_HEADER_BUDGET_FICTIONAL_SAMPLE.json) is not a client audit.
 
 ## Optional paid follow-on
 

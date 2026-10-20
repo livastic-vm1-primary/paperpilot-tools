@@ -134,9 +134,70 @@
     };
   }
 
+  // Simulate the contribution of optional, user-supplied Bazaar metadata ONLY.
+  // These are hypothetical compact-JSON bytes, not a guaranteed modification
+  // to a deployed 402 header. No raw metadata values leave the parser.
+  function inspectOptionalMetadataSize(quote) {
+    const headerBytes = doc => Math.ceil(new TextEncoder().encode(JSON.stringify(doc)).length / 3) * 4 + 20;
+    const originalHeaderLineBytes = headerBytes(quote);
+    const paths = [];
+    const add = path => {
+      if (path.every(key => /^[A-Za-z0-9_$-]{1,40}$/.test(key))) paths.push(path);
+    };
+    const info = quote && quote.extensions && quote.extensions.bazaar && quote.extensions.bazaar.info;
+    if (info && typeof info === "object" && !Array.isArray(info)) {
+      const keys = Object.keys(info).slice(0, 64);
+      for (const key of keys) {
+        add(["extensions", "bazaar", "info", key]);
+        const value = info[key];
+        if (value && typeof value === "object" && !Array.isArray(value) &&
+            ["input","output","schema","examples"].includes(key)) {
+          for (const child of Object.keys(value).slice(0, 24)) {
+            add(["extensions", "bazaar", "info", key, child]);
+          }
+        }
+      }
+    }
+    if (quote && quote.resource && typeof quote.resource.description === "string") {
+      add(["resource", "description"]);
+    }
+    const possible = [];
+    for (const path of paths.slice(0, 64)) {
+      // A JSON-only clone cannot execute malformed prototype objects or
+      // inadvertently touch the original pasted quote.
+      const simulated = JSON.parse(JSON.stringify(quote));
+      let parent = simulated;
+      for (const key of path.slice(0,-1)) {
+        if (!parent || typeof parent !== "object") {parent=null; break;}
+        parent = Object.hasOwn(parent,key) ? parent[key] : null;
+      }
+      const leaf = path[path.length - 1];
+      if (!parent || typeof parent !== "object" || !Object.hasOwn(parent,leaf)) continue;
+      delete parent[leaf];
+      const after = headerBytes(simulated);
+      const saved = originalHeaderLineBytes-after;
+      if (saved>0) possible.push({
+        path:path.join("."), hypotheticalHeaderBytesSaved:saved,
+        hypotheticalHeaderLineBytesAfter:after,
+        merchantMustReviewSemantics:true,
+      });
+    }
+    possible.sort((a,b)=>b.hypotheticalHeaderBytesSaved-a.hypotheticalHeaderBytesSaved || a.path.localeCompare(b.path));
+    return {
+      estimateMethod:"simulation_removing_one_optional_field_from_compact_json",
+      originalCompactJsonHeaderLineBytes:originalHeaderLineBytes,
+      hypotheticalNonAdditiveRankedCandidates:possible.slice(0,6),
+      otherFieldsUntouched:true,
+      proposalOnlyNoQuoteMutation:true,
+      vendorCompatibilityGuaranteed:false,
+      warning:"Never edit or truncate a live payment challenge automatically. Only the seller can decide whether any Bazaar metadata is truly optional; clients may rely on its paths. Savings estimates are independent and must not be summed. Deployed header serialization and other HTTP headers may differ.",
+    };
+  }
+
   function analyze(raw, capInput = "0.02", expectedInvoiceUSDCInput = "") {
     const quote = parseInput(raw);
     const transportHeaderBudget = inspectTransportHeader(raw, quote);
+    const optionalMetadataBudget = inspectOptionalMetadataSize(quote);
     const maxMicro = parseCap(capInput);
     const expectedInvoiceMicro = parseExpectedInvoiceAmount(expectedInvoiceUSDCInput);
     if (quote.x402Version !== 2) throw new Error("Only x402 version 2 public payment requirements are supported.");
@@ -239,6 +300,7 @@
       version: 2, networkExpected: NETWORK, canonicalNativeBaseUSDC: NATIVE_BASE_USDC,
       resource: {url: resourceUrl, description: str(resource.description, 300)},
       transportHeaderBudget,
+      optionalMetadataBudget,
       merchantReportedError: serverError,
       merchantErrorUnverified: true,
       maxDisplayBudgetUSDC: formatMicro(maxMicro),
@@ -262,7 +324,7 @@
     };
   }
 
-  const exported = {analyze, inspectTransportHeader, parseInput, parseCap, parseExpectedInvoiceAmount, formatMicro, TEST_FIXTURE, INVOICE_MISMATCH_FIXTURE, NETWORK, NATIVE_BASE_USDC, MAX_BYTES};
+  const exported = {analyze, inspectTransportHeader, inspectOptionalMetadataSize, parseInput, parseCap, parseExpectedInvoiceAmount, formatMicro, TEST_FIXTURE, INVOICE_MISMATCH_FIXTURE, NETWORK, NATIVE_BASE_USDC, MAX_BYTES};
   if (typeof module !== "undefined" && module.exports) module.exports = exported;
   if (global) global.PaperPilotX402 = exported;
 })(typeof window !== "undefined" ? window : undefined);

@@ -1,0 +1,75 @@
+{
+  "purpose": "FICTIONAL demonstration of local inspection; not a real seller, client report, payment or on-chain receipt",
+  "checkedWith": "PaperPilot x402 offline quote analyzer",
+  "unsignedHttp402Source": "synthetic local fixture only",
+  "transportHeaderBudget": {
+    "method": "compact-json-estimate",
+    "paymentRequiredValueBytes": 15124,
+    "estimatedHttp1HeaderLineBytes": 15144,
+    "risk": "HIGH_8K_PLUS",
+    "exceeds2KiB": true,
+    "exceeds8KiB": true,
+    "exceeds16KiB": false,
+    "totalOtherResponseHeadersIncluded": false,
+    "compatibilityGuaranteed": false,
+    "note": "Only a local Base64 header-length inspection. HTTP/2 framing, other headers, per-field/per-line/total-header limits, proxy rules and server serialization are not verified. Do not truncate or rewrite an x402 signed offer."
+  },
+  "hypotheticalBazaarMetadataSavings": {
+    "estimateMethod": "simulation_removing_one_optional_field_from_compact_json",
+    "originalCompactJsonHeaderLineBytes": 15144,
+    "hypotheticalNonAdditiveRankedCandidates": [
+      {
+        "path": "extensions.bazaar.info.output",
+        "hypotheticalHeaderBytesSaved": 12880,
+        "hypotheticalHeaderLineBytesAfter": 2264,
+        "merchantMustReviewSemantics": true
+      },
+      {
+        "path": "extensions.bazaar.info.output.example",
+        "hypotheticalHeaderBytesSaved": 12016,
+        "hypotheticalHeaderLineBytesAfter": 3128,
+        "merchantMustReviewSemantics": true
+      },
+      {
+        "path": "extensions.bazaar.info.input",
+        "hypotheticalHeaderBytesSaved": 1764,
+        "hypotheticalHeaderLineBytesAfter": 13380,
+        "merchantMustReviewSemantics": true
+      },
+      {
+        "path": "extensions.bazaar.info.input.example",
+        "hypotheticalHeaderBytesSaved": 1748,
+        "hypotheticalHeaderLineBytesAfter": 13396,
+        "merchantMustReviewSemantics": true
+      },
+      {
+        "path": "extensions.bazaar.info.output.schema",
+        "hypotheticalHeaderBytesSaved": 848,
+        "hypotheticalHeaderLineBytesAfter": 14296,
+        "merchantMustReviewSemantics": true
+      },
+      {
+        "path": "resource.description",
+        "hypotheticalHeaderBytesSaved": 56,
+        "hypotheticalHeaderLineBytesAfter": 15088,
+        "merchantMustReviewSemantics": true
+      }
+    ],
+    "otherFieldsUntouched": true,
+    "proposalOnlyNoQuoteMutation": true,
+    "vendorCompatibilityGuaranteed": false,
+    "warning": "Never edit or truncate a live payment challenge automatically. Only the seller can decide whether any Bazaar metadata is truly optional; clients may rely on its paths. Savings estimates are independent and must not be summed. Deployed header serialization and other HTTP headers may differ."
+  },
+  "invoiceComparison": {
+    "expectedInvoiceUSDC": null,
+    "state": "NO_AMOUNT_COMPARISON_REQUESTED",
+    "explanation": "No exact native Base USDC invoice comparison was established; do not infer that this quote is payable.",
+    "merchantIssuanceDeniedUnverified": false,
+    "matchingBaseOptions": 0,
+    "mismatchedBaseOptions": 0
+  },
+  "merchantAuthenticityVerified": false,
+  "paidBuyerOrders": 0,
+  "customerRevenueUSDC": 0,
+  "actualNetworkRequests": 0
+}
