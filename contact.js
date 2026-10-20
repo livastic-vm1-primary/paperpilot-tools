@@ -3,6 +3,7 @@
 // No private fields are prefilled and no network requests are made by this script.
 (function () {
   const categories = Object.freeze({
+    'koinly-mini-5': 'Koinly one-source 10-row manual CSV map (5 Base USDC proposed)',
     invoice: 'Bilingual invoice or quote template',
     utility: 'Offline browser utility',
     qa: 'Playwright browser QA',

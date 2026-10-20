@@ -12,6 +12,7 @@ const handler=readFileSync(join(ROOT,"contact.js"),"utf8");
 const origin="https://livastic-vm1-primary.github.io/paperpilot-tools/";
 
 const serviceCategories=[
+  ["koinly-mini-5","Koinly one-source 10-row manual CSV map (5 Base USDC proposed)"],
   ["invoice","Bilingual invoice or quote template"],
   ["utility","Offline browser utility"],
   ["qa","Playwright browser QA"],
@@ -37,7 +38,7 @@ function renderSelection(param){
   return {...state,domLookups:count};
 }
 
-test("exact eight distinct in-site paid-service inquiry routes",()=>{
+test("exact nine distinct original-owner paid-service inquiry routes",()=>{
   const links=[...services.matchAll(/<a class="service-contact" href="([^"]+)"/g)].map(m=>m[1]);
   assert.deepEqual(links,serviceCategories.map(([key])=>"contact.html?service="+key));
   assert.ok(!links.some(x=>x.startsWith("mailto:")));
