@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#111b30">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'none'; form-action 'none'; img-src 'self'; object-src 'none'; base-uri 'self'; upgrade-insecure-requests">
+<title>USDC Invoice ↔ Transfer CSV Reconciliation — Free Offline Candidate Check | PaperPilot</title>
+<meta name="description" content="Free privacy-first, no-wallet Base Circle USDC invoice and ERC-20 Transfer CSV preflight. Identify unpaid, partial, duplicated, wrong-chain, wrong-token, wrong-recipient and unknown references. NOT chain verification, financial, tax or audit advice.">
+<link rel="canonical" href="https://livastic-vm1-primary.github.io/paperpilot-tools/usdc-invoice-reconcile.html">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="defi-exception-inbox.css">
+</head><body>
+<header><div class="wrap"><nav aria-label="Main"><a class="brand" href="./">PaperPilot <em>Tools</em></a><a href="tradeid-audit.html">Trade-ID check</a><a href="services.html">Custom services</a></nav></div></header>
+<main>
+<section class="hero"><div class="wrap grid"><div>
+<span class="kicker">Original demo • no uploads, credentials or signing</span>
+<h1>USDC transfer found. <em>Which invoice, if any?</em></h1>
+<p class="lead">Compare a merchant's invoice register and its separately prepared Base USDC Transfer CSV <strong>inside this browser</strong>. Quarantine mismatched network, token, recipient and repeated event identities rather than guessing that a payment settled.</p>
+<p>No chain RPC, blockchain authenticity check, third-party API, local storage, wallet connect, analytics, cookie, invoice-posting action or payment on this page.</p>
+</div><aside class="card"><span class="kicker">Report meaning</span><h2>Candidate matching ONLY</h2>
+<p>Even when the CSV fields appear to agree, a claimed transfer is <strong>not proof of payment</strong>. A real merchant must independently verify Base chain ID 8453, the canonical Circle USDC token, transaction receipt logs, destination, finality and the invoice agreement before releasing goods or recording revenue.</p>
+<p class="fine">No actual merchant adoption, paid buyer, accounting certification or external chain checks claimed.</p></aside></div></section>
+<section class="section"><div class="wrap">
+<h2>Preview your authorized CSVs locally — free</h2>
+<p>Use the fictional demo first. Inputs are capped at 256 KiB and 750 CSV records each. Do not enter private financial data on shared computers. We cannot validate whether your CSV was forged or whether a payment actually exists onchain.</p>
+<div class="card">
+<label for="recon-invoices"><strong>1. Invoices CSV</strong> — required headers: invoice_id, amount_usdc, chain_id, token_contract, pay_to</label>
+<textarea id="recon-invoices" rows="7" spellcheck="false" placeholder="invoice_id,amount_usdc,chain_id,token_contract,pay_to"></textarea>
+<label for="recon-invoices-file">Or read invoices from your own local CSV (not uploaded):</label><input id="recon-invoices-file" type="file" accept=".csv,text/csv">
+<label for="recon-transfers"><strong>2. Declared incoming ERC-20 Transfer CSV</strong> — required headers: tx_hash, log_index, invoice_id, amount_usdc, chain_id, token_contract, from_address, to_address</label>
+<textarea id="recon-transfers" rows="7" spellcheck="false" placeholder="tx_hash,log_index,invoice_id,amount_usdc,chain_id,token_contract,from_address,to_address"></textarea>
+<label for="recon-transfers-file">Or read transfers from your own local CSV (not uploaded):</label><input id="recon-transfers-file" type="file" accept=".csv,text/csv">
+<p class="fine">An invoice_id beside a transfer must come from a separate buyer-authorized association or merchant memo; it is NOT inherent to the blockchain. No amount-only guesses or automatic allocations across invoices. Partial transfers with the same invoice reference can sum, but all amounts remain unverified.</p>
+<div class="actions"><button id="recon-demo" type="button" class="alt">Load fictional example</button><button id="recon-run" type="button">Preview locally</button><button id="recon-clear" type="button" class="alt">Clear both inputs</button></div>
+<pre id="recon-output" role="status" aria-live="polite">No report yet. No data stored.</pre>
+<button type="button" disabled id="recon-download">Download local candidate report JSON</button>
+</div></div></section>
+<section class="section"><div class="wrap two"><div>
+<h2>What can be flagged</h2>
+<ul><li>Candidate exact amount, partial/underpaid or overpaid invoices.</li><li>Repeated chain + transaction hash + log index — <strong>review, never silently delete</strong>.</li><li>Same transaction hash, distinct log indices: genuine separate event candidates.</li><li>Declared wrong network, wrong token (including noncanonical bridged assets) or wrong recipient; zero-address burn/mint and self-to-self transfers must never be counted as independent customer receipts.</li><li>Missing, invalid, ambiguous, duplicated or unknown invoice references and CSV fields.</li></ul>
+</div><div><h2>Critical boundaries</h2>
+<ul><li><strong>Only</strong> Base mainnet 8453 and native Circle USDC contract 0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913.</li><li>Exact 6-decimal integer arithmetic; no floating point or exchange-rate assumptions.</li><li>All statuses are unverified CSV candidates, including candidate exact matches.</li><li>Report omits raw transaction hashes, recipient addresses and invoice IDs; local row numbers and candidate amounts can still be commercially sensitive.</li><li>Never automatically import to ledgers, delete events, initiate refunds or claim tax/accounting assurance.</li></ul>
+<p>Inspect the <a href="https://github.com/livastic-vm1-primary/paperpilot-tools/blob/main/usdc-invoice-reconcile-core.mjs" target="_blank" rel="noopener noreferrer">original source</a> and <a href="https://github.com/livastic-vm1-primary/paperpilot-tools/blob/main/tests/usdc-invoice-reconcile.test.mjs" target="_blank" rel="noopener noreferrer">synthetic regression tests</a>.</p></div></div></section>
+<section class="section"><div class="wrap">
+<h2>Interested in a small, buyer-authorized pilot?</h2>
+<p>The <strong>USD 49</strong> up-to-50-payment manual exception-review hypothesis is an <em>indicative proposed price</em>, not proven demand or a binding contract. A lawful customer must agree in writing on non-sensitive data handling, precise scope, cancellation, payee identity and independent payment-rail verification. Native Circle Base USDC could be used only at an exact separately agreed amount; this page does not collect payment. No existing paid reconciliation customers claimed.</p>
+<div class="actions"><a class="cta" href="contact.html?service=usdc-invoice-pilot">Ask about a 49-USD pilot scope (free inquiry) ↗</a><a class="cta alt" href="defi-exception-inbox.html#feedback">Optional problem feedback ↗</a></div>
+<p class="fine">The voluntary contact page explicitly requires consent to an outside email-form provider; don't send real invoices, addresses, passwords or wallet recovery information in the enquiry.</p>
+</div></section>
+</main>
+<footer><div class="wrap">PaperPilot Tools · One real human economic owner · AI-assisted original software · No actual production merchant integration or onchain receipt validation.</div></footer>
+<script type="module" src="usdc-invoice-reconcile-ui.mjs"></script>
+</body></html>

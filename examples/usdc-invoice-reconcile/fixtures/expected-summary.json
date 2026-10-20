@@ -1,0 +1,17 @@
+{
+  "synthetic_only": true,
+  "invoice_status_counts": {
+    "candidate_exact_amount_only": 1,
+    "candidate_overpaid_review": 1,
+    "candidate_partial_underpaid": 1,
+    "review_required_exception": 2
+  },
+  "transfer_status_counts": {
+    "candidate_attributed_unverified": 3,
+    "declared_wrong_network": 1,
+    "duplicate_event_identity_review": 2,
+    "unknown_invoice_reference": 1
+  },
+  "actual_receipts_verification": false,
+  "paid_customers": 0
+}
