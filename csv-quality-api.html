@@ -4,14 +4,14 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#111b30">
-  <meta name="description" content="CSV data quality preflight API for agents: free example, 0.005 USDC on Base for an authorized CSV structure check. Validate columns, duplicates, missing values and formula risk.">
+  <meta name="description" content="Check CSV structure locally for free, without upload or signup. Preview missing cells, duplicate rows and spreadsheet-formula warnings. Optional agent x402 API for 0.005 USDC on Base.">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="CSV quality API — Free Sample and $0.005 USDC per Real Check">
-  <meta property="og:description" content="Try a free synthetic example. Check your authorized CSV on an independently hosted paid x402 API for 0.005 Circle Base USDC per valid call. No subscription.">
+  <meta property="og:title" content="Free Local CSV Checker + Optional $0.005 USDC API">
+  <meta property="og:description" content="Inspect your own CSV locally without uploading. Pay only if you later choose the separate agent-ready x402 API.">
   <meta property="og:url" content="https://livastic-vm1-primary.github.io/paperpilot-tools/csv-quality-api.html">
   <link rel="canonical" href="https://livastic-vm1-primary.github.io/paperpilot-tools/csv-quality-api.html">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
-  <title>CSV Quality Check API — Free Sample + $0.005 USDC x402 | PaperPilot Tools</title>
+  <title>Free CSV Checker (Local, No Upload) + x402 API | PaperPilot Tools</title>
   <style>
     :root{color-scheme:dark;--bg:#111b30;--mid:#192641;--lime:#d8fa76;--soft:#afbdd8;--line:#3a4765;--fg:#f4f7fb}
     *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font:16px/1.65 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--bg);color:var(--fg)}
@@ -30,6 +30,15 @@
     .two{display:grid;grid-template-columns:1fr 1fr;gap:22px}.muted{color:var(--soft)}.panel{border-left:4px solid var(--lime);background:#1c2943;padding:18px 20px;border-radius:4px 10px 10px 4px}.panel p{margin:4px 0}
     .footer{border-top:1px solid var(--line);padding:24px 0 44px;color:var(--soft);font-size:13px}
     @media(max-width:740px){.hero{padding:42px 0 28px}.hero-grid,.two,.grid{grid-template-columns:1fr}.price strong{font-size:37px}.section{padding:32px 0}.top nav{gap:12px}}
+    .csv-preview{padding:20px;border:1px solid var(--line);border-radius:14px;background:var(--mid);margin:18px 0}
+    .csv-preview label{display:block;margin:8px 0;font-size:14px}
+    #csv-preview-input{display:block;width:100%;min-height:135px;resize:vertical;padding:14px;border:1px solid #a4b1cc;border-radius:8px;background:#0b1426;color:var(--fg);font:14px/1.5 ui-monospace,SFMono-Regular,Consolas,monospace}
+    #csv-preview-input:focus-visible,.csv-preview input:focus-visible,.csv-preview button:focus-visible{outline:3px solid var(--lime);outline-offset:3px}
+    .csv-file-label{margin-top:16px!important}.csv-preview input[type=file]{max-width:100%}.csv-preview button{font:inherit;cursor:pointer}
+    .csv-preview-results{border:1px solid var(--line);background:#101d33;border-radius:10px;padding:12px 16px;min-height:54px}
+    .csv-preview-results[data-state=error]{border-color:#ffa5a5;color:#fff1f1}
+    .csv-preview-stats{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px 25px;max-width:550px}
+    .csv-preview-stats dt{color:var(--soft)}.csv-preview-stats dd{margin:0;text-align:right;font-variant-numeric:tabular-nums;font-weight:700;color:var(--lime)}
   </style>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"CSV Quality Check API — free demo and paid x402 inspection","description":"An independently hosted, original VM5 x402 CSV structure inspection API with a free example and a 0.005 Circle USDC on Base request price","url":"https://livastic-vm1-primary.github.io/paperpilot-tools/csv-quality-api.html","inLanguage":["en","ko"],"isPartOf":{"@type":"WebSite","name":"PaperPilot Tools","url":"https://livastic-vm1-primary.github.io/paperpilot-tools/"}}</script>
 </head>
@@ -41,7 +50,7 @@
     <span class="eyebrow">For API builders · Agent-ready x402</span>
     <h1>Catch CSV mistakes <em>before importing.</em></h1>
     <p class="lead">Check column counts, missing values, duplicate rows, type inconsistencies and spreadsheet-formula warning signals. Start with a free, entirely fictional example; authorize a real paid request only when you need a report on your own CSV.</p>
-    <div class="actions"><a class="button" href="https://vm5-openapi-x402.onrender.com/v1/csv-sample" rel="noopener">View free sample JSON ↗</a><a class="button alt" href="https://github.com/livastic-vm5-primary-20260911/x402-openapi-lint/blob/main/docs/CSV_REAL_DATA_BUYER_QUICKSTART_20261020.md" rel="noopener">Buyer API quickstart ↗</a></div>
+    <div class="actions"><a class="button" href="#local-preview">Try free CSV check ↓</a><a class="button alt" href="https://github.com/livastic-vm5-primary-20260911/x402-openapi-lint/blob/main/docs/CSV_REAL_DATA_BUYER_QUICKSTART_20261020.md" rel="noopener">Buyer API quickstart ↗</a></div>
     <p class="fine">Runs on our same-owner VM5 merchant at vm5-openapi-x402.onrender.com. The static page here collects no files, accounts or payment information.</p>
   </div><aside class="price" aria-label="Real paid call information">
     <span class="small">Price per valid buyer-authorized API call</span><strong>0.005 USDC</strong>
@@ -54,6 +63,30 @@
     <article class="tile"><h3>Data anomalies</h3><p>Duplicate rows and basic type-pattern inconsistencies to prioritize review.</p></article>
     <article class="tile"><h3>Formula warnings</h3><p>Flags suspicious spreadsheet formula prefixes. Not a malware scan or security certification.</p></article>
   </div></div></section>
+  <section class="section" id="local-preview">
+    <div class="container">
+      <span class="eyebrow">Free &amp; private · runs in your browser</span>
+      <h2>Check your CSV locally before paying</h2>
+      <p class="lead">Try a real structural preview at no cost. Paste a small, non-confidential CSV or choose a file. The content is <strong>processed only in this browser</strong>—no upload, network request, tracking, or wallet needed. Up to 32 KB of UTF-8 text.</p>
+      <div class="csv-preview">
+        <label for="csv-preview-input"><strong>CSV text</strong> (optional: try fictional data)</label>
+        <textarea id="csv-preview-input" rows="6" maxlength="32768" spellcheck="false" placeholder="id,name,amount&#10;1,Ada,12&#10;2,Lee,9" aria-describedby="csv-preview-privacy"></textarea>
+        <label class="csv-file-label" for="csv-preview-file">Or select a local CSV file (never uploaded)</label>
+        <input type="file" id="csv-preview-file" accept=".csv,text/csv,text/plain">
+        <div class="actions">
+          <button id="csv-preview-check" type="button" class="button">Check locally</button>
+          <button id="csv-preview-demo" type="button" class="button alt">Load fictional demo</button>
+          <button id="csv-preview-clear" type="button" class="button alt">Clear input</button>
+        </div>
+        <div id="csv-preview-results" class="csv-preview-results" role="status" aria-live="polite" data-state="empty">No CSV checked yet.</div>
+        <p class="fine" id="csv-preview-privacy">The local preview counts rows, missing cells, duplicate values, column mismatches, and formula warning prefixes. It does not send data anywhere and cannot prove data correctness or eliminate injection risks. Avoid using confidential or regulated records even when testing locally on a shared device.</p>
+      </div>
+      <div class="panel">
+        <strong>Want repeatable machine-readable preflight in an agent workflow?</strong>
+        <p>The separate <a href="https://github.com/livastic-vm5-primary-20260911/x402-openapi-lint/blob/main/docs/CSV_REAL_DATA_BUYER_QUICKSTART_20261020.md" rel="noopener">original merchant buyer quickstart</a> explains its scoped x402 POST API, current 0.005 USDC price, and buyer-authorized payment. This local preview does not initiate a paid request.</p>
+      </div>
+    </div>
+  </section>
   <section class="section" id="example"><div class="container"><h2>Start free. Decide whether to pay.</h2>
     <div class="two"><div><h3>1 — Get a non-sensitive example</h3><p class="muted">This GET returns a fictional CSV, expected headers and an actual sample POST body. It is not the paid report.</p><pre class="code">curl -fsS \
   https://vm5-openapi-x402.onrender.com/v1/csv-sample</pre><p class="fine">Optional: also inspect <a href="https://vm5-openapi-x402.onrender.com/v1/docs">machine-readable route documentation</a>.</p></div>
@@ -75,5 +108,6 @@
   </div></section>
 </main>
 <footer class="footer"><div class="container">© 2026 PaperPilot Tools. AI-assisted original software. No account required to read this page. <a href="./">Home</a> · <a href="services.html">Services</a> · <a href="contact.html">Contact</a></div></footer>
+<script src="csv-local-preview.js" defer></script>
 </body>
 </html>
