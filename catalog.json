@@ -43,6 +43,23 @@
       "independent_external_user_adoption_confirmed": false
     },
     {
+      "id": "buyer-owned-base-usdc-csv-browser-checkout",
+      "type": "buyer-controlled-consent-gated-wallet-frontend-beta",
+      "page": "https://livastic-vm1-primary.github.io/paperpilot-tools/csv-usdc-checkout.html",
+      "separate_original_paid_merchant": "https://vm5-openapi-x402.onrender.com/v1/csv-preflight",
+      "merchant_vm": "vm-05",
+      "price_native_circle_usdc": "0.005000",
+      "chain": "eip155:8453",
+      "asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+      "buyer_explicit_wallet_authorization_required": true,
+      "quotes_upload_csv_only_after_separate_consent": true,
+      "free_local_checks_network_requests": 0,
+      "automatic_paid_retry": false,
+      "real_wallet_paid_settlement_browser_integration_tested": false,
+      "confirmed_independent_paid_POST_customers": 0,
+      "caveat": "Beta browser checkout against already live original x402 merchant; unit tested and unsigned quote verified only. A wallet connection and HTTP 402 are not payment or report delivery."
+    },
+    {
       "id": "vm5-x402-csv-preflight",
       "type": "optional-agent-api",
       "endpoint": "https://vm5-openapi-x402.onrender.com/v1/csv-preflight",

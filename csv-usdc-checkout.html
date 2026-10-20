@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#121b2c">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'self' https://vm5-openapi-x402.onrender.com; img-src 'self' data:; object-src 'none'; base-uri 'self'; form-action 'none'; frame-ancestors 'none'">
+<meta name="description" content="Check CSV issues locally for free, then optionally get a machine-readable hosted CSV preflight with one browser-wallet-authorized 0.005 native Base USDC x402 payment. No account or file upload for the free check.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="CSV Check & Optional 0.005 USDC Pay-per-Report — PaperPilot">
+<meta property="og:url" content="https://livastic-vm1-primary.github.io/paperpilot-tools/csv-usdc-checkout.html">
+<link rel="canonical" href="https://livastic-vm1-primary.github.io/paperpilot-tools/csv-usdc-checkout.html">
+<link rel="stylesheet" href="csv-usdc-checkout.css">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="alternate" type="text/plain" href="llms.txt" title="AI agent buyer guide">
+<title>Free CSV Check + Optional Wallet-Paid 0.005 USDC Report | PaperPilot</title>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"PaperPilot Free CSV Check and Optional Base USDC Preflight","url":"https://livastic-vm1-primary.github.io/paperpilot-tools/csv-usdc-checkout.html","applicationCategory":"DeveloperApplication","operatingSystem":"Browser","offers":[{"@type":"Offer","name":"Free local CSV structure preview","price":"0","priceCurrency":"USD"},{"@type":"Offer","name":"Optional x402 hosted CSV preflight","price":"0.005","priceCurrency":"USD","description":"0.005 native Circle USDC on Base network; buyer must explicitly authorize one EIP-3009 payment; no repeat charges"}]}</script>
+</head>
+<body>
+<a class="skip" href="#content">Skip to CSV checker</a>
+<header class="top">
+  <div class="wrap nav"><a class="brand" href="./">PaperPilot <span>TOOLS</span></a>
+    <nav aria-label="Site navigation"><a href="./">Home</a><a href="csv-quality-api.html">Free CSV guide</a><a href="services.html">Custom QA</a><a href="contact.html">Contact</a></nav>
+  </div>
+</header>
+<main id="content">
+ <section class="hero">
+  <div class="wrap hero-grid">
+   <div><span class="eyebrow">Real buyer checkout · explicit permission only</span>
+     <h1>Check your CSV. <em>Pay only if you need more.</em></h1>
+     <p class="lead">Spot broken columns and duplicate rows <strong>for free in your browser</strong>. For a hosted machine-readable report with type warnings, review the live 0.005 USDC price, connect your own EVM wallet and approve one payment yourself.</p>
+     <p class="fine">Free mode uploads nothing. The paid API is separately hosted by the same beneficial owner on VM5; buyers must opt in before their CSV is sent. This checkout is an <strong>untested-with-real-wallet beta</strong>; no buyer-paid POST success has been independently verified yet.</p>
+   </div>
+   <aside class="rate"><small>Optional single x402 report</small><strong>0.005 USDC</strong><p>Native Circle USDC · Base mainnet · 8453</p><p>Existing VM5 API; no subscription, deposit, NFT or swap.</p>
+     <p><a href="https://vm5-openapi-x402.onrender.com/v1/docs" rel="noopener">Read original merchant documentation ↗</a></p></aside>
+  </div>
+ </section>
+
+ <section class="section">
+  <div class="wrap">
+   <h2>1. Free local check — no wallet</h2>
+   <p class="sub">Paste your own <strong>non-confidential</strong> CSV (up to 32 KiB UTF-8) or load our fictional example. Only counts and heuristic warnings are displayed here; no upload or charge.</p>
+   <div class="card">
+    <label for="csv-preview-input">CSV text (do not paste private customers, credentials, account data or regulated records)</label>
+    <textarea id="csv-preview-input" rows="7" spellcheck="false" maxlength="32768" aria-describedby="csv-preview-privacy" placeholder="id,name,amount&#10;1,Ada,15&#10;2,Lee,9"></textarea>
+    <label for="csv-preview-file">Or choose a local CSV file (remains on this device unless you separately request a hosted quote)</label>
+    <input id="csv-preview-file" type="file" accept=".csv,text/csv,text/plain">
+    <div class="actions">
+     <button type="button" id="csv-preview-check" class="btn">Check locally (free)</button>
+     <button type="button" id="csv-preview-demo" class="btn outline">Load fictional example</button>
+     <button type="button" id="csv-preview-clear" class="btn outline">Clear CSV</button>
+    </div>
+    <div id="csv-preview-results" data-state="empty" class="status" role="status" aria-live="polite">No local check run yet.</div>
+    <p id="csv-preview-privacy" class="fine">Local 32 KiB CSV parser: quoted fields, escaped quotes, missing cells, ragged rows, duplicate headers/rows and spreadsheet-formula prefix warnings. Not a semantic, accounting, compliance, malware or spreadsheet safety certification.</p>
+   </div>
+  </div>
+ </section>
+
+ <section class="section">
+  <div class="wrap">
+   <h2>2. Optional hosted CSV quality report</h2>
+   <p class="sub">Hosted report adds type-pattern, date/number/email checks and row/column positions. Its <strong>first unpaid quote already sends your CSV to VM5</strong>. Skip this section if you only want privacy-first local results.</p>
+   <div class="card">
+     <div class="consent"><input type="checkbox" id="remote-upload-consent"><label for="remote-upload-consent">I own or am authorized to send this <strong>non-sensitive</strong> CSV to the separate VM5 API for a price quote and, only if I later consent, a paid report. I understand hosted infrastructure and payment facilitators may process transport metadata.</label></div>
+     <button type="button" id="remote-quote-btn" class="btn">Get live price — no payment</button>
+     <div id="live-price-terms" class="terms" role="status">No live quote. Free local checks require no wallet and never upload CSV.</div>
+     <p class="fine">Price may be different when you next visit. This buyer screen refuses changes to token, chain, amount or recipient and does not initiate an unknown-price transaction.</p>
+   </div>
+  </div>
+ </section>
+
+ <section class="section">
+  <div class="wrap">
+   <h2>3. Connect a wallet and pay once <small>(optional)</small></h2>
+   <div class="card">
+     <p>Browser checkout uses an injected EVM wallet such as MetaMask. <strong>Connecting alone does not pay</strong>. Your wallet must be on <strong>Base mainnet</strong> and hold at least <strong>0.005 native Circle USDC</strong>; the x402 facilitator submits the gasless EIP-3009 authorization. Do not paste a recovery phrase or private key here. This checkout never asks for ERC-20 approvals, staking, or swapping.</p>
+     <button type="button" id="wallet-connect-btn" class="btn outline">Connect my browser wallet — no payment</button>
+     <div class="consent gap-top"><input type="checkbox" id="remote-payment-consent"><label for="remote-payment-consent">After checking the unpaid live quote and original recipient, <strong>I authorize ONE payment attempt for exactly 0.005 native Base USDC</strong> and consent to this CSV being sent to VM5. I will review the EIP-712 wallet signature before accepting. No automatic repeat.</label></div>
+     <button type="button" id="remote-pay-btn" class="btn pay" disabled>Pay 0.005 USDC once &amp; get report</button>
+     <p id="remote-checkout-status" role="status" aria-live="polite" data-state="info" class="status">No payment has been requested. Start with the free local preview.</p>
+     <p class="fine"><strong>Important:</strong> if your wallet says a payment is pending or the server times out after a signature, <strong>do not click again</strong>. Check the original wallet history and the merchant receipt first. This client does not auto-retry signed payments. A 402 price quote is not a successful payment.</p>
+     <h3>Hosted report (shown only after a real paid response)</h3>
+     <pre id="paid-result" class="report" aria-live="polite">No paid report requested.</pre>
+     <p><a id="settlement-transaction-link" hidden target="_blank" rel="noopener noreferrer">View your transaction on BaseScan ↗</a></p>
+   </div>
+  </div>
+ </section>
+ <section class="section">
+  <div class="wrap more">
+    <h2>What you get and what we cannot promise</h2>
+    <p>The free checker runs in your browser. The paid report is from <a href="https://vm5-openapi-x402.onrender.com/v1/csv-preflight">the original VM5 CSV API</a>. It checks CSV structure and pattern mismatches; it does not confirm business correctness, financial compliance, security or vendor reputations. Purchase authorization and any customer data transfer are solely your decision.</p>
+    <p>The original merchant already received payment for different **synthetic GET API products**. There are <strong>zero independently proven paid buyer-owned CSV POST orders</strong> as of this release. Neither a page visit nor a wallet connection is income.</p>
+    <p><a href="https://github.com/livastic-vm1-primary/paperpilot-tools/blob/main/src/csv-wallet-checkout-entry.mjs">Audit the buyer checkout source</a> · <a href="https://github.com/livastic-vm1-primary/paperpilot-tools/blob/main/src/csv-x402-guard.mjs">Read the strict price guard</a> · <a href="csv-quality-api.html#local-preview">Use the free-only checker</a></p>
+    <p lang="ko"><strong>한국어:</strong> 무료 검사는 브라우저에서만 실행됩니다. 유료 검사는 해당 CSV를 VM5 서버로 전송한 뒤, 구매자가 자신의 지갑에서 <strong>Base 메인넷 USDC 0.005</strong>를 직접 승인하는 방식입니다. 지갑 연결·가격 확인만으로 결제되지는 않으며, 자동 재결제도 하지 않습니다. 개인정보·계좌정보·비밀키를 입력하지 마세요.</p>
+  </div>
+ </section>
+</main>
+<footer><div class="wrap">© 2026 PaperPilot Tools · AI-assisted software · <a href="./">Home</a> · <a href="contact.html">Contact</a> · <a href="llms.txt">Agent guide</a></div></footer>
+<script src="csv-local-preview.js" defer></script>
+<script type="module" src="csv-wallet-checkout.bundle.js"></script>
+</body></html>

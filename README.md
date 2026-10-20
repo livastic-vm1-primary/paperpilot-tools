@@ -106,3 +106,27 @@ using an actual trusted wallet or client.
 Regression tests: node --test tests/*.test.mjs. Browser functional testing
 is a separate requirement; those unit tests cannot by themselves prove a
 real browser deployment or paid response.
+
+## Browser-wallet optional x402 purchase path (beta)
+
+Buyers can use the [new free-first CSV wallet checkout](csv-usdc-checkout.html):
+the original local CSV structure checker is free with no upload. Only after
+**separate explicit consent** does the page send a nonconfidential CSV to VM5
+to get an unpaid HTTP402 quote. It refuses changes from exactly **0.005
+native Circle Base USDC**, chain8453, the original asset and original seller
+recipient. After browser-wallet connection, a *second distinct explicit
+click* can request exactly one EIP-3009 typed signature and **one** paid
+POST through the original independently operated VM5 merchant.
+
+The browser signing flow uses pinned x402 v2 and viem libraries compiled to
+a same-origin JS bundle. It sends no owner-held wallet credentials and never
+stores visitor CSV, wallet secrets or tracking IDs. **No auto-retry on
+ambiguous settlement**. No real-wallet paid browser end-to-end purchase is
+claimed to have been tested, and the original POST has no independently
+verified paying customers at this stage. The original VM5 paid server was
+not modified or restarted.
+
+Rebuild exactly with `npm ci --include=dev --ignore-scripts --no-audit --no-fund`
+and `npm run build:checkout`. Audit the pure guards in
+`src/csv-x402-guard.mjs` before use. Do not pay from the seller's wallet
+as a purported independent customer.

@@ -1,0 +1,18 @@
+{
+  "name": "paperpilot-browser-csv-usdc-checkout",
+  "version": "0.1.0",
+  "private": true,
+  "description": "One-owner free-first CSV quality checker and strictly consent-gated buyer-authorized x402 purchase UI",
+  "scripts": {
+    "build:checkout": "esbuild src/csv-wallet-checkout-entry.mjs --bundle --format=esm --platform=browser --target=es2022 --minify --outfile=csv-wallet-checkout.bundle.js",
+    "test": "node --test tests/*.test.mjs"
+  },
+  "dependencies": {
+    "@x402/evm": "2.28.0",
+    "@x402/fetch": "2.28.0",
+    "viem": "2.57.7"
+  },
+  "devDependencies": {
+    "esbuild": "0.28.2"
+  }
+}
