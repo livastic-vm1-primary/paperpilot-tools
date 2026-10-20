@@ -144,3 +144,20 @@ test("public catalog and marketing link label no established paid POST buyer",()
  const llms=readFileSync(root+"llms.txt","utf8");
  assert.match(llms,/human browser USDC checkout \(beta\)/);
 });
+
+
+test("wallet connection keeps the displayed unsigned live quote instead of forcing a second upload",()=>{
+ const root=fileURLToPath(new URL("../",import.meta.url));
+ const src=readFileSync(root+"src/csv-wallet-checkout-entry.mjs","utf8");
+ const body=src.split("async function connect(){")[1].split("async function buyOnce(){")[0];
+ assert.match(body,/state\.walletChainReady=onBase/);
+ assert.doesNotMatch(body,/resetQuote\(\)/);
+ assert.match(body,/Your previous price remains visible/);
+});
+test("buyer payment button and click handler both require Base wallet and both explicit consents",()=>{
+ const root=fileURLToPath(new URL("../",import.meta.url));
+ const src=readFileSync(root+"src/csv-wallet-checkout-entry.mjs","utf8");
+ assert.match(src,/!state\.walletChainReady\|\|!consent\.checked\|\|!privacy\.checked/);
+ assert.match(src,/!state\.walletChainReady\|\|!consent\.checked\|\|!privacy\.checked\)return;/);
+ assert.match(src,/state\.walletChainReady=false;\s*buttons\(\);\s*throw Error\("Wallet is not on Base/);
+});

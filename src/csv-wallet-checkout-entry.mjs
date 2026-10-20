@@ -24,7 +24,7 @@ const status=$("remote-checkout-status");
 const price=$("live-price-terms");
 const paidResult=$("paid-result");
 const transactionLink=$("settlement-transaction-link");
-const state={quotedBody:null,quote:null,account:null,provider:null,busy:false,paymentAttempted:false};
+const state={quotedBody:null,quote:null,account:null,provider:null,walletChainReady:false,busy:false,paymentAttempted:false};
 
 function show(msg,kind="info"){
   status.textContent=msg;status.dataset.state=kind;
@@ -42,7 +42,7 @@ function buttons(){
   quoteBtn.disabled=state.busy||state.paymentAttempted;
   connectBtn.disabled=state.busy||state.paymentAttempted;
   payBtn.disabled=state.busy||state.paymentAttempted||!state.quote||!state.account||
-    !consent.checked||!privacy.checked;
+    !state.walletChainReady||!consent.checked||!privacy.checked;
 }
 function merchantBody(){
   return checkCsvForRemote(input.value,privacy.checked);
@@ -55,10 +55,16 @@ function walletDisplay(address){return address.slice(0,6)+"…"+address.slice(-4
 async function currentWallet(){
   if (!state.provider||!state.account)throw Error("Connect the buyer's browser wallet first.");
   const chain=await state.provider.request({method:"eth_chainId"});
-  if (Number(chain)!==CHAIN_ID)throw Error("Wallet is not on Base mainnet. Switch networks in the wallet, then reconnect.");
+  if (Number(chain)!==CHAIN_ID) {
+    state.walletChainReady=false;
+    buttons();
+    throw Error("Wallet is not on Base mainnet. Switch networks in the wallet, then reconnect.");
+  }
   const addresses=await state.provider.request({method:"eth_accounts"});
   if (!Array.isArray(addresses)||addresses.length===0 ||
       !addresses.some(a=>typeof a==="string"&&a.toLowerCase()===state.account.toLowerCase())) {
+    state.walletChainReady=false;
+    buttons();
     throw Error("Wallet account changed. Reconnect and review the quote.");
   }
   return state.account;
@@ -88,7 +94,9 @@ async function quote(){
 }
 async function connect(){
   if(state.busy||state.paymentAttempted)return;
-  state.busy=true;buttons();
+  // Connecting can prompt for a different account/network; disable buying while
+  // waiting, but do not discard an already validated *unsigned* price quotation.
+  state.busy=true;state.walletChainReady=false;buttons();
   try{
     const p=walletProvider();
     if(!p)throw Error("No injected EVM wallet detected. Install or open MetaMask on your own device, or use an independent x402 client.");
@@ -97,17 +105,22 @@ async function connect(){
     if(!Array.isArray(addresses)||!addresses.length)throw Error("Wallet connection was not authorized.");
     const address=getAddress(addresses[0]);
     const chain=await p.request({method:"eth_chainId"});
-    state.account=address;state.provider=p;
-    resetQuote();
-    show(Number(chain)===CHAIN_ID
-      ? "Connected buyer wallet "+walletDisplay(address)+". No signature or payment was requested. Please get a fresh unpaid quote."
-      : "Wallet connected but is not on Base (8453). Change chain in the wallet, then get a fresh quote.");
+    const onBase=Number(chain)===CHAIN_ID;
+    state.account=address;state.provider=p;state.walletChainReady=onBase;
+    // Preserve the buyer's existing same-file quote. The purchase button still
+    // requires a second checkbox and buyOnce obtains an independent fresh quote
+    // immediately before any EIP-712 signature.
+    if (!onBase)consent.checked=false;
+    show(onBase
+      ? "Connected buyer wallet "+walletDisplay(address)+". Your previous price remains visible. No signature or payment was requested."
+      : "Wallet connected but is not on Base (8453). Switch to Base in your wallet, then reconnect. Paying is disabled.");
   }catch(e){show(e instanceof Error?e.message:"Browser wallet connection failed.","error");}
   finally{state.busy=false;buttons();}
 }
 
 async function buyOnce(){
-  if(state.busy||state.paymentAttempted||!state.quote||!state.account||!consent.checked)return;
+  if(state.busy||state.paymentAttempted||!state.quote||!state.account||
+     !state.walletChainReady||!consent.checked||!privacy.checked)return;
   // Permanent one-per-page attempt guard, INCLUDING ambiguous transport/settlement failures.
   state.busy=true;state.paymentAttempted=true;buttons();
   let signingStarted=false;
