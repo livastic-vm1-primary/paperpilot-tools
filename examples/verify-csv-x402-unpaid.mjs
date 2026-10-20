@@ -9,11 +9,11 @@
 import {pathToFileURL} from 'node:url';
 import {
  CSV_API, NETWORK, USDC, RECIPIENT, ATOMIC_AMOUNT,
- checkCsvForRemote, decodePaymentRequired, displayPricing,
+ syntheticUnpaidQuoteBody, SYNTHETIC_UNPAID_QUOTE_CSV, decodePaymentRequired, displayPricing,
 } from '../src/csv-x402-guard.mjs';
 
 export const ORIGINAL_SITE_ORIGIN = 'https://livastic-vm1-primary.github.io';
-export const FIXED_FICTIONAL_CSV = 'id,amount\nSYNTHETIC_1,1.25\nSYNTHETIC_2,2.50';
+export const FIXED_FICTIONAL_CSV = SYNTHETIC_UNPAID_QUOTE_CSV;
 
 function expectedOrigin(headers) {
  const actual=headers.get('access-control-allow-origin');
@@ -50,7 +50,7 @@ export async function inspectUnpaidCsvCheckout(fetcher,now=new Date()) {
      !csvHeaderHas(options.headers,'access-control-allow-headers','content-type'))
    throw Error('Browser cannot dispatch the quoted CSV POST from this site.');
 
- const body=checkCsvForRemote(FIXED_FICTIONAL_CSV,true);
+ const body=syntheticUnpaidQuoteBody();
  const response=await fetcher(CSV_API,{
    method:'POST',
    headers:{Origin:ORIGINAL_SITE_ORIGIN,'Content-Type':'application/json','Accept':'application/json'},

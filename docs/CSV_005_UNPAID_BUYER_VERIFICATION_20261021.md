@@ -70,9 +70,7 @@ successful delivery, facilitator receipt or onchain transfer.
 ## Real buying requires independent informed consent
 
 The FREE local CSV inspection happens in the visitor's own browser.
-The optional UNPAID hosted quote DOES upload the visitor-selected CSV to
-the original VM5 production service after explicit source-data consent.
-Do not submit sensitive invoices, employee/customer PII or credentials.
+**Privacy update after the original 02:14 KST measurement:** the current buyer UI now obtains its free quote using ONLY fixed fictional CSV data from the same publicly inspected script. No visitor CSV is uploaded before wallet payment authorization. The original earlier beta displayed a consented preview that sent real visitor-selected CSV; this historical report documents the original merchant protocol, not the outdated buyer upload behavior. Do not submit sensitive invoices, employee/customer PII or credentials on any paid request.
 
 The separate published browser-wallet checkout
 https://livastic-vm1-primary.github.io/paperpilot-tools/csv-usdc-checkout.html

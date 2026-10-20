@@ -29,10 +29,10 @@
    <div><span class="eyebrow">Real buyer checkout · explicit permission only</span>
      <h1>Check your CSV. <em>Pay only if you need more.</em></h1>
      <p class="lead">Spot broken columns and duplicate rows <strong>for free in your browser</strong>. For a hosted machine-readable report with type warnings, review the live 0.005 USDC price, connect your own EVM wallet and approve one payment yourself.</p>
-     <p class="fine">Free mode uploads nothing. The paid API is separately hosted by the same beneficial owner on VM5; buyers must opt in before their CSV is sent. This checkout is an <strong>untested-with-real-wallet beta</strong>; no buyer-paid POST success has been independently verified yet.</p>
+     <p class="fine">Free mode uploads nothing. The paid API is separately hosted by the same beneficial owner on VM5; buyers must opt in before their CSV is sent. This checkout remains an <strong>untested-with-real-wallet beta</strong>; no buyer-paid POST success has been independently verified yet. Unlike earlier beta versions, free price checking now uploads only fictional sample rows.</p>
    </div>
    <aside class="rate"><small>Optional single x402 report</small><strong>0.005 USDC</strong><p>Native Circle USDC · Base mainnet · 8453</p><p>Existing VM5 API; no subscription, deposit, NFT or swap.</p>
-     <p><a href="https://vm5-openapi-x402.onrender.com/v1/docs" rel="noopener">Read original merchant documentation ↗</a></p><p class="fine"><a href="docs/CSV_005_UNPAID_BUYER_VERIFICATION_20261021.md">Reproduce our real 0.005 USDC unpaid quote and CORS results ↗</a> — no wallet or buyer payment claimed.</p></aside>
+     <p><a href="https://vm5-openapi-x402.onrender.com/v1/docs" rel="noopener">Read original merchant documentation ↗</a></p><p class="fine"><a href="docs/CSV_005_UNPAID_BUYER_VERIFICATION_20261021.md">Reproduce our real 0.005 USDC unpaid quote and CORS results ↗</a> — no wallet or buyer payment claimed. <a href="docs/CSV_005_PRIVACY_FIRST_FICTIONAL_QUOTE_20261021.md">Privacy-first: buyer data stays local until signed purchase ↗</a>.</p></aside>
   </div>
  </section>
 
@@ -43,7 +43,7 @@
    <div class="card">
     <label for="csv-preview-input">CSV text (do not paste private customers, credentials, account data or regulated records)</label>
     <textarea id="csv-preview-input" rows="7" spellcheck="false" maxlength="32768" aria-describedby="csv-preview-privacy" placeholder="id,name,amount&#10;1,Ada,15&#10;2,Lee,9"></textarea>
-    <label for="csv-preview-file">Or choose a local CSV file (remains on this device unless you separately request a hosted quote)</label>
+    <label for="csv-preview-file">Or choose a local CSV file (stays on this device for free previews and price lookups; uploaded only for a separately authorized paid report)</label>
     <input id="csv-preview-file" type="file" accept=".csv,text/csv,text/plain">
     <div class="actions">
      <button type="button" id="csv-preview-check" class="btn">Check locally (free)</button>
@@ -59,12 +59,12 @@
  <section class="section">
   <div class="wrap">
    <h2>2. Optional hosted CSV quality report</h2>
-   <p class="sub">Hosted report adds type-pattern, date/number/email checks and row/column positions. Its <strong>first unpaid quote already sends your CSV to VM5</strong>. Skip this section if you only want privacy-first local results.</p>
+   <p class="sub">Hosted report adds type-pattern, date/number/email checks and row/column positions. <strong>Unpaid price quotes use only a fixed fictional CSV; your chosen CSV stays on this device.</strong> Your actual file is sent to VM5 only after you separately authorize a one-time paid report. No wallet or upload permission is needed just to check the price.</p>
    <div class="card">
-     <div class="consent"><input type="checkbox" id="remote-upload-consent"><label for="remote-upload-consent">I own or am authorized to send this <strong>non-sensitive</strong> CSV to the separate VM5 API for a price quote and, only if I later consent, a paid report. I understand hosted infrastructure and payment facilitators may process transport metadata.</label></div>
-     <button type="button" id="remote-quote-btn" class="btn">Get live price — no payment</button>
-     <div id="live-price-terms" class="terms" role="status">No live quote. Free local checks require no wallet and never upload CSV.</div>
-     <p class="fine">Price may be different when you next visit. This buyer screen refuses changes to token, chain, amount or recipient and does not initiate an unknown-price transaction.</p>
+     <div class="consent"><input type="checkbox" id="remote-upload-consent"><label for="remote-upload-consent">I own or am authorized to send this <strong>non-sensitive</strong> CSV to the VM5 API only if I separately approve a paid report. The unpaid price check sends fictional rows, not my CSV. I understand paid infrastructure and facilitators may process transport metadata.</label></div>
+     <button type="button" id="remote-quote-btn" class="btn">Get live price — fictional input, no payment</button>
+     <div id="live-price-terms" class="terms" role="status">No live quote. You may check the current price using fictional rows without a wallet, real CSV upload or payment.</div>
+     <p class="fine">Price may change only if this previously fixed-scope service changes. Recheck the live offer; the strict guard refuses changes to token, chain, amount, service or recipient. An unpaid quote is not a checkout. No real CSV is transmitted while checking the price.</p>
    </div>
   </div>
  </section>
@@ -75,7 +75,7 @@
    <div class="card">
      <p>Browser checkout uses an injected EVM wallet such as MetaMask. <strong>Connecting alone does not pay</strong>. Your wallet must be on <strong>Base mainnet</strong> and hold at least <strong>0.005 native Circle USDC</strong>; the x402 facilitator submits the gasless EIP-3009 authorization. Do not paste a recovery phrase or private key here. This checkout never asks for ERC-20 approvals, staking, or swapping.</p>
      <button type="button" id="wallet-connect-btn" class="btn outline">Connect my browser wallet — no payment</button>
-     <div class="consent gap-top"><input type="checkbox" id="remote-payment-consent"><label for="remote-payment-consent">After checking the unpaid live quote and original recipient, <strong>I authorize ONE payment attempt for exactly 0.005 native Base USDC</strong> and consent to this CSV being sent to VM5. I will review the EIP-712 wallet signature before accepting. No automatic repeat.</label></div>
+     <div class="consent gap-top"><input type="checkbox" id="remote-payment-consent"><label for="remote-payment-consent">After checking the synthetic-data live price and the original recipient, <strong>I authorize ONE payment attempt for exactly 0.005 native Base USDC</strong> and consent to my selected CSV being sent to VM5 on the signed paid request only. I will review the EIP-712 wallet signature before accepting. No automatic repeat.</label></div>
      <button type="button" id="remote-pay-btn" class="btn pay" disabled>Pay 0.005 USDC once &amp; get report</button>
      <p id="remote-checkout-status" role="status" aria-live="polite" data-state="info" class="status">No payment has been requested. Start with the free local preview.</p>
      <p class="fine"><strong>Important:</strong> if your wallet says a payment is pending or the server times out after a signature, <strong>do not click again</strong>. Check the original wallet history and the merchant receipt first. This client does not auto-retry signed payments. A 402 price quote is not a successful payment.</p>

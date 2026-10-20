@@ -61,12 +61,16 @@
       "chain": "eip155:8453",
       "asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
       "buyer_explicit_wallet_authorization_required": true,
-      "quotes_upload_csv_only_after_separate_consent": true,
+      "quotes_upload_csv_only_after_separate_consent": false,
       "free_local_checks_network_requests": 0,
       "automatic_paid_retry": false,
       "real_wallet_paid_settlement_browser_integration_tested": false,
       "confirmed_independent_paid_POST_customers": 0,
-      "caveat": "Beta browser checkout against already live original x402 merchant; unit tested and unsigned quote verified only. A wallet connection and HTTP 402 are not payment or report delivery."
+      "caveat": "Privacy-first beta: fixed invented CSV is used for unsigned quotes without owner CSV upload or wallet. Visitors explicitly authorize and sign one paid request before selected non-sensitive CSV POST; full real-wallet paid report and chain receipt still NOT independently proven.",
+      "unpaid_quote_fixed_fictional_csv_only": true,
+      "unpaid_quote_may_contain_visitor_data": false,
+      "browser_user_input_transmitted_only_after_one_signed_paid_request_and_explicit_upload_consent": true,
+      "privacy_specific_source": "https://github.com/livastic-vm1-primary/paperpilot-tools/blob/main/src/csv-wallet-checkout-entry.mjs"
     },
     {
       "id": "vm5-x402-csv-preflight",

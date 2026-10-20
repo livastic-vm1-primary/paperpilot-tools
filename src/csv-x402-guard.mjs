@@ -8,6 +8,15 @@ export const RECIPIENT = "0x6b01efA0705E91a7aca54271510bf9e594717f34";
 export const ATOMIC_AMOUNT = "5000"; // 0.005 native Circle USDC (6 decimals)
 export const MAX_CSV_BYTES = 32768;
 
+// Purely fictional sample used to request this FIXED 0.005 USDC merchant
+// service's price. The user's textarea and files are never read for a quote.
+export const SYNTHETIC_UNPAID_QUOTE_CSV = "id,amount\nSYNTHETIC_1,1.25\nSYNTHETIC_2,2.50";
+export function syntheticUnpaidQuoteBody() {
+  // Only original source-controlled invented rows. NEVER the visitor's CSV.
+  return checkCsvForRemote(SYNTHETIC_UNPAID_QUOTE_CSV,true);
+}
+
+
 export function checkCsvForRemote(csv, userAcknowledgedUpload) {
   if (userAcknowledgedUpload !== true) throw Error("Confirm that this sample may be sent to the hosted API.");
   if (typeof csv !== "string" || csv.trim().length < 4) throw Error("Enter a non-confidential CSV with a header and one data row.");

@@ -9,7 +9,7 @@ import { x402Client, x402HTTPClient } from "@x402/fetch";
 import { ExactEvmScheme } from "@x402/evm/exact/client";
 import {
   CSV_API, CHAIN_ID, RECIPIENT, USDC, NETWORK, ATOMIC_AMOUNT,
-  checkCsvForRemote, decodePaymentRequired, assertExpectedQuote,
+  checkCsvForRemote, syntheticUnpaidQuoteBody, decodePaymentRequired, assertExpectedQuote,
   displayPricing, assertOnePaymentSignatureRequest
 } from "./csv-x402-guard.mjs";
 
@@ -24,16 +24,16 @@ const status=$("remote-checkout-status");
 const price=$("live-price-terms");
 const paidResult=$("paid-result");
 const transactionLink=$("settlement-transaction-link");
-const state={quotedBody:null,quote:null,account:null,provider:null,walletChainReady:false,busy:false,paymentAttempted:false};
+const state={quote:null,account:null,provider:null,walletChainReady:false,busy:false,paymentAttempted:false};
 
 function show(msg,kind="info"){
   status.textContent=msg;status.dataset.state=kind;
 }
 function setPrice(msg) {price.textContent=msg;}
 function resetQuote(){
-  state.quote=null;state.quotedBody=null;
+  state.quote=null;
   consent.checked=false;
-  setPrice("No live quote. Free local checks require no wallet and never upload CSV.");
+  setPrice("No live quote. You can verify the price using fixed fictional rows without uploading your CSV.");
   paidResult.textContent="No paid report requested.";
   transactionLink.hidden=true; transactionLink.removeAttribute("href");
   buttons();
@@ -82,13 +82,14 @@ async function quote(){
   if(state.busy||state.paymentAttempted)return;
   state.busy=true;buttons();resetQuote();
   try{
-    const body=merchantBody();
-    show("Asking the separate VM5 server for an unpaid, no-signature quote…");
-    const q=await readQuote(body);
+    // The VM5 route has an invariant price per one CSV preflight, so this
+    // source-owned fictional fixture is enough to price it WITHOUT buyer data.
+    show("Verifying the price with fictional CSV rows. Your CSV stays local.");
+    const q=await readQuote(syntheticUnpaidQuoteBody());
     const terms=displayPricing(q);
-    state.quote=q;state.quotedBody=body;
+    state.quote=q;
     setPrice(`Exact quote: ${terms.priceUSDC} ${terms.asset} on ${terms.chain}. Recipient: ${terms.recipient}. No payment has occurred.`);
-    show("Price verified. Connecting a browser wallet is optional; you can stop now without paying.");
+    show("Price verified from synthetic CSV. YOUR CSV WAS NOT UPLOADED. Wallet connection is optional; nothing has been paid.");
   }catch(e){show(e instanceof Error?e.message:"Unpaid quote unavailable.","error");}
   finally{state.busy=false;buttons();}
 }
@@ -121,17 +122,25 @@ async function connect(){
 async function buyOnce(){
   if(state.busy||state.paymentAttempted||!state.quote||!state.account||
      !state.walletChainReady||!consent.checked||!privacy.checked)return;
-  // Permanent one-per-page attempt guard, INCLUDING ambiguous transport/settlement failures.
-  state.busy=true;state.paymentAttempted=true;buttons();
+  // Failures BEFORE signing do not permanently disable the buying control.
+  // After the signing phase starts, even ambiguous results cannot be retried.
+  state.busy=true;buttons();
   let signingStarted=false;
   try{
+    // Validate the real visitor's data locally, but do NOT transmit it for
+    // a free quote; it is transmitted only as a separately authorized paid POST.
     const body=merchantBody();
-    if(body!==state.quotedBody)throw Error("CSV has changed. Do not sign. Refresh and request a new quote.");
     await currentWallet();
     assertExpectedQuote(state.quote);
-    show("Obtaining the final fresh 0.005 USDC quote. Review the impending wallet signature.");
-    const fresh=await readQuote(body);
+    show("Refreshing the 0.005 USDC price using fictional rows only.");
+    const fresh=await readQuote(syntheticUnpaidQuoteBody());
     assertExpectedQuote(fresh);
+    if(!state.quote||!privacy.checked||!consent.checked||
+       checkCsvForRemote(input.value,privacy.checked)!==body)
+      throw Error("Your CSV or consent changed during the unsigned quote. No payment requested.");
+    // This is the beginning of the ONE irreversible signature opportunity.
+    // Any ambiguity after here must NOT be retried on this same page.
+    state.paymentAttempted=true;buttons();
     const account=state.account;
     const clientWallet=createWalletClient({
       chain:base,account,transport:custom(state.provider)
@@ -156,6 +165,11 @@ async function buyOnce(){
     if(headerNames.length!==1||headerNames[0]!=="payment-signature"){
       throw Error("Unexpected payment protocol headers, aborting before dispatch.");
     }
+    // Verify data/consent AGAIN after wallet signature and before disclosing
+    // original cells in exactly one signed POST. No customer data in 402 quote.
+    if(!privacy.checked||!consent.checked||
+       checkCsvForRemote(input.value,privacy.checked)!==body)
+      throw Error("Buyer CSV or upload consent changed after signing. No signed POST dispatched.");
     const response=await fetch(CSV_API,{
       method:"POST",
       headers:{"Content-Type":"application/json","Accept":"application/json",...extraHeaders},
@@ -185,7 +199,7 @@ async function buyOnce(){
     show(reason+(signingStarted?" One authorization may have been signed. DO NOT click again without reviewing your wallet.":""),"error");
   }finally{
     state.busy=false;buttons();privacy.checked=false;consent.checked=false;
-    // No persistence, trackers, retries or stored visitor CSV.
+    // No persistence, trackers, unpaid buyer data uploads or signed retries.
   }
 }
 
