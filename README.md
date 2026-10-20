@@ -224,6 +224,17 @@ histories, prices, gains, losses, settlement finality and jurisdiction-specific
 tax interpretations remain the buyer's responsibility.
 
 
+## Free Google Workspace invoice intake (real public buyer pain)
+
+A new original **preview-first** Google Apps Script example helps a business
+with many labeled Gmail invoice PDFs archive exact files to its own private
+Drive folder and a separate human-review staging Sheet, with duplicate
+hashing, bounded pages, a ScriptLock and retries that do not multiply Drive
+copies. It never touches the live bookkeeping sheet and defaults to NO writes.
+See [source, installation scope, limits and offline tested examples](examples/google-workspace-invoice-staging/README.md).
+This is one free proof-of-work sample, **not** a client installation, paid
+USDC receipt or independent buyer endorsement.
+
 ## Same-owner two-export crypto transfer bridge
 
 The existing free VM1 DeFi exception inbox now links to the separately hosted, original same-human-owned VM3 exchange withdrawal versus wallet receipt two-CSV candidate checker (https://livastic-vm3-primary-tmp-260920.github.io/defi-payment-proof-qa/guides/crypto-transfer-csv-pair-auditor.html). The Kraken Ledger txid is internal to that exchange, not proof of a final on-chain transaction. Both privacy-first tools process the provided CSV locally, offer limited heuristics, and do NOT compute tax, profits or cost basis. Voluntary feedback now includes missing_transfer_pair and kraken_ledger categories. No paying customer or organic feedback is asserted by publishing a link.
