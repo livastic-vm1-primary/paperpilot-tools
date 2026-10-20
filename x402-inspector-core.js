@@ -93,6 +93,18 @@
       ? quote.resource : {};
     const resourceUrl = str(resource.url, 1200);
     const notices = [];
+    // x402 v2 PaymentRequired.error is a vendor-supplied message, not
+    // settlement proof or a facilitator-authenticated error. Display
+    // bounded text only; never paste PAYMENT-SIGNATURE or auto-retry.
+    const serverError = typeof quote.error === "string"
+      ? quote.error.replace(/[\u0000-\u001f\u007f]/g, " ").trim().slice(0, 240)
+      : "";
+    if (quote.error != null && typeof quote.error !== "string") {
+      notices.push("Unrecognized non-string merchant error field; no failure reason was inferred.");
+    }
+    if (serverError) {
+      notices.push("This text is only the merchant-reported error, not settlement or identity verification. Do not auto-retry a signed payment; check your own wallet and independent chain receipt first.");
+    }
     if (resourceUrl && !/^https:\/\//i.test(resourceUrl)) notices.push("Resource URL is not HTTPS.");
     if (quote.accepts.length > 1) notices.push("Multiple possible payment options exist; inspect the option selected by your real client.");
 
@@ -131,6 +143,8 @@
       kind: "public-x402-quote-offline-structural-display-v1",
       version: 2, networkExpected: NETWORK, canonicalNativeBaseUSDC: NATIVE_BASE_USDC,
       resource: {url: resourceUrl, description: str(resource.description, 300)},
+      merchantReportedError: serverError,
+      merchantErrorUnverified: true,
       maxDisplayBudgetUSDC: formatMicro(maxMicro),
       options: choices,
       notices,

@@ -38,6 +38,15 @@
       el("h2", "", report.options.length + " payment option" + (report.options.length === 1 ? "" : "s") + " found"),
       el("p", "", "No merchant identity, on-chain payment, asset ownership, signatures or wallet status verified."));
     results.replaceChildren(head);
+    if (report.merchantReportedError) {
+      const errorBox = el("div", "quote-row");
+      errorBox.append(
+        el("h3", "", "Merchant-reported error (unverified)"),
+        el("p", "fine", report.merchantReportedError),
+        el("p", "fine", "An error field in an HTTP 402 is not a settlement receipt. After any signed attempt, check independent wallet/transaction status before retrying.")
+      );
+      results.append(errorBox);
+    }
     if (report.resource.url) field(results, "Quoted resource", report.resource.url);
     field(results, "Display cap", report.maxDisplayBudgetUSDC + " USDC");
     report.options.forEach(choice => {

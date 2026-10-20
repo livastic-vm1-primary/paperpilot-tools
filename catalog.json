@@ -40,7 +40,8 @@
       "wallet_connection": false,
       "local_storage": false,
       "scope": "Pure syntax/field inspection of unsigned public x402 v2 quote up to 32 KiB; Base native CircleUSDC token, exact micro-amount, wallet-address format and optional visible budget. Not merchant authentication, settlement proof or approval to pay.",
-      "independent_external_user_adoption_confirmed": false
+      "independent_external_user_adoption_confirmed": false,
+      "server_reported_error_field_is_untrusted": true
     },
     {
       "id": "buyer-owned-base-usdc-csv-browser-checkout",

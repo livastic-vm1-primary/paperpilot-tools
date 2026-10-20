@@ -147,3 +147,15 @@ Proof before linking: VM1 original browser fetched the exact VM5 unsigned
 synthetic CSV request on this already-live checkout, and observed correctly
 pinned 0.005 native Circle BaseUSDC, recipient and no paid request; payment
 was never signed. Both free UI paths remain usable without signup/wallet.
+
+### Troubleshooting vendor-reported x402 errors locally
+
+The free payment-inspector now displays the bounded unsigned x402 v2
+PaymentRequired \`error\` message when present. This is a *merchant-supplied
+diagnostic string*, and its contents are unverified. The viewer never claims
+whether verify/settle succeeded; it never processes signed payment payloads,
+retries requests or pays gas. An x402 spec HTTP402 can represent an ordinary
+unpaid requirement OR a payment rejection. Check an independent wallet receipt
+before attempting another signature.
+
+Source: https://github.com/x402-foundation/x402/blob/main/specs/transports-v2/http.md
