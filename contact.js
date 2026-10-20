@@ -7,7 +7,8 @@
     utility: 'Offline browser utility',
     qa: 'Playwright browser QA',
     'x402-cors': 'x402 merchant CORS and quote QA',
-    'workspace-invoice': 'Google Workspace Gmail Drive invoice intake QA'
+    'workspace-invoice': 'Google Workspace Gmail Drive invoice intake QA',
+    'tradeid-review': 'Crypto Trade-ID CSV 50-row manual review (15 Base USDC)'
   });
   const service = new URL(window.location.href).searchParams.get('service');
   if (!Object.prototype.hasOwnProperty.call(categories, service)) return;

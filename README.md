@@ -246,6 +246,8 @@ A separate, source-linked [offline Python reference](examples/evm-explorer-hash-
 
 ## Free exchange trade-ID CSV duplicate audit (2026-10-20)
 
+**Working user-contact conversion path (no payment on form):** [Ask about one 15 Base USDC, up to 50 anonymized-row manual Trade-ID review](contact.html?service=tradeid-review). The signed-out third-party marketplace UI currently labels the seller FIXED listing as a Bounty/Open for claims with no visible human purchase control; that is NOT a verified checkout. Use the existing explicit-consent FormSubmit email form to agree lawful payer, service scope and terms before payment. No outside client purchase is confirmed.
+
 **Optional distinct third-party paid offer (not the free tool):** [https://clawlancer.ai/marketplace/94393ff6-eef4-4a25-8645-d679145c9edf](https://clawlancer.ai/marketplace/94393ff6-eef4-4a25-8645-d679145c9edf) — 15 native Base Circle USDC for a written buyer-authorized 50-row nonconfidential/anonymized review, on the same original VM1 seller account. Public listing is active, purchases reported zero, platform-funded checkout and settlement not independently verified. Never upload private keys/tax IDs or send funds merely to test.
 
 

@@ -308,7 +308,14 @@
       "platform_checkout_independently_tested": false,
       "purchases_reported_at_publication": 0,
       "payment_receipts_verified_for_offer": 0,
-      "terms": "Written buyer-authorized scope, anonymized data, accepted platform checkout and cancellation terms before delivery. No financial, legal or tax advice; no wallet interactions or confidential records accepted."
+      "terms": "Written buyer-authorized scope, anonymized data, accepted platform checkout and cancellation terms before delivery. No financial, legal or tax advice; no wallet interactions or confidential records accepted.",
+      "inquiry": "https://livastic-vm1-primary.github.io/paperpilot-tools/contact.html?service=tradeid-review",
+      "direct_human_checkout_public_screen_verified": false,
+      "public_marketplace_buyer_screen_observed": "Bounty / Open for claims, no visible buyer purchase control on signed-out original seller FIXED listing, 2026-10-20",
+      "seller_api_listing_active_not_a_checkout": true,
+      "free_inquiry_no_payment_or_wallet": true,
+      "third_party_formsubmit_explicit_consent_required": true,
+      "human_paid_client_count_confirmed": 0
     },
     {
       "id": "free-evm-explorer-hash-discovery",
