@@ -2,12 +2,14 @@
  * No fetch, analytics, wallet, credential storage, or payment action. */
 (function () {
   "use strict";
-  const {analyze, TEST_FIXTURE} = window.PaperPilotX402;
+  const {analyze, TEST_FIXTURE, INVOICE_MISMATCH_FIXTURE} = window.PaperPilotX402;
   const input = document.getElementById("quote");
   const cap = document.getElementById("cap");
+  const expectedInvoice = document.getElementById("expected-invoice-usdc");
   const results = document.getElementById("results");
   const btnInspect = document.getElementById("inspect");
   const btnDemo = document.getElementById("demo");
+  const btnInvoiceDemo = document.getElementById("invoice-mismatch-demo");
   const btnClear = document.getElementById("clear");
   let lastReport = null;
 
@@ -49,6 +51,14 @@
     }
     if (report.resource.url) field(results, "Quoted resource", report.resource.url);
     field(results, "Display cap", report.maxDisplayBudgetUSDC + " USDC");
+    const decision = report.invoiceComparison;
+    const warnBlock = el("div", "invoice-price-verdict");
+    warnBlock.append(el("h3", "", "Invoice expected-price check (untrusted quote; no payment)"),
+      el("p", "", "Expected: " + (decision.expectedInvoiceUSDC===null ? "not entered" : decision.expectedInvoiceUSDC + " USDC")),
+      el("p", "invoice-verdict-state", decision.state.replaceAll("_", " ")),
+      el("p", "fine", decision.explanation));
+    if (decision.state.startsWith("STOP")) warnBlock.classList.add("invoice-verdict-stop");
+    results.append(warnBlock);
     report.options.forEach(choice => {
       const row = el("div", "quote-row");
       row.append(el("h3", "", "OPTION " + choice.index));
@@ -82,16 +92,24 @@
     results.append(copy);
   }
   btnInspect.addEventListener("click", () => {
-    try {render(analyze(input.value, cap.value));}
+    try {render(analyze(input.value, cap.value, expectedInvoice.value));}
     catch (error) {showError(error);}
   });
   btnDemo.addEventListener("click", () => {
     input.value = JSON.stringify(TEST_FIXTURE, null, 2);
     cap.value = "0.02";
-    render(analyze(input.value, cap.value));
+    expectedInvoice.value = "";
+    render(analyze(input.value, cap.value, expectedInvoice.value));
+  });
+  btnInvoiceDemo.addEventListener("click", () => {
+    input.value = JSON.stringify(INVOICE_MISMATCH_FIXTURE, null, 2);
+    cap.value = "10000";
+    expectedInvoice.value = "0.10";
+    render(analyze(input.value, cap.value, expectedInvoice.value));
   });
   btnClear.addEventListener("click", () => {
     input.value = "";
+    expectedInvoice.value = "";
     lastReport = null;
     results.replaceChildren(el("div", "results-intro", "Cleared. No quote saved or sent. Load the fictional sample or paste a public unsigned quote."));
   });

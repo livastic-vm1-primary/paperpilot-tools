@@ -16,6 +16,15 @@
     accepts: [{scheme: "exact", network: NETWORK, amount: "10000", asset: NATIVE_BASE_USDC, payTo: "0x1111111111111111111111111111111111111111"}],
   });
 
+  const INVOICE_MISMATCH_FIXTURE = Object.freeze({
+    x402Version: 2,
+    resource: {url: "https://example.invalid/fictional-broken-invoice", description: "FAKE 0.10 USDC invoice; do not pay", mimeType: "application/json"},
+    accepts: [
+      {scheme: "exact", network: NETWORK, amount: "1000000000", asset: NATIVE_BASE_USDC, payTo: "0x1111111111111111111111111111111111111111"},
+      {scheme: "exact", network: "lightning:mainnet", amount: "1", asset: "lnbtc", payTo: "fake", extra: {issuanceDenied: "invoice_not_found"}}
+    ],
+  });
+
   function str(value, maxLength = 256) {
     return typeof value === "string" ? value.slice(0, maxLength) : "";
   }
@@ -41,6 +50,18 @@
     if (amount > 10000000000n) throw new Error("Budget limit is 10,000 USDC.");
     return amount;
   }
+  function parseExpectedInvoiceAmount(value) {
+    const trimmed = String(value ?? "").trim();
+    if (trimmed === "") return null;
+    try {
+      const atomic = parseCap(trimmed);
+      if (atomic <= 0n) throw Error("zero");
+      return atomic;
+    } catch {
+      throw new Error("Expected invoice amount must be positive USDC, up to six decimal places, with a maximum of 10,000 USDC.");
+    }
+  }
+
   function parseInput(raw) {
     if (typeof raw !== "string") throw new Error("Paste a public PAYMENT-REQUIRED header or x402 v2 JSON.");
     if (new TextEncoder().encode(raw).length > MAX_BYTES) {
@@ -82,9 +103,10 @@
     return obj;
   }
 
-  function analyze(raw, capInput = "0.02") {
+  function analyze(raw, capInput = "0.02", expectedInvoiceUSDCInput = "") {
     const quote = parseInput(raw);
     const maxMicro = parseCap(capInput);
+    const expectedInvoiceMicro = parseExpectedInvoiceAmount(expectedInvoiceUSDCInput);
     if (quote.x402Version !== 2) throw new Error("Only x402 version 2 public payment requirements are supported.");
     if (!Array.isArray(quote.accepts) || quote.accepts.length < 1 || quote.accepts.length > MAX_ACCEPTS) {
       throw new Error("Expected 1–20 explicit payment acceptance options.");
@@ -105,6 +127,22 @@
     if (serverError) {
       notices.push("This text is only the merchant-reported error, not settlement or identity verification. Do not auto-retry a signed payment; check your own wallet and independent chain receipt first.");
     }
+    // Real-world fail-closed pattern: an invoice lookup failure must not be
+    // treated as a valid payment invitation, even when a placeholder HTTP402
+    // accidentally advertises a valid-looking, much larger Base USDC price.
+    // Check ALL advertised options: denial metadata may be attached to a
+    // non-Base (e.g. Lightning) alternative, while Base lists the high price.
+    const merchantIssuanceDenied =
+      /invoice_not_found|issuance.?denied|invoice_unpayable/i.test(serverError) ||
+      quote.accepts.some(option => {
+        if (!option || typeof option !== "object" || Array.isArray(option)) return false;
+        const extra = option.extra;
+        if (!extra || typeof extra !== "object" || Array.isArray(extra)) return false;
+        const value = extra.issuanceDenied;
+        return typeof value === "string" && value.trim().length > 0 &&
+          !/^(?:false|none|0)$/i.test(value.trim());
+      });
+    if (merchantIssuanceDenied) notices.push("STOP: the merchant's untrusted quote advertises an invoice issuance denial; refuse signing and confirm invoice validity with the merchant before any retry.");
     if (resourceUrl && !/^https:\/\//i.test(resourceUrl)) notices.push("Resource URL is not HTTPS.");
     if (quote.accepts.length > 1) notices.push("Multiple possible payment options exist; inspect the option selected by your real client.");
 
@@ -122,6 +160,8 @@
       const addressFormat = WALLET.test(payTo);
       const amountUSDC = nativeUSDC && amount !== null ? formatMicro(amount) : null;
       const budgetExceeded = nativeUSDC && amount !== null && amount > maxMicro;
+      const expectedAmountMismatch = expectedInvoiceMicro !== null && nativeUSDC &&
+        (amount === null || amount !== expectedInvoiceMicro);
       const warnings = [];
       if (scheme !== "exact") warnings.push("Unsupported payment scheme; do not assume it is an exact-charge request.");
       if (!isBase) warnings.push("Not Base mainnet (eip155:8453). Chain and token must be verified independently.");
@@ -129,15 +169,32 @@
       if (amount === null) warnings.push("Missing or invalid positive integer atomic amount.");
       if (!addressFormat) warnings.push("Recipient payTo address is not a 20-byte EVM hexadecimal address.");
       if (budgetExceeded) warnings.push("Quoted native Base USDC exceeds the chosen display-only spending limit.");
+      if (expectedAmountMismatch) warnings.push("STOP: quoted Base USDC does not equal the user's expected invoice amount. Do not sign or pay.");
+      if (expectedInvoiceMicro !== null && !nativeUSDC) warnings.push("Cannot compare expected native Base USDC invoice amount against this other network or token.");
       if (!budgetExceeded && nativeUSDC && amount !== null) {
         warnings.push("Quote is within your chosen display limit, but no merchant identity or payment authorization is verified.");
       }
       return {
         index: i + 1, scheme, network, asset, payTo, amountAtomic: typeof option.amount === "string" ? option.amount.slice(0, 40) : "",
         amountUSDC, nativeBaseUSDC: nativeUSDC, recipientFormatValid: addressFormat,
-        overBudget: !!budgetExceeded, issues: warnings,
+        overBudget: !!budgetExceeded, expectedInvoiceAmountMismatch: !!expectedAmountMismatch, issues: warnings,
       };
     });
+    const baseChoices = choices.filter(option => option.nativeBaseUSDC);
+    const mismatches = baseChoices.filter(option => option.expectedInvoiceAmountMismatch);
+    const matches = expectedInvoiceMicro === null ? [] :
+      baseChoices.filter(option => option.amountUSDC === formatMicro(expectedInvoiceMicro));
+    const decision = merchantIssuanceDenied ? "STOP_MERCHANT_INVOICE_DENIED" :
+      expectedInvoiceMicro === null ? "NO_AMOUNT_COMPARISON_REQUESTED" :
+      !baseChoices.length ? "REVIEW_NO_NATIVE_BASE_USDC_OPTION" :
+      mismatches.length ? "STOP_QUOTED_AMOUNT_DIFFERS_FROM_INVOICE" :
+      matches.length === baseChoices.length ? "AMOUNT_MATCH_ONLY_NOT_PAYMENT_AUTHORIZATION" :
+      "STOP_INDETERMINATE_PAYMENT_AMOUNT";
+    const decisionExplanation = decision.startsWith("STOP") ?
+      "Refuse signing and contact the merchant. An HTTP 402 is not a payable invoice or a wallet spending authorization." :
+      decision === "AMOUNT_MATCH_ONLY_NOT_PAYMENT_AUTHORIZATION" ?
+      "The quoted Base native USDC amount matches your supplied expectation; seller identity, invoice validity and wallet payment safety are STILL NOT VERIFIED." :
+      "No exact native Base USDC invoice comparison was established; do not infer that this quote is payable.";
 
     return {
       kind: "public-x402-quote-offline-structural-display-v1",
@@ -146,6 +203,14 @@
       merchantReportedError: serverError,
       merchantErrorUnverified: true,
       maxDisplayBudgetUSDC: formatMicro(maxMicro),
+      invoiceComparison: {
+        expectedInvoiceUSDC: expectedInvoiceMicro===null ? null : formatMicro(expectedInvoiceMicro),
+        state: decision,
+        explanation: decisionExplanation,
+        merchantIssuanceDeniedUnverified: merchantIssuanceDenied,
+        matchingBaseOptions: matches.length,
+        mismatchedBaseOptions: mismatches.length,
+      },
       options: choices,
       notices,
       completedOffline: true,
@@ -158,7 +223,7 @@
     };
   }
 
-  const exported = {analyze, parseInput, parseCap, formatMicro, TEST_FIXTURE, NETWORK, NATIVE_BASE_USDC, MAX_BYTES};
+  const exported = {analyze, parseInput, parseCap, parseExpectedInvoiceAmount, formatMicro, TEST_FIXTURE, INVOICE_MISMATCH_FIXTURE, NETWORK, NATIVE_BASE_USDC, MAX_BYTES};
   if (typeof module !== "undefined" && module.exports) module.exports = exported;
   if (global) global.PaperPilotX402 = exported;
 })(typeof window !== "undefined" ? window : undefined);

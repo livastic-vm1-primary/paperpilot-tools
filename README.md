@@ -227,3 +227,22 @@ tax interpretations remain the buyer's responsibility.
 ## Same-owner two-export crypto transfer bridge
 
 The existing free VM1 DeFi exception inbox now links to the separately hosted, original same-human-owned VM3 exchange withdrawal versus wallet receipt two-CSV candidate checker (https://livastic-vm3-primary-tmp-260920.github.io/defi-payment-proof-qa/guides/crypto-transfer-csv-pair-auditor.html). The Kraken Ledger txid is internal to that exchange, not proof of a final on-chain transaction. Both privacy-first tools process the provided CSV locally, offer limited heuristics, and do NOT compute tax, profits or cost basis. Voluntary feedback now includes missing_transfer_pair and kraken_ledger categories. No paying customer or organic feedback is asserted by publishing a link.
+
+
+## Buyer-side exact invoice mismatch check (free, no spending)
+
+A legitimate independent integrator [publicly reported an x402
+invoice challenge of 1,000 USDC for an intended 0.10 USDC order](https://github.com/bitrefill/agents/issues/11).
+The same original free read-only [x402 PAYMENT-REQUIRED
+inspector](x402-inspector.html) now accepts **optional expected invoice
+amount** and displays a prominent STOP discrepancy when native Base Circle
+USDC differs, including when a high generic "budget" would otherwise permit
+the placeholder. Every acceptance option is checked for an untrusted
+`issuanceDenied: "invoice_not_found"` marker; even a matching Base option
+does not override a merchant-declared issuance denial from another network.
+The included **one-click fully fictional broken invoice demo** reproduces
+both STOP cases. A matching amount is still **not a payment authorization**:
+seller, invoice, recipient identity and blockchain settlement are not
+verified. All logic is local JavaScript, no API requests or wallet calls.
+Neither this real-world public bug report nor our synthetic example is a
+paying user, an endorsement, or a current merchant incident claim.

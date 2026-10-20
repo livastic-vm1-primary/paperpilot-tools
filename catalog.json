@@ -39,9 +39,13 @@
       "requires_login": false,
       "wallet_connection": false,
       "local_storage": false,
-      "scope": "Pure syntax/field inspection of unsigned public x402 v2 quote up to 32 KiB; Base native CircleUSDC token, exact micro-amount, wallet-address format and optional visible budget. Not merchant authentication, settlement proof or approval to pay.",
+      "scope": "Pure syntax/field inspection of unsigned public x402 v2 quote up to 32 KiB; Base native CircleUSDC token, exact micro-amount, wallet-address format and optional visible budget AND separate exact positive invoice-expected-USDC comparison with fatal mismatch/issuance-denied warnings. Not merchant authentication, settlement proof or approval to pay.",
       "independent_external_user_adoption_confirmed": false,
-      "server_reported_error_field_is_untrusted": true
+      "server_reported_error_field_is_untrusted": true,
+      "exact_expected_invoice_comparison": true,
+      "invoice_not_found_or_issuance_denied_stop": true,
+      "real_world_bug_regression_source": "https://github.com/bitrefill/agents/issues/11",
+      "safe_case": "0.10 buyer-expected Base USDC vs 1000 real merchant-quoted amount (all synthetic offline test, no actual customer invoice or wallet used)"
     },
     {
       "id": "buyer-owned-base-usdc-csv-browser-checkout",

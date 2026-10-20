@@ -32,6 +32,7 @@
     <h1>Before your agent pays,<br><em>read the quote.</em></h1>
     <p class="lead">Paste a <code>PAYMENT-REQUIRED</code> header. Instantly see the network, token contract, micro-USDC price and recipient. Understand what was <strong>requested</strong> before you approve any wallet action.</p>
     <p class="sub-ko" lang="ko">결제 전에 체인·USDC 자산·요청 금액·수령 주소를 무료로 확인하세요. 입력값은 서버에 전송하지 않습니다.</p>
+    <p class="sub-ko">A real x402 invoice lookup problem can return a <strong>1,000 USDC placeholder</strong> for a <strong>0.10 USDC invoice</strong>. Enter the expected invoice amount below; this page flags an exact mismatch and any merchant-reported issuance denial. No payment is initiated. <a href="https://github.com/bitrefill/agents/issues/11" rel="noopener noreferrer">Original independent user report ↗</a>. This public report is not an endorsement of this tool or evidence of our paid customers.</p>
     <p class="sub-ko">For failed/rejected payment attempts, a public <code>PAYMENT-REQUIRED</code> quote may also contain an untrusted server <code>error</code> field. We show it locally without treating it as a verified facilitator diagnosis or permission to retry. Never paste a signed payment header.</p>
     <div class="hero-metrics" aria-label="Product capabilities">
       <div><strong>0</strong><span>Uploads / 업로드</span></div>
@@ -52,9 +53,11 @@
     <label for="quote"><strong>PAYMENT-REQUIRED header or decoded JSON</strong><span>Only a public unsigned merchant quote. Never paste PAYMENT-SIGNATURE, wallet seed, bearer token, customer data or private credentials.</span></label>
     <textarea id="quote" placeholder="PAYMENT-REQUIRED: eyJ4NDAyVmVyc2lvbiI6Miw..." spellcheck="false" autocomplete="off" autocapitalize="off" rows="9" maxlength="32768"></textarea>
     <div class="action-row"><div class="budget"><label for="cap"><strong>Display budget (native Base USDC)</strong><span>Warning threshold; not a wallet limit.</span></label><input id="cap" type="text" inputmode="decimal" value="0.02" maxlength="15" aria-describedby="cap-help"><small id="cap-help">Default 0.020000 · No payment is authorized</small></div></div>
+    <div class="invoice-match-field"><label for="expected-invoice-usdc"><strong>Expected invoice amount (optional, native Base USDC)</strong><span>Enter the real invoice's intended USDC price (e.g. 0.10). Purely a local price mismatch check, never a wallet spending cap or signature authorization. Do not paste an invoice ID, wallet seed or signed payment.</span></label><input id="expected-invoice-usdc" type="text" inputmode="decimal" autocomplete="off" value="" placeholder="0.10" maxlength="16" aria-describedby="expected-invoice-help"><small id="expected-invoice-help">If the HTTP 402 asks for 1000 but your invoice is 0.10, the tool displays STOP. Merchant-declared invoice_not_found also triggers STOP, even if the price matches. No wallet is connected.</small></div>
     <div class="buttons">
       <button class="primary" type="button" id="inspect">Inspect without paying <span aria-hidden="true">→</span></button>
       <button class="secondary" type="button" id="demo">Load fictional sample</button>
+      <button class="secondary" type="button" id="invoice-mismatch-demo">Load 0.10 vs 1,000 USDC mismatch (fictional)</button>
       <button class="ghost" type="button" id="clear">Clear</button>
     </div>
     <p class="privacy">⦿ Your input is processed only by JavaScript in this browser. This page makes <strong>no network requests</strong> to inspect a quote, has no analytics and stores no input. It never fetches an arbitrary API or connects a wallet.</p>
