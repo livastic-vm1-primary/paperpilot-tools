@@ -7,8 +7,8 @@ const ui = readFileSync(new URL('../koinly-import-triage-ui.mjs', import.meta.ur
 const map = readFileSync(new URL('../koinly-column-mapper.html', import.meta.url), 'utf8');
 const sales = readFileSync(new URL('../crypto-csv-rescue.html', import.meta.url), 'utf8');
 const sitemap = readFileSync(new URL('../sitemap.xml', import.meta.url), 'utf8');
-test('four genuinely different importer symptoms, with official HTTPS docs and concrete safe steps', () => {
- assert.deepEqual([...validIds].sort(), ['duplicates','missing','rejected','skipped']);
+test('five genuinely different importer symptoms, with official HTTPS docs and concrete safe steps', () => {
+ assert.deepEqual([...validIds].sort(), ['duplicates','missing','rejected','skipped','strike-2026']);
  for (const [id, plan] of Object.entries(plans)) {
   assert.ok(page.includes('value="'+id+'"'));
   assert.equal(plan.steps.length, 3);

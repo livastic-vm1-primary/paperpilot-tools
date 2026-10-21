@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'none'; script-src 'self'; style-src 'self'; img-src 'self'; form-action 'none'; object-src 'none'; base-uri 'self'; upgrade-insecure-requests">
-<meta name="description" content="Why did Koinly skip rows, report missing purchase history, reject a CSV, or show API + CSV duplicates? Free private diagnosis by symptom, official references and an optional 5 Base USDC human mapping review. No wallet or uploads.">
+<meta name="description" content="Koinly Strike iOS CSV Unknown file (reported October 2026)? Support-first steps before editing supported exports, plus free skipped-row, duplicate and missing-history triage. No CSV upload or wallet.">
 <meta property="og:title" content="Koinly CSV skipped rows, duplicates & missing purchase history | Free Triage">
 <meta property="og:description" content="Free no-upload Koinly import error checklist. Independent, source-backed help; small optional scoped review, no tax advice.">
 <link rel="canonical" href="https://livastic-vm1-primary.github.io/paperpilot-tools/koinly-import-triage.html">
@@ -34,6 +34,7 @@
 </aside></div></section>
 <section class="wrap section" id="triage">
 <h2>Pick what Koinly actually reported</h2>
+<p class="small-note">An independent Strike iOS customer <a href="https://discuss.koinly.io/t/strike-exchange-csv-file-appears-to-have-changed-october-2026/28630" target="_blank" rel="noopener noreferrer">reported an "Unknown file" import on October 12, 2026 ↗</a>. This is one unresolved user report, not a confirmed format-change announcement, endorsement or paid customer. <a href="?issue=strike-2026#triage">Open the safe Strike-specific support-first checklist ↗</a>.</p>
 <div class="triage">
 <label for="issue">Select your observed symptom · 화면에 나온 문제 선택</label>
 <select id="issue">
@@ -41,6 +42,7 @@
 <option value="duplicates">Possible API + CSV duplicates / 중복 거래</option>
 <option value="missing">Missing purchase history / 취득 이력 누락</option>
 <option value="rejected">Rejected or unrecognized CSV / 파일 인식 실패</option>
+<option value="strike-2026">Strike iOS CSV "Unknown file" (Oct 2026 user report) · 공식 고객지원 우선</option>
 </select>
 <section id="plan" role="region" aria-live="polite" aria-labelledby="plan-title">
 <h3 id="plan-title">Rows were skipped</h3>
@@ -81,6 +83,8 @@
 <p>These references independently document that skipped records may be intentional, duplicate matching requires near-exact equality, and missing purchase history has multiple causes.</p>
 <ul>
 <li><a href="https://support.koinly.io/en/articles/9490012-errors-when-importing-transactions" target="_blank" rel="noopener noreferrer">Import errors: skipped, rejected, failed rows</a></li>
+<li><a href="https://support.koinly.io/en/articles/9885319-how-to-modify-csv-files-to-import-them-to-koinly" target="_blank" rel="noopener noreferrer">Supported exchange + "Unknown file": contact Koinly support before manual CSV edits</a></li>
+<li><a href="https://feedback.koinly.io/integrations/p/strike-integration" target="_blank" rel="noopener noreferrer">Koinly integration feedback: Strike CSV support marked complete in 2023 (does not verify 2026 file compatibility)</a></li>
 <li><a href="https://support.koinly.io/en/articles/9789363-how-duplicate-detection-works-in-koinly" target="_blank" rel="noopener noreferrer">Duplicate detection and API/CSV overlap</a></li>
 <li><a href="https://support.koinly.io/en/articles/9490037-missing-purchase-history-for-xyz" target="_blank" rel="noopener noreferrer">Missing purchase history</a></li>
 <li><a href="https://support.koinly.io/en/articles/9489985-how-to-import-a-csv-file-using-a-different-timezone" target="_blank" rel="noopener noreferrer">Non-UTC CSV import handling</a></li>
