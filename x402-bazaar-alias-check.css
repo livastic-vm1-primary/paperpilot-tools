@@ -1,0 +1,15 @@
+.skip-link{position:absolute;left:-100vw;top:0;padding:10px;background:white;color:#173446;z-index:3}
+.skip-link:focus{left:10px}
+#checker label{display:block;margin:20px 0 7px}
+#checker textarea{display:block;width:100%;border:2px solid #bfd4d8;border-radius:10px;padding:13px;color:#102c41;background:#f8fbfb;font:0.94rem/1.55 ui-monospace,SFMono-Regular,Consolas,monospace;resize:vertical}
+#checker textarea:focus-visible{outline:3px solid #087dad;outline-offset:3px}
+#checker .controls{display:flex;flex-wrap:wrap;gap:10px;margin:18px 0}
+#checker button.secondary{background:#dceae9;color:#143e4c;border:2px solid #9ac6cd}
+#bazaar-alias-status{font-weight:700}
+#bazaar-alias-results{margin-top:16px}
+#bazaar-alias-results .finding{margin-top:15px;padding:14px;background:#f5f7ef;border:1px solid #bec8ae;border-radius:10px}
+#bazaar-alias-results .finding h3{margin:0 0 8px;font-size:1.1rem}
+#bazaar-alias-results .check-line{display:grid;grid-template-columns:minmax(165px,1fr) 2fr;border-bottom:1px solid #dce6e5;gap:10px;padding:8px 0;overflow-wrap:anywhere}
+#bazaar-alias-results .check-line:last-child{border:0}
+code{background:#e6eeeb;color:#183548;border-radius:4px;padding:0 3px;font-size:.92em}
+@media(max-width:640px){#bazaar-alias-results .check-line{grid-template-columns:1fr;gap:2px}}

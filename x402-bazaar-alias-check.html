@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f3f7f8">
+<meta name="description" content="Free local-only x402 Bazaar discovery alias checker. Find duplicate request-body/query parameter aliases before buyers edit a key your server ignores. No wallet or signup.">
+<meta property="og:title" content="Free x402 Bazaar Alias Example Checker | PaperPilot">
+<meta property="og:description" content="Compare a public unsigned x402 Bazaar input example against aliases verified by the seller's source. No upload, wallet, funds, or signatures.">
+<meta property="og:url" content="https://livastic-vm1-primary.github.io/paperpilot-tools/x402-bazaar-alias-check.html">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self'; connect-src 'none'; form-action 'none'; base-uri 'none'; object-src 'none'">
+<link rel="canonical" href="https://livastic-vm1-primary.github.io/paperpilot-tools/x402-bazaar-alias-check.html">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="x402-post-body-diagnostic.css">
+<link rel="stylesheet" href="x402-bazaar-alias-check.css">
+<title>Free x402 Bazaar Duplicate Input Alias Checker | PaperPilot Tools</title>
+</head>
+<body>
+<a class="skip-link" href="#checker">Skip to checker</a>
+<header class="nav"><div class="container"><strong>PaperPilot Tools · x402</strong><nav aria-label="Navigation"><a href="x402-post-body-diagnostic.html">400/402 Diagnostic</a> · <a href="x402-inspector.html">Quote Inspector</a> · <a href="services.html#x402-audit">Scoped Paid QA</a></nav></div></header>
+<main class="container">
+<section class="hero">
+<p class="chip">FREE · PUBLIC DISCOVERY EXAMPLES · NO CONNECT</p>
+<h1>Which x402 input field does your server actually read?</h1>
+<p class="lead">One Bazaar example can publish <code>q</code>, <code>query</code> and <code>text</code> even when the merchant reads only the first populated alias. A buyer edits <code>text</code>, receives a successful response, but the old <code>q</code> silently wins. Check duplicate alias names in your <strong>public, unsigned</strong> <code>extensions.bazaar.info.input.body</code> or <code>queryParams</code> before agents buy a result.</p>
+<p lang="ko">x402 Bazaar 요청 예제의 중복 파라미터 별칭을 브라우저에서만 검사합니다. 예제를 수정한 구매자가 서버에서 무시되는 값을 바꿀 위험을 찾습니다. 지갑·서명·결제·서버 업로드가 없습니다.</p>
+</section>
+<section class="panel" id="checker" aria-labelledby="title">
+<h2 id="title">Inspect an existing HTTP Bazaar example</h2>
+<p><strong>Required developer knowledge:</strong> enter each logical parameter's known aliases from your own handler source, in priority order. <strong>The sample JSON alone cannot prove</strong> names are aliases or which one wins. This tool reports duplicate <em>developer-declared</em> fields; it cannot independently infer the real handler or validate a JSON Schema.</p>
+<label for="bazaar-json"><strong>Public, unsigned x402 v2 402 JSON or Bazaar discovery object (maximum 32 KiB)</strong></label>
+<textarea id="bazaar-json" rows="12" maxlength="32768" spellcheck="false" placeholder='{"extensions":{"bazaar":{"info":{"input":{"type":"http","method":"POST","bodyType":"json","body":{"q":"hello","query":"different"}}}}}}'></textarea>
+<label for="bazaar-alias-groups"><strong>Aliases from your actual handler source</strong> — one logical group per line; e.g. <code>q, query, text</code></label>
+<textarea id="bazaar-alias-groups" rows="3" maxlength="4096" spellcheck="false" placeholder="q, query, text"></textarea>
+<div class="controls">
+<button type="button" id="analyze-bazaar-aliases">Check locally</button>
+<button type="button" id="load-alias-demo" class="secondary">Load fictional example</button>
+<button type="button" id="clear-bazaar-aliases" class="secondary">Clear</button>
+</div>
+<p class="fine">Do not paste a signed PAYMENT-SIGNATURE header, wallet seed, authorization token, merchant credentials, customer rows, invoices or any private data. No network request occurs from these controls; all processing runs entirely in this page. We do not log input or run scripts from it.</p>
+<p role="status" id="bazaar-alias-status" aria-live="polite">Ready. No analysis or network request has run.</p>
+<div id="bazaar-alias-results" role="region" aria-label="Local alias audit findings" aria-live="polite"></div>
+</section>
+<section class="panel">
+<h2>What a finding means</h2>
+<p>When a source-verified group contains two or more keys in <code>info.input.body</code> or <code>info.input.queryParams</code>, a client may edit the wrong one. The safe remediation is to inspect the real handler's priority and publish one canonical example key for each logical parameter. Even equal values are problematic when an agent later edits a shadowed field. No finding means only that <em>declared groups</em> did not collide; it is not a vendor security audit.</p>
+<p>This local example is based on a <a href="https://github.com/x402-foundation/x402/issues/3841" rel="noopener noreferrer">public x402 Bazaar input-alias problem report</a> and the <a href="https://github.com/x402-foundation/x402/blob/main/specs/extensions/bazaar.md" rel="noopener noreferrer">upstream Bazaar discovery specification</a>. It is an independent AI-assisted developer demonstration, <strong>not an official x402 validator</strong>, endorsement, grant, paid customer order or a proof that the reported catalog dataset was independently reproduced here. No actual merchant has been tested with your input.</p>
+</section>
+<section class="panel">
+<h2>Have a real merchant discovery bug?</h2>
+<p>Need a reproducible, separately authorized x402 POST schema/alias/400-before-402/CORS/invoice mismatch review? Our <a href="services.html#x402-audit">existing bounded public-sandbox technical QA service</a> offers an indicative <strong>49 native Circle Base USDC</strong> scope when separately agreed in writing. <a href="contact.html?service=x402-audit">Request a no-obligation private quote</a> with a public endpoint and non-sensitive problem description only; written price, deliverables, payment network/recipient, acceptance, privacy and refund terms must be agreed before payment. We do <strong>not</strong> run a chargeable test or hold a customer's funds on this page. No independent paying customer for this alias-checker offering is confirmed.</p>
+<p>For free non-sensitive feature feedback, use the <a href="x402-inspector.html#buyer-feedback">existing optional opt-in feedback form</a>. The form is a separate third-party service and requires explicit consent. No text pasted here is included in that form.</p>
+</section>
+</main>
+<footer class="footer"><div class="container">© 2026 PaperPilot Tools · <a href="index.html">Home</a> · <a href="contact.html">Contact</a> · AI-assisted independent work · no new wallet accounts.</div></footer>
+<script type="module" src="x402-bazaar-alias-ui.mjs"></script>
+</body>
+</html>
