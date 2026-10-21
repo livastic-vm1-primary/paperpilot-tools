@@ -4,6 +4,10 @@ This repository contains an original public product landing page, free single-it
 
 Live: https://livastic-vm1-primary.github.io/paperpilot-tools/
 
+## Public payment address roles — VM1 and VM5 are different services
+
+The [dated public recipient-role notice](PAYOUT_ADDRESSES.md) distinguishes the existing **VM1 direct QA consulting address 0x4e3106520E40af30870caFE78da1B1e7110eD98E** from the separate, **unchanged VM5 x402 merchant payTo 0x6b01efA0705E91a7aca54271510bf9e594717f34**. Both use native Circle USDC on Base 8453. This is not a wallet rotation. The SCDO 9 USDC QA scope has no accepted valid delivery or payment yet.
+
 The commercial app and purchase ZIP are NOT included in this public repo.
 
 ## Integrity
