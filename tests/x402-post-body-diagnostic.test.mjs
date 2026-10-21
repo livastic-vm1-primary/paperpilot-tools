@@ -102,6 +102,21 @@ test('static HTML only opts in on explicit click; CSP restricts fetch to origina
  assert.doesNotMatch(core,/XMLHttpRequest|localStorage|navigator\.sendBeacon/);
  assert.equal((html.match(/src="x402-post-body-diagnostic-ui\.mjs"/g)||[]).length,1);
 });
+test('buyer agents can discover machine-readable synthetic unsigned POST request without spending',()=>{
+ const html=read('x402-post-body-diagnostic.html');
+ const manifest=JSON.parse(read('x402-post-discovery.json'));
+ assert.match(html,/rel="alternate" type="application\/json" href="x402-post-discovery\.json"/);
+ assert.match(html,/href="x402-post-discovery\.json">download the unsigned POST request example/);
+ assert.match(html,/not an official x402 standard/);
+ assert.match(html,/does not prove paid delivery/);
+ const quote=manifest.free_buyer_safe_quote_probe;
+ assert.equal(quote.request.method,'POST');
+ assert.deepEqual(quote.request.json_body,{csvText:'id,name\n1,Ada\n2,Lin\n',expectedColumns:['id','name']});
+ assert.equal(quote.expected_http_status,402);
+ assert.equal(quote.free_quote_authorizes_spending,false);
+ assert.equal(quote.auto_retry_or_payment_signature_in_probe,false);
+ assert.equal(manifest.buyer_offer.actual_independent_paid_POST_buyers_confirmed,0);
+});
 test('local-only page retains connect-src none while new page has separate explicit network allowance',()=>{
  const old=read('x402-inspector.html');
  const seller=read('csv-quality-api.html');
