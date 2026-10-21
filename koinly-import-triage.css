@@ -8,3 +8,12 @@
 .method article{border:1px solid #d6e2de;background:#f6fbfa;padding:20px;border-radius:12px}
 .method h3{margin:0 0 8px}.method p{line-height:1.65;margin:0}
 .small-note{color:#364e52;font-size:.91rem}
+.voluntary-support{margin-block:36px;padding:clamp(20px,3vw,32px);border:1px solid #d1dedb;border-radius:18px;background:#f7fbfa}
+.voluntary-support h2{margin:4px 0 12px}
+.voluntary-support p{max-width:85ch;line-height:1.7}
+.voluntary-support .address{display:block;overflow-wrap:anywhere;padding:14px;border:1px solid #b9ccc8;border-radius:8px;background:white;font-size:clamp(.82rem,1.5vw,1rem);user-select:all}
+.voluntary-support button{margin:18px 12px 12px 0;padding:12px 18px;background:#135f62;color:white;border:0;border-radius:8px;font:inherit;font-weight:700;cursor:pointer}
+.voluntary-support button:disabled{cursor:wait;opacity:.72}
+.voluntary-support button:focus-visible{outline:3px solid #3773ad;outline-offset:4px}
+.voluntary-support .unrelated-paid{font-weight:700;padding:14px;border-left:4px solid #466d72;background:white}
+.voluntary-support .copy-status{min-height:2em;font-weight:650;color:#204b4e}
