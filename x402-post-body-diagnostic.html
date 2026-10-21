@@ -44,6 +44,16 @@ Content-Type: application/json
 <p id="attempts" class="fine">No request logs, local storage or analytics are created by this page.</p>
 <p class="fine">A matching 402 quote proves only the <em>unsigned challenge</em> for this fictional input. It does not prove a buyer paid, a settlement finalized, user-owned CSV delivery, refund handling, or merchant safety. A CORS failure is inconclusive, not evidence that funds were lost.</p>
 </section>
+<section class="panel" id="directory-get" aria-labelledby="directory-get-title">
+<h2 id="directory-get-title">Another real discovery failure: an incomplete GET is not a missing paywall</h2>
+<p>One existing automated directory listed our owner's <code>GET /v1/base-usdc-receipt</code> without its required query fields. That public bare URL returns an input error (HTTP 400) before the x402 middleware; this says nothing about whether a separately valid paid service works. The <strong>same original merchant host</strong> has a <em>different</em> documented route, <code>GET /v1/email-dns-preflight?domain=example.com</code>, whose unsigned 402 quote can be checked without paying. This illustrates input validation, not an official listing correction or proof the directory has changed.</p>
+<p>Click once to make at most <strong>two fixed GET requests</strong> with no user input or credentials, inspect the public HTTP statuses and decode the <code>PAYMENT-REQUIRED</code> quote. We verify the exact URL, x402 v2, official Base Circle USDC, amount 5000 atomic units (0.005 USDC), and original receiving address. This never signs, settles, retries a paid request or uploads private data. The seller sees the network IP of visitors who click; CORS or service sleep may make the result inconclusive.</p>
+<button id="run-directory-get" type="button">Compare two public GET routes (unpaid)</button>
+<p id="directory-get-status" role="status">Not started; no example GET has been sent.</p>
+<div id="directory-get-result" role="region" aria-live="polite" aria-label="Unsigned GET quote result"></div>
+<p id="directory-get-targets" class="fine">No test has run.</p>
+<p class="fine"><strong>Optional actual payable service:</strong> <a href="https://vm5-openapi-x402.onrender.com/v1/email-dns-preflight?domain=example.com" rel="noopener noreferrer">read its current unsigned DNS report quote</a> or <a href="https://livastic-vm5-primary-20260911.github.io/vm5-delivery-lab/email-dns-preflight/" rel="noopener noreferrer">review the original merchant buyer guide</a>. This is public DNS MX/SPF/DMARC/A configuration only: not mailbox access, DKIM checking, message deliverability, refund assurance or proof of a paid result. Pay only if you independently trust the merchant and approve the exact current quote. Existing actual buyers of this DNS endpoint: not verified.</p>
+</section>
 <section class="panel">
 <h2>Run the same test without a wallet, or ask for a scoped QA review</h2>
 <p><strong>Machine-readable example for buyer agents:</strong> <a href="x402-post-discovery.json">download the unsigned POST request example (JSON)</a>. The <code>free_buyer_safe_quote_probe.request</code> field provides the exact POST method, endpoint, public synthetic body and headers for an unpaid HTTP 402 challenge. Compare network, official token, amount and recipient with the current quote. This is our <strong>merchant-specific proposal, not an official x402 standard</strong>, and a 402 response does not prove paid delivery. For missing fields and safer buying workflows, use the <a href="x402-inspector.html#buyer-feedback">optional non-sensitive feedback form</a>. Never send wallet secrets, private records or payment headers.</p>
@@ -55,4 +65,5 @@ Content-Type: application/json
 </main>
 <footer class="footer"><div class="container">© 2026 PaperPilot Tools · <a href="index.html">Home</a> · <a href="contact.html">Contact</a> · No automatic signing or token transfers.</div></footer>
 <script type="module" src="x402-post-body-diagnostic-ui.mjs"></script>
+<script type="module" src="x402-directory-get-probe-ui.mjs"></script>
 </body></html>
