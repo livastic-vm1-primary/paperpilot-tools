@@ -1,0 +1,20 @@
+{
+  "x402Version": 2,
+  "resources": [
+    {
+      "url": "https://vm5-openapi-x402.onrender.com/v1/tapeout-cpu0-report",
+      "method": "GET",
+      "description": "Read-only block-pinned X Layer (chain 196) TapeOut CPU0 current-state JSON: public market/factory fees, proxy implementations, ownership and transistor supply. A paid x402 v2 0.005 USDC per successful request on Base (8453); not a security audit, return-on-investment forecast or real-time investment advice. Free synthetic preview: https://vm5-openapi-x402.onrender.com/v1/tapeout-cpu0-sample",
+      "accepts": [
+        {
+          "scheme": "exact",
+          "network": "eip155:8453",
+          "asset": "0x833589fCD6eDb6E08f4C7C32D4f71b54bdA02913",
+          "amount": "5000",
+          "payTo": "0x4e3106520E40af30870caFE78da1B1e7110eD98E",
+          "maxTimeoutSeconds": 300
+        }
+      ]
+    }
+  ]
+}

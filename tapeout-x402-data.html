@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="index,follow">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; connect-src 'none'; script-src 'none'; form-action 'none'; object-src 'none'; base-uri 'none'">
+<meta name="description" content="Pay per call for a read-only X Layer TapeOut CPU0 block-pinned public JSON report: 0.005 USDC Base via x402 v2. Original merchant wallet, free example, developer documentation.">
+<link rel="canonical" href="https://livastic-vm1-primary.github.io/paperpilot-tools/tapeout-x402-data.html">
+<title>TapeOut X Layer CPU0 JSON report — x402 Base USDC | PaperPilot</title>
+<style>
+:root{color-scheme:light}*{box-sizing:border-box}body{margin:0;background:#f5f8fa;color:#172b40;font:16px/1.65 system-ui,-apple-system,Segoe UI,sans-serif}main,footer{max-width:860px;margin:auto;padding:28px 24px}a{color:#086d69}a:focus-visible{outline:3px solid #247f85;outline-offset:3px}header{background:#142b3d;color:#edf8f8}header .wrap{max-width:860px;margin:auto;padding:18px 24px}header a{color:#b3f0da}h1{font-size:clamp(31px,5vw,45px);line-height:1.13;letter-spacing:-.04em}h2{margin-top:37px;font-size:24px}p{max-width:750px}.tag{font-size:12px;font-weight:760;letter-spacing:.1em;text-transform:uppercase;color:#25665e}.card{background:white;border:1px solid #dbe5e9;border-radius:13px;padding:20px;margin:17px 0;box-shadow:0 5px 16px #132e3c0b}.cost{font-size:26px;font-weight:750}.btn{display:inline-block;padding:11px 17px;margin:6px 8px 6px 0;border-radius:7px;background:#153c47;color:#fff;text-decoration:none;font-weight:710}.btn.sec{background:white;color:#174e51;border:1px solid #b0ced0}code,pre{background:#eaf2f4;border-radius:5px;font-family:ui-monospace,Consolas,monospace;font-size:13px}code{padding:2px 4px}pre{white-space:pre-wrap;overflow-wrap:anywhere;padding:16px}.alert{border-left:4px solid #227b77;padding:10px 15px;background:#eaf6f4}dl{display:grid;grid-template-columns:140px 1fr;gap:7px 15px}dt{font-weight:720}dd{margin:0;overflow-wrap:anywhere}footer{font-size:13px;color:#607480}@media(max-width:600px){dl{grid-template-columns:1fr}dd{margin-bottom:13px}}
+</style>
+</head>
+<body><header><div class="wrap"><a href="./">PaperPilot Tools</a> / x402 paid public-data APIs</div></header>
+<main>
+<p class="tag">Original one-owner merchant · Pay per call · No account</p>
+<h1>TapeOut X Layer CPU0: a block-pinned JSON report for agents</h1>
+<p>A narrowly scoped, read-only public blockchain state report. Use the <strong>free preview</strong> to inspect the schema, then pay <strong>0.005 native Circle USDC on Base</strong> only if the actual data is useful. The API origin is hosted on a sibling VM managed by the <em>same single human owner</em>; payments from this specific endpoint go directly to the existing original VM1 public beneficiary address shown below.</p>
+<section class="card" aria-label="Product">
+<p class="tag">Live paid GET · HTTP 402 challenge · x402 v2</p>
+<div class="cost">0.005 USDC <span style="font-size:14px;font-weight:450">per paid JSON call, on Base</span></div>
+<p>Data includes public TapeOut CPU0 market and factory fee fields, contract owners, EIP-1967 proxy implementation slots, and token supply as of specified X Layer blocks. Source attribution and snapshot limits accompany the report. This is not a smart-contract audit, a trading signal, or a guarantee of current liquidity.</p>
+<a class="btn sec" href="https://vm5-openapi-x402.onrender.com/v1/tapeout-cpu0-sample" rel="noopener noreferrer">View free JSON example ↗</a>
+<a class="btn" href="https://vm5-openapi-x402.onrender.com/v1/tapeout-cpu0-report" rel="noopener noreferrer">Inspect live 402 quote ↗</a>
+</section>
+<h2>Payment terms to verify before purchase</h2>
+<dl>
+<dt>Protocol</dt><dd><code>x402Version: 2</code>, <code>scheme: exact</code>, <code>GET</code></dd>
+<dt>Pay network</dt><dd><code>eip155:8453</code> — Base mainnet. Data being analysed comes from <strong>X Layer chain 196</strong>; paying on Base is not an X Layer bridge.</dd>
+<dt>Token</dt><dd>Native Circle USDC on Base: <code>0x833589fCD6eDb6E08f4C7C32D4f71b54bdA02913</code></dd>
+<dt>Quoted amount</dt><dd><code>5000</code> atomic USDC (6 decimals = 0.005 USDC)</dd>
+<dt>Original payee</dt><dd><code>0x4e3106520E40af30870caFE78da1B1e7110eD98E</code></dd>
+<dt>Evidence</dt><dd><a href=".well-known/x402.json">Machine-readable x402 seller manifest</a>, <a href="https://vm5-openapi-x402.onrender.com/openapi.json">API OpenAPI schema</a>, and <a href="https://payapi.market/api/tapeout-x-layer-cpu0-on-chain-integrity-report">third-party live PayAPI listing</a>.</dd>
+</dl>
+<h2>Developer quickstart</h2>
+<p>Free, unsigned, read-only inspection of the public <code>402 Payment Required</code> quote does not debit a wallet. An x402-compatible agent, SDK or approved buyer-controlled wallet then signs its own payment authorization and retries the same GET. This website has no wallet integration and will never request a private key.</p>
+<pre><code>curl -i 'https://vm5-openapi-x402.onrender.com/v1/tapeout-cpu0-report'
+# Expected: HTTP 402 + PAYMENT-REQUIRED header.
+# Verify amount=5000, asset, network=eip155:8453, payTo as above.
+# Use your independently trusted x402 client only if you approve the price.</code></pre>
+<p class="alert"><strong>Safety:</strong> The free preview is illustrative. A 402 quote or an API directory listing is not a paid sale. The merchant has evidence of <em>one historical independent operator-paid 0.005 USDC call</em>, not sustained external customer demand. The on-chain result is informational and does not authenticate customers or certify contract safety. If quotes differ, do not sign.</p>
+<p>If you need a bespoke x402 price/CORS integrity report rather than a public X Layer data snapshot, <a href="services.html#x402-audit">review our scope-limited QA offer</a> or <a href="contact.html?service=x402-audit">request a written quote</a>. No payment or contract arises from merely browsing this page.</p>
+</main><footer>PaperPilot Tools · One human economic owner · Separate older CSV seller payees are <strong>not</strong> part of this paid resource · 2026-10-24 public source check</footer></body></html>
