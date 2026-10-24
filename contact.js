@@ -9,6 +9,7 @@
     qa: 'Playwright browser QA',
     'x402-cors': 'x402 merchant CORS and quote QA',
     'x402-audit': 'x402 merchant CORS and quote QA',
+    'x402-agent-review-5': 'x402 v2 Base Circle USDC LangChain/AgentKit fixed-scope QA (5 native Base USDC per review)',
     'x402-postpayment-qa': 'x402 post-payment response and duplicate-charge evidence review (quote first)',
     'workspace-invoice': 'Google Workspace Gmail Drive invoice intake QA',
     'tradeid-review': 'Crypto Trade-ID CSV 50-row manual review (15 Base USDC)',
