@@ -33,6 +33,12 @@
 <dt>Original payee</dt><dd><code>0x4e3106520E40af30870caFE78da1B1e7110eD98E</code></dd>
 <dt>Evidence</dt><dd><a href=".well-known/x402.json">Machine-readable x402 seller manifest</a>, <a href="https://vm5-openapi-x402.onrender.com/openapi.json">API OpenAPI schema</a>, and <a href="https://payapi.market/api/tapeout-x-layer-cpu0-on-chain-integrity-report">third-party live PayAPI listing</a>.</dd>
 </dl>
+<h2>Independent third-party compatibility evidence</h2>
+<section class="card" aria-label="Public x402 verification and discovery">
+<p><strong>Can other agents find and validate this API?</strong> The public host appears in <a href="https://402registry.com/site/vm5-openapi-x402.onrender.com" rel="noopener noreferrer">402registry's independently checked API catalogue</a> and the original GET is discoverable as <a href="https://bazaar.saylorinnovations.com/resources/69300" rel="noopener noreferrer">Agent Bazaar resource 69300</a>. These are directory listings, not paid orders, user reviews or source audits.</p>
+<p>The <a href="https://agentic.market/validate?url=https%3A%2F%2Fvm5-openapi-x402.onrender.com%2Fv1%2Ftapeout-cpu0-report" rel="noopener noreferrer">Coinbase-operated Agentic Market endpoint validator</a> reported <strong>25 of 25 technical checks passed</strong> for this exact paid GET on 24 October 2026: transport and URL (6/6), payment requirements (9/9), and Bazaar discovery metadata (10/10). This establishes x402 formatting compatibility at that check, <strong>not a security audit, live Coinbase Bazaar listing, or a new sale</strong>. Its Bazaar still requires a genuine facilitator verify-and-settle event before automatic indexing; a self-purchase is not evidence of independent demand.</p>
+<p><strong>Who this is for:</strong> an agent or human developer who needs a small, source-attributed, block-pinned JSON snapshot of public X Layer contracts. Inspect the free example and the unchanged HTTP 402 quote first. The snapshot does not provide live portfolio valuation, personalized investment advice, or transaction-forensics guarantees.</p>
+</section>
 <h2>Developer quickstart</h2>
 <p>Free, unsigned, read-only inspection of the public <code>402 Payment Required</code> quote does not debit a wallet. An x402-compatible agent, SDK or approved buyer-controlled wallet then signs its own payment authorization and retries the same GET. This website has no wallet integration and will never request a private key.</p>
 <pre><code>curl -i 'https://vm5-openapi-x402.onrender.com/v1/tapeout-cpu0-report'

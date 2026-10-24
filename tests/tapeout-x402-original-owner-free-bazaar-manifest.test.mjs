@@ -50,3 +50,20 @@ test('buyer manifest excludes legacy VM5 no-signer wallet and any fake success l
  assert.doesNotMatch(serialized,/guaranteed profit|live organic customers|unlimited purchases/i);
  assert.equal((html.match(/href="\.well-known\/x402\.json"/g)||[]).length,1);
 });
+
+// 2026-10-24 first-party verified external listing and x402 validation, not a new customer order.
+test('source-backed third-party discovery links cannot masquerade as paid customer receipts',()=>{
+ const expected=[
+  'https://402registry.com/site/vm5-openapi-x402.onrender.com',
+  'https://bazaar.saylorinnovations.com/resources/69300',
+  'https://agentic.market/validate?url=https%3A%2F%2Fvm5-openapi-x402.onrender.com%2Fv1%2Ftapeout-cpu0-report',
+  '25 of 25 technical checks passed', 'transport and URL (6/6)',
+  'payment requirements (9/9)', 'Bazaar discovery metadata (10/10)',
+  'not a security audit, live Coinbase Bazaar listing, or a new sale',
+  'a self-purchase is not evidence of independent demand',
+ ];
+ for(const item of expected)assert.ok(html.includes(item),'Missing exact verified but non-paid condition: '+item);
+ for(const url of expected.slice(0,3))
+  assert.equal(html.split('href="'+url+'"').length-1,1,'Must not duplicate independently backed link: '+url);
+ assert.doesNotMatch(html,/customer orders (?:increased|grew)|new sales confirmed|guaranteed revenue/i);
+});
