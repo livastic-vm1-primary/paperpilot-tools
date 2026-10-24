@@ -496,7 +496,8 @@
       "buyerAuthorizesTheirOwnWalletIfBuying": true,
       "ownerPrivateKeysRequiredForBrowsingOrSample": false,
       "tradingInstructionsOrYieldGuarantees": false,
-      "isSeparateVM5HostedProductBelongingToSameOneHumanOwner": true
+      "isSeparateVM5HostedProductBelongingToSameOneHumanOwner": true,
+      "buyer_guide": "https://livastic-vm1-primary.github.io/paperpilot-tools/btc-funding-x402-data.html"
     }
   ],
   "genuine_historical_receipt_note": "The same original merchant has prior paid-and-delivered synthetic GET service receipts distinct from the buyer-owned POST; none establish paid POST orders.",

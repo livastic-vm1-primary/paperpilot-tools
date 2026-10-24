@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="index,follow">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; connect-src 'none'; script-src 'none'; form-action 'none'; object-src 'none'; base-uri 'none'">
+<meta name="description" content="BTCUSDT perpetual futures funding rates from four live exchanges. Read-only x402 v2 JSON, 0.01 USDC on Base per paid call. Free synthetic sample, exact payment terms, independently verified one test purchase.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="BTC/USDT four-exchange perp funding rates API | 0.01 Base USDC x402">
+<meta property="og:description" content="Source-specific funding rates, timings, basis points and freshness checks from four public exchanges. One operator-paid test verified; no repeat buyers claimed.">
+<link rel="canonical" href="https://livastic-vm1-primary.github.io/paperpilot-tools/btc-funding-x402-data.html">
+<title>BTC/USDT 4-exchange perpetual funding rates API | 0.01 USDC per x402 call — PaperPilot</title>
+<style>
+:root{color-scheme:light}*{box-sizing:border-box}body{margin:0;background:#f5f8fa;color:#172b40;font:16px/1.65 system-ui,-apple-system,Segoe UI,sans-serif}main,footer{max-width:900px;margin:auto;padding:25px 24px}a{color:#086d69}a:focus-visible{outline:3px solid #e7a934;outline-offset:2px}.wrap{max-width:900px;margin:auto;padding:14px 24px}header{background:#e8eff0;border-bottom:1px solid #d6dfe5}h1{font-size:clamp(1.85rem,5vw,2.75rem);line-height:1.17;max-width:770px}h2{font-size:1.28rem;margin-top:34px}p{max-width:780px}strong{font-weight:740}.tag{color:#275e62;font-size:.85rem;letter-spacing:.08em;text-transform:uppercase;font-weight:700}.card{padding:23px;background:white;border:1px solid #d1dee1;border-radius:11px;margin:18px 0}.cost{font-size:2rem;font-weight:800}.btn{display:inline-block;border-radius:6px;margin:6px 9px 6px 0;padding:10px 14px;background:#076466;color:#fff;font-weight:700;text-decoration:none}.btn.sec{background:#eef5f5;color:#075a61;border:1px solid #a6cccf}.alert{background:#fdf8e7;border-left:4px solid #a47722;padding:16px 20px}pre{padding:17px;background:#e5edef;border:1px solid #c8dadc;border-radius:5px;overflow:auto;white-space:pre-wrap;overflow-wrap:anywhere;max-width:860px;font-size:.88rem}code{font-family:ui-monospace,Menlo,Consolas,monospace;overflow-wrap:anywhere}dt{font-weight:750;margin-top:10px}dd{margin:4px 0 10px 0}.small{font-size:.9rem;color:#4d6470}footer{font-size:.85rem;color:#54666e;border-top:1px solid #d5e0e2}@media(max-width:460px){main,footer{padding:24px 15px}.card{padding:17px}}
+</style>
+</head>
+<body>
+<header><div class="wrap"><a href="./">PaperPilot Tools</a> / Paid data APIs / BTC funding</div></header>
+<main>
+<p class="tag">Read-only crypto market data · Pay for one JSON result · No login for the free example</p>
+<h1>BTC/USDT perpetual funding rates from four exchanges</h1>
+<p>Compare quoted perpetual futures funding rates in a structured response without opening any position. The <strong>paid endpoint requires four distinct, fresh, successfully observed public exchange responses</strong> before requesting payment. Preferred public sources are Binance, Bybit, OKX and Bitget, with regional fallbacks to MEXC and Gate.io when needed. Actual included venues depend on availability and regional accessibility.</p>
+<section class="card" aria-label="Live product">
+<p class="tag">Live paid GET · x402 v2 · Base mainnet USDC</p>
+<div class="cost">0.010000 USDC <span style="font-size:14px;font-weight:450">per authorised JSON GET</span></div>
+<p>Each reported observation is source-labelled and contains a funding quote and its exchange-specific timing information. Quote timing is not normalized into an imaginary identical 8-hour interval. The endpoint refuses an incomplete, stale or invalid upstream sample with an error <em>before charging</em>.</p>
+<p><a class="btn" href="https://payapi.market/api/btc-usdt-perpetual-funding-4-live-exchange-quotes" target="_blank" rel="noopener noreferrer">PayAPI official listing + verified test receipt ↗</a>
+<a class="btn sec" href="https://vm5-openapi-x402.onrender.com/v1/btc-funding-sample" target="_blank" rel="noopener noreferrer">Free fictional JSON example ↗</a></p>
+<p class="small">The free example is purposefully synthetic: <code>exampleOnly:true</code>, <code>paid:false</code>, <code>noRealMarketQuoteInThisSample:true</code>. Do not use its placeholder values in a trade.</p>
+</section>
+
+<h2>Inspect the unsigned price before any purchase</h2>
+<p>A read-only HTTP request to the live resource with no payment returns <strong>HTTP 402 Payment Required</strong> and a <code>PAYMENT-REQUIRED</code> header. Inspect the terms manually. No wallet signature, account creation or token transfer is needed to view the price.</p>
+<pre><code>curl -i 'https://vm5-openapi-x402.onrender.com/v1/btc-funding-four-venues'
+# HTTP 402, x402Version: 2, scheme: exact, network: eip155:8453
+# amount: 10000 atomic units = 0.010000 native Circle USDC
+# asset: 0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913
+# payTo: 0x4e3106520E40af30870caFE78da1B1e7110eD98E</code></pre>
+<dl>
+<dt>Buyer payment rail</dt><dd>Base mainnet, <code>eip155:8453</code>. This is a payment for market-data access, not leveraged trading or a bridge.</dd>
+<dt>USDC token contract</dt><dd><code>0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913</code> (native Circle USDC on Base, 6 decimals).</dd>
+<dt>Exact quote amount</dt><dd><code>10000</code> atomic USDC = <strong>0.010000 USDC</strong>. Confirm live terms before signing. A buyer-controlled x402 client pays only when its human/operator approves.</dd>
+<dt>Original economic owner's payee</dt><dd><code>0x4e3106520E40af30870caFE78da1B1e7110eD98E</code> (the original VM1 MetaMask on Base). The API is operated by a separate VM under the <strong>same one beneficial human owner</strong>.</dd>
+<dt>Protocol</dt><dd><code>x402Version: 2</code>, exact EVM payment, <code>GET</code>. No credentials or wallet keys are requested from visitors by this page.</dd>
+<dt>Developer input</dt><dd>No required POST body, API key, or token symbol input. The public endpoint itself fixes the BTC/USDT market and its source count.</dd>
+</dl>
+
+<h2>What the response tells you and what it does not</h2>
+<p>Funding rates are periodic transfers between long and short perpetual positions. Venues may use different funding intervals, funding caps, marks and timestamps. A reported rate is <strong>not</strong> APY, savings interest, guaranteed return, an investment recommendation, an instruction to trade or proof that a proposed basis trade is profitable. Compare the source interval and mark information, not merely the sign of the rate.</p>
+<p>The provider attempts four independent public venues and does not charge for a partial snapshot. Data can still be delayed between the upstream quote, this service, your own analysis and a trade. Verify directly with the exchange before any position. Do not provide trading authority or private wallet credentials to this market-data endpoint.</p>
+
+<h2>One real paid test, no fictional sales</h2>
+<section class="card" aria-label="Independently paid platform test">
+<p>On <strong>24 October 2026 at 06:54:33 UTC</strong>, PayAPI Market verified one operator-funded paid GET. Its public record marks this route <code>payment_verified: true</code> at 06:56:07 UTC, with one native Base Circle USDC transfer of <strong>0.010000 USDC</strong> to the original owner's receiving address.</p>
+<p><a href="https://basescan.org/tx/0x0cf2906aa5cc7fc8978b81307e61d2569e0759452b41c09f2dcae8cb87721edd" target="_blank" rel="noopener noreferrer">Check the original Base transfer ↗</a> · ERC20 transfer <code>logIndex: 90</code> · <a href="https://payapi.market/api/btc-usdt-perpetual-funding-4-live-exchange-quotes" target="_blank" rel="noopener noreferrer">PayAPI verified listing ↗</a>.</p>
+<p><strong>Disclosure:</strong> this is <em>one marketplace-operated verification purchase</em>, not an independently documented organic paying customer, recurring subscription, a guarantee of future demand, or a third-party audit of market-data accuracy. Net profit after labor, infrastructure and tax is not established. No new money is charged or collected by browsing this static site.</p>
+</section>
+<p>If you need a signed-scope review of a <em>separate</em> x402 invoice or browser CORS problem, <a href="services.html#x402-audit">review the optional service terms</a>. No services or customer contract are automatically created by viewing this page.</p>
+<p lang="ko" class="small">원래 VM1 MetaMask로 지급되는 Base USDC 0.01/호출 데이터 API입니다. 무료 예시의 숫자는 가상 값이며 투자 조언이 아닙니다. 2026년 10월 24일 판매 플랫폼의 유료 시험 1건만 확인되었습니다.</p>
+</main>
+<footer>PaperPilot Tools · One beneficial human owner · Original VM1 recipient · Public market-data resource, not a financial advisor · 2026-10-24</footer>
+</body>
+</html>
